@@ -19,10 +19,12 @@ npm is the package manager for node.js
 # sudo npm install --global http-server
 (https://www.npmjs.com/package/http-server)
 
-Start the http-server; open a terminal in the folder with the index file
+-------------------------------------------------------------------------
+
+To start the http-server; open a terminal in the root folder and run 
 # http-server
 
-go to: http://192.168.0.8:8080 in Chrome
+Go to: http://192.168.0.8:8080 in Chrome (or whatever I.P. address it churns out that you can find in the terminal post excecution)
 
 -------------------------------------------------------------------------
 
