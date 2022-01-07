@@ -28,7 +28,7 @@ Go to: http://192.168.0.8:8080 in Chrome (or whatever I.P. address it churns out
 
 -------------------------------------------------------------------------
 
-You can visit the [main site](https://5e.tools/index.html) or go to the GitHub [mirror](https://github.com/5etools-mirror-1/5etools-mirror-1.github.io) that this repo is (hopefully) in sync with.
+You can visit the [main site](https://5e.tools/index.html) or go to the GitHub [mirror](https://github.com/5etools-mirror-1/5etools-mirror-1.github.io) that this repo is (hopefully) in sync with which is hosted on GitHub [here!](https://arch-ive.github.io/5etools-Archived/)
 
 You can join the 5etools Discord [here](https://discord.gg/5etools)
 
