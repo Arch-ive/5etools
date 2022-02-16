@@ -1,6 +1,6 @@
 ## 5e.tools:Archived
 
-Archived for redundancy
+Recorded and Stored
 
 ## Running a local javascript server to host this repo
 - for private use of 5e.tools and any other compatiable content
