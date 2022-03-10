@@ -766,6 +766,13 @@ Parser.itemRechargeToFull = function (recharge) {
 	return Parser._parse_aToB(Parser.ITEM_RECHARGE_TO_FULL, recharge);
 };
 
+Parser.ITEM_MISC_TAG_TO_FULL = {
+	"CF/W": "Creates Food/Water",
+};
+Parser.itemMiscTagToFull = function (type) {
+	return Parser._parse_aToB(Parser.ITEM_MISC_TAG_TO_FULL, type);
+};
+
 Parser._decimalSeparator = (0.1).toLocaleString().substring(1, 2);
 Parser._numberCleanRegexp = Parser._decimalSeparator === "." ? new RegExp(/[\s,]*/g, "g") : new RegExp(/[\s.]*/g, "g");
 Parser._costSplitRegexp = Parser._decimalSeparator === "." ? new RegExp(/(\d+(\.\d+)?)([csegp]p)/) : new RegExp(/(\d+(,\d+)?)([csegp]p)/);
@@ -1592,6 +1599,7 @@ Parser.CHAR_OPTIONAL_FEATURE_TYPE_TO_FULL = {
 	"OF": "Optional Feature",
 	"DG": "Dark Gift",
 	"RF:B": "Replacement Feature: Background",
+	"CS": "Character Secret", // Specific to IDRotF (rules on page 14)
 };
 
 Parser.charCreationOptionTypeToFull = function (type) {
@@ -2491,6 +2499,7 @@ SRC_UA2021FF = `${SRC_UA_PREFIX}2021FolkOfTheFeywild`;
 SRC_UA2021DO = `${SRC_UA_PREFIX}2021DraconicOptions`;
 SRC_UA2021MoS = `${SRC_UA_PREFIX}2021MagesOfStrixhaven`;
 SRC_UA2021TotM = `${SRC_UA_PREFIX}2021TravelersOfTheMultiverse`;
+SRC_UA2022HoK = `${SRC_UA_PREFIX}2022HeroesOfKrynn`;
 
 SRC_3PP_SUFFIX = " 3pp";
 
@@ -2682,6 +2691,7 @@ Parser.SOURCE_JSON_TO_FULL[SRC_UA2021FF] = `${UA_PREFIX}2021 Folk of the Feywild
 Parser.SOURCE_JSON_TO_FULL[SRC_UA2021DO] = `${UA_PREFIX}2021 Draconic Options`;
 Parser.SOURCE_JSON_TO_FULL[SRC_UA2021MoS] = `${UA_PREFIX}2021 Mages of Strixhaven`;
 Parser.SOURCE_JSON_TO_FULL[SRC_UA2021TotM] = `${UA_PREFIX}2021 Travelers of the Multiverse`;
+Parser.SOURCE_JSON_TO_FULL[SRC_UA2022HoK] = `${UA_PREFIX}2022 Heroes of Krynn`;
 
 Parser.SOURCE_JSON_TO_ABV = {};
 Parser.SOURCE_JSON_TO_ABV[SRC_CoS] = "CoS";
@@ -2861,6 +2871,7 @@ Parser.SOURCE_JSON_TO_ABV[SRC_UA2021FF] = "UA21FF";
 Parser.SOURCE_JSON_TO_ABV[SRC_UA2021DO] = "UA21DO";
 Parser.SOURCE_JSON_TO_ABV[SRC_UA2021MoS] = "UA21MoS";
 Parser.SOURCE_JSON_TO_ABV[SRC_UA2021TotM] = "UA21TotM";
+Parser.SOURCE_JSON_TO_ABV[SRC_UA2022HoK] = "UA22HoK";
 
 Parser.SOURCE_JSON_TO_DATE = {};
 Parser.SOURCE_JSON_TO_DATE[SRC_CoS] = "2016-03-15";
@@ -3039,6 +3050,7 @@ Parser.SOURCE_JSON_TO_DATE[SRC_UA2021FF] = "2020-03-12";
 Parser.SOURCE_JSON_TO_DATE[SRC_UA2021DO] = "2021-04-14";
 Parser.SOURCE_JSON_TO_DATE[SRC_UA2021MoS] = "2021-06-08";
 Parser.SOURCE_JSON_TO_DATE[SRC_UA2021TotM] = "2021-10-08";
+Parser.SOURCE_JSON_TO_DATE[SRC_UA2022HoK] = "2022-03-08";
 
 Parser.SOURCES_ADVENTURES = new Set([
 	SRC_LMoP,
@@ -3293,6 +3305,7 @@ Parser.TAG_TO_DEFAULT_SOURCE = {
 	"spell": SRC_PHB,
 	"item": SRC_DMG,
 	"class": SRC_PHB,
+	"subclass": SRC_PHB,
 	"creature": SRC_MM,
 	"condition": SRC_PHB,
 	"disease": SRC_DMG,
@@ -3329,6 +3342,20 @@ Parser.getTagSource = function (tag, source) {
 
 	if (!Parser.TAG_TO_DEFAULT_SOURCE[tag]) throw new Error(`Unhandled tag "${tag}"`);
 	return Parser.TAG_TO_DEFAULT_SOURCE[tag];
+};
+
+Parser.PROP_TO_TAG = {
+	"monster": "creature",
+	"optionalfeature": "optfeature",
+	"tableGroup": "table",
+	"vehicleUpgrade": "vehupgrade",
+	"baseitem": "item",
+	"itemGroup": "item",
+	"variant": "item",
+};
+Parser.getPropTag = function (prop) {
+	if (Parser.PROP_TO_TAG[prop]) return Parser.PROP_TO_TAG[prop];
+	return prop;
 };
 
 Parser.PROP_TO_DISPLAY_NAME = {

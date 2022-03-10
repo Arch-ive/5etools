@@ -109,7 +109,7 @@ Renderer.dice = {
 			Renderer.dice._showBox();
 			Renderer.dice._$iptRoll.focus();
 		});
-		const $head = $(`<div class="head-roll"><span class="hdr-roll">Dice Roller</span><span class="delete-icon glyphicon glyphicon-remove"></span></div>`)
+		const $head = $(`<div class="head-roll"><span class="hdr-roll">Dice Roller</span><span class="p-2 glyphicon glyphicon-remove"></span></div>`)
 			.on("click", () => {
 				if (!Renderer.dice._panel) Renderer.dice._hideBox();
 			});
@@ -746,6 +746,8 @@ Renderer.dice = {
 					<li>Rounding; <span class="out-roll-item-code">floor(1.5)</span>, <span class="out-roll-item-code">ceil(1.5)</span>, <span class="out-roll-item-code">round(1.5)</span></li>
 
 					<li>Average; <span class="out-roll-item-code">avg(8d6)</span></li>
+					<li>Maximize dice; <span class="out-roll-item-code">dmax(8d6)</span></li>
+					<li>Minimize dice; <span class="out-roll-item-code">dmin(8d6)</span></li>
 
 					<li>Other functions; <span class="out-roll-item-code">sign(1d6-3)</span>, <span class="out-roll-item-code">abs(1d6-3)</span>, ...etc.</li>
 				</ul>
@@ -846,6 +848,12 @@ Use <span class="out-roll-item-code">${PREF_MACRO} list</span> to list saved mac
 			Renderer.dice._$lastRolledBy = $(`<div class="out-roll-wrp"></div>`).data("name", name);
 			Renderer.dice._$outRoll.prepend(Renderer.dice._$lastRolledBy);
 		}
+	},
+};
+
+Renderer.dice.util = {
+	getReducedMeta (meta) {
+		return {pb: meta.pb};
 	},
 };
 
@@ -1010,6 +1018,8 @@ Renderer.dice.lang = {
 			case "ceil": self.tokenStack.push(Renderer.dice.tk.CEIL); break;
 			case "round": self.tokenStack.push(Renderer.dice.tk.ROUND); break;
 			case "avg": self.tokenStack.push(Renderer.dice.tk.AVERAGE); break;
+			case "dmax": self.tokenStack.push(Renderer.dice.tk.DMAX); break;
+			case "dmin": self.tokenStack.push(Renderer.dice.tk.DMIN); break;
 			case "sign": self.tokenStack.push(Renderer.dice.tk.SIGN); break;
 			case "abs": self.tokenStack.push(Renderer.dice.tk.ABS); break;
 			case "cbrt": self.tokenStack.push(Renderer.dice.tk.CBRT); break;
@@ -1131,6 +1141,8 @@ Renderer.dice.lang = {
 			|| this._parse3_match(self, Renderer.dice.tk.CEIL)
 			|| this._parse3_match(self, Renderer.dice.tk.ROUND)
 			|| this._parse3_match(self, Renderer.dice.tk.AVERAGE)
+			|| this._parse3_match(self, Renderer.dice.tk.DMAX)
+			|| this._parse3_match(self, Renderer.dice.tk.DMIN)
 			|| this._parse3_match(self, Renderer.dice.tk.SIGN)
 			|| this._parse3_match(self, Renderer.dice.tk.ABS)
 			|| this._parse3_match(self, Renderer.dice.tk.CBRT)
@@ -1378,6 +1390,8 @@ Renderer.dice.tk.FLOOR = Renderer.dice.tk._new("FLOOR", "floor");
 Renderer.dice.tk.CEIL = Renderer.dice.tk._new("CEIL", "ceil");
 Renderer.dice.tk.ROUND = Renderer.dice.tk._new("ROUND", "round");
 Renderer.dice.tk.AVERAGE = Renderer.dice.tk._new("AVERAGE", "avg");
+Renderer.dice.tk.DMAX = Renderer.dice.tk._new("DMAX", "avg");
+Renderer.dice.tk.DMIN = Renderer.dice.tk._new("DMIN", "avg");
 Renderer.dice.tk.SIGN = Renderer.dice.tk._new("SIGN", "sign");
 Renderer.dice.tk.ABS = Renderer.dice.tk._new("ABS", "abs");
 Renderer.dice.tk.CBRT = Renderer.dice.tk._new("CBRT", "cbrt");
@@ -1671,6 +1685,14 @@ Renderer.dice.parsed = {
 					const [, symExp] = this._nodes;
 					return symExp.avg(meta);
 				}
+				case Renderer.dice.tk.DMAX.type: {
+					const [, symExp] = this._nodes;
+					return symExp.max(meta);
+				}
+				case Renderer.dice.tk.DMIN.type: {
+					const [, symExp] = this._nodes;
+					return symExp.min(meta);
+				}
 				default: throw new Error(`Unimplemented!`);
 			}
 		}
@@ -1683,6 +1705,8 @@ Renderer.dice.parsed = {
 				case Renderer.dice.tk.CEIL.type:
 				case Renderer.dice.tk.ROUND.type:
 				case Renderer.dice.tk.AVERAGE.type:
+				case Renderer.dice.tk.DMAX.type:
+				case Renderer.dice.tk.DMIN.type:
 				case Renderer.dice.tk.SIGN.type:
 				case Renderer.dice.tk.ABS.type:
 				case Renderer.dice.tk.CBRT.type:
@@ -1842,14 +1866,14 @@ Renderer.dice.parsed = {
 		_invoke (fnName, meta) {
 			if (this._nodes.length === 1) return this._nodes[0][fnName](meta); // if it's just a factor
 
-			// N.B. we don't pass "meta" to symbol evaluation inside the dice expression--we therefore won't see
+			// N.B. we don't pass the full "meta" to symbol evaluation inside the dice expression--we therefore won't see
 			//   the metadata from the nested rolls, but that's OK.
 
 			const view = this._nodes.slice();
 			// Shift the first symbol and use that as our initial number of dice
 			//   e.g. the "2" in 2d3d5
 			const numSym = view.shift();
-			let tmp = numSym[fnName]();
+			let tmp = numSym[fnName](Renderer.dice.util.getReducedMeta(meta));
 
 			while (view.length) {
 				if (Math.round(tmp) !== tmp) throw new Error(`Number of dice to roll (${tmp}) was not an integer!`);
