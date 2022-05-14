@@ -192,11 +192,12 @@ function Renderer () {
 		return MiscUtil.copy(this._trackTitles.titles);
 	};
 
-	this.getTrackedTitlesInverted = function () {
+	this.getTrackedTitlesInverted = function ({isStripTags = false} = {}) {
 		// `this._trackTitles.titles` is a map of `{[data-title-index]: "<name>"}`
 		// Invert it such that we have a map of `{"<name>": ["data-title-index-0", ..., "data-title-index-n"]}`
 		const trackedTitlesInverse = {};
 		Object.entries(this._trackTitles.titles || {}).forEach(([titleIx, titleName]) => {
+			if (isStripTags) titleName = Renderer.stripTags(titleName);
 			titleName = titleName.toLowerCase().trim();
 			(trackedTitlesInverse[titleName] = trackedTitlesInverse[titleName] || []).push(titleIx);
 		});
@@ -3143,9 +3144,12 @@ Renderer.utils = {
 						return fauxEntry;
 					}
 					case "@chance": {
-						// format: {@chance 25|display text|rollbox rollee name}
+						// format: {@chance 25|display text|rollbox rollee name|success text|failure text}
+						const [textSuccess, textFailure] = others;
 						fauxEntry.toRoll = `1d100`;
 						fauxEntry.successThresh = Number(rollText);
+						fauxEntry.chanceSuccessText = textSuccess;
+						fauxEntry.chanceFailureText = textFailure;
 						return fauxEntry;
 					}
 					case "@recharge": {
@@ -3156,6 +3160,8 @@ Renderer.utils = {
 						fauxEntry.successThresh = 7 - asNum;
 						fauxEntry.successMax = 6;
 						fauxEntry.displayText = `${asNum}${asNum < 6 ? `\u20136` : ""}`;
+						fauxEntry.chanceSuccessText = "Recharged!";
+						fauxEntry.chanceFailureText = "Did not recharge";
 						return fauxEntry;
 					}
 				}
@@ -6189,7 +6195,7 @@ Renderer.monster = {
 
 Renderer.item = {
 	_sortProperties (a, b) {
-		return SortUtil.ascSort(Renderer.item.propertyMap[a].name, Renderer.item.propertyMap[b].name);
+		return SortUtil.ascSort(Renderer.item.propertyMap[a]?.name || "", Renderer.item.propertyMap[b]?.name || "");
 	},
 
 	_getPropertiesText (item) {
@@ -9154,6 +9160,7 @@ Renderer.hover = {
 	 * @param hash
 	 * @param [opts] Options object.
 	 * @param [opts.isCopy] If a copy, rather than the original entity, should be returned.
+	 * @param [opts.isRequired] If an error should be thrown on a missing entity.
 	 */
 	async pCacheAndGet (page, source, hash, opts) {
 		opts = opts || {};
@@ -9165,6 +9172,13 @@ Renderer.hover = {
 		const existingOut = Renderer.hover.getFromCache(page, source, hash, opts);
 		if (existingOut) return existingOut;
 
+		const out = await Renderer.hover._pCacheAndGet(page, source, hash, opts);
+
+		if (!out && opts.isRequired) throw new Error(`Could not find entity for page/prop "${page}" with source "${source}" and hash "${hash}"`);
+		return out;
+	},
+
+	async _pCacheAndGet (page, source, hash, opts) {
 		switch (page) {
 			case "generic":
 			case "hover": return null;
@@ -10181,8 +10195,9 @@ Renderer.getNumberedNames = function (entry) {
 };
 
 // dig down until we find a name, as feature names can be nested
-Renderer.findName = function (entry) { return CollectionUtil.dfs(entry, "name"); };
-Renderer.findSource = function (entry) { return CollectionUtil.dfs(entry, "source"); };
+Renderer.findName = function (entry) { return CollectionUtil.dfs(entry, {prop: "name"}); };
+Renderer.findSource = function (entry) { return CollectionUtil.dfs(entry, {prop: "source"}); };
+Renderer.findEntry = function (entry) { return CollectionUtil.dfs(entry, {fnMatch: obj => obj.name && obj?.entries?.length}); };
 
 Renderer.stripTags = function (str) {
 	if (!str) return str;
