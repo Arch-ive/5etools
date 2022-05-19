@@ -27,7 +27,7 @@ To start the http-server; open a terminal in the root folder and run the script 
 
 This (currently) runs the following: "http-server -c-1 --cors --port 5000"
 
-Right click the ip address it churns out in the terminal post excecution and open to access the site
+Right click the ip address it churns out in the terminal post excecution and open to access the site or manually go to http://localhost:5000/ in your browser of choice
 
 -------------------------------------------------------------------------
 
