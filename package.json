@@ -25,6 +25,7 @@
 		"preversion": "npm test",
 		"version": "node node/version-bump.js",
 		"serve:dev": "http-server -c-1 --cors --port 5000"
+		"server": "http-server -c-1 --cors --port 5000 -o"
 	},
 	"repository": {
 		"type": "git",
