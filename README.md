@@ -23,11 +23,11 @@ Just install npm alongside nodejs
 # Running the server
 
 To start the http-server; open a terminal in the root folder and run the script listed in the package.json file
-- npm run serve:dev
+- npm run server
 
-This (currently) runs the following: "http-server -c-1 --cors --port 5000"
+This runs the following: "http-server -c-1 --cors --port 5000 -o"
 
-Right click the ip address it churns out in the terminal post excecution and open to access the site or manually go to http://localhost:5000/ in your browser of choice
+The server will push the site open in an applicable browser and/or you can manually go to http://localhost:5000/ in the browser of your choice.
 
 -------------------------------------------------------------------------
 
