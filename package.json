@@ -32,33 +32,13 @@
 		"preversion": "npm test",
 		"version": "node node/version-bump.js",
 		"serve:dev": "http-server -c-1 --cors --port 5000",
-<<<<<<< HEAD
 		"server": "http-server -c-1 --cors --port 5000 -o"
-=======
-		"serve:dev:tls": "http-server -c-1 --cors --port 5001 --tls --cert certs/cert.pem --key certs/key.pem",
-		"spellcheck:check-data": "echo \"This can take a few minutes.\" && npx cspell --no-progress --show-context --show-suggestions \"data/**/*.json\"",
-		"spellcheck:check-data-quick": "git diff --name-only | grep -P \"^data/[^.]+.json\" | npx cspell --no-progress --show-context --show-suggestions --file-list stdin",
-		"spellcheck:trust-data": "echo \"This can take a few minutes.\" && echo \"# new words on $(date)\" >> spellcheck/dnd-words.txt && npx cspell --words-only --unique \"./data/**/*.json\" | sort --ignore-case >> spellcheck/dnd-words.txt"
->>>>>>> d86daccdbcd5de4565bd49c25681d647d6dd9342
 	},
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/5etools-mirror-1/5etools-mirror-1.github.io.git"
 	},
 	"devDependencies": {
-<<<<<<< HEAD
-		"ajv": "^8.10.0",
-		"eslint": "^8.5.0",
-		"http-server": "^14.1.0",
-		"json-source-map": "^0.6.1",
-		"probe-image-size": "^6.0.0",
-		"readline-sync": "^1.4.10",
-		"sass": "^1.45.0",
-		"simple-git": "^3.4.0",
-		"stylelint": "^13.13.1",
-		"stylelint-config-sass-guidelines": "^8.0.0",
-		"terser": "^5.10.0"
-=======
 		"5etools-utils": "^0.6.4",
 		"ajv": "^8.11.2",
 		"ajv-formats": "^2.1.1",
@@ -75,7 +55,6 @@
 		"stylelint-config-sass-guidelines": "^8.0.0",
 		"terser": "^5.15.1",
 		"workbox-cli": "^6.5.3"
->>>>>>> d86daccdbcd5de4565bd49c25681d647d6dd9342
 	},
 	"bugs": {
 		"url": "https://github.com/5etools-mirror-1/5etools-mirror-1.github.io/issues"
