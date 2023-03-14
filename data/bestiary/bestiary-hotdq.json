@@ -17,6 +17,12 @@
 			"name": "Ambush Drake",
 			"source": "HotDQ",
 			"page": 88,
+			"otherSources": [
+				{
+					"source": "ToD",
+					"page": 180
+				}
+			],
 			"size": [
 				"M"
 			],
@@ -104,8 +110,15 @@
 		{
 			"name": "Azbara Jos",
 			"isNpc": true,
+			"isNamedCreature": true,
 			"source": "HotDQ",
 			"page": 88,
+			"otherSources": [
+				{
+					"source": "ToD",
+					"page": 180
+				}
+			],
 			"size": [
 				"M"
 			],
@@ -262,8 +275,15 @@
 		{
 			"name": "Blagothkus",
 			"isNpc": true,
+			"isNamedCreature": true,
 			"source": "HotDQ",
 			"page": 89,
+			"otherSources": [
+				{
+					"source": "ToD",
+					"page": 181
+				}
+			],
 			"size": [
 				"H"
 			],
@@ -425,8 +445,15 @@
 		{
 			"name": "Captain Othelstan",
 			"isNpc": true,
+			"isNamedCreature": true,
 			"source": "HotDQ",
 			"page": 89,
+			"otherSources": [
+				{
+					"source": "ToD",
+					"page": 181
+				}
+			],
 			"size": [
 				"M"
 			],
@@ -541,6 +568,10 @@
 				{
 					"source": "RoT",
 					"page": 89
+				},
+				{
+					"source": "ToD",
+					"page": 182
 				}
 			],
 			"size": [
@@ -640,7 +671,8 @@
 			"miscTags": [
 				"MW"
 			],
-			"hasToken": true
+			"hasToken": true,
+			"hasFluffImages": true
 		},
 		{
 			"name": "Dragonwing",
@@ -650,6 +682,10 @@
 				{
 					"source": "RoT",
 					"page": 89
+				},
+				{
+					"source": "ToD",
+					"page": 183
 				}
 			],
 			"size": [
@@ -772,15 +808,25 @@
 		{
 			"name": "Dralmorrer Borngray",
 			"isNpc": true,
+			"isNamedCreature": true,
 			"source": "HotDQ",
 			"page": 90,
+			"otherSources": [
+				{
+					"source": "ToD",
+					"page": 184
+				}
+			],
 			"size": [
 				"M"
 			],
 			"type": {
 				"type": "humanoid",
 				"tags": [
-					"high elf"
+					{
+						"tag": "elf",
+						"prefix": "High"
+					}
 				]
 			},
 			"alignment": [
@@ -946,10 +992,48 @@
 			"hasFluffImages": true
 		},
 		{
+			"name": "Four-Armed Troll",
+			"source": "HotDQ",
+			"page": 65,
+			"otherSources": [
+				{
+					"source": "ToD",
+					"page": 81
+				}
+			],
+			"_copy": {
+				"name": "Troll",
+				"source": "MM",
+				"_mod": {
+					"action": {
+						"mode": "replaceArr",
+						"replace": "Multiattack",
+						"items": {
+							"name": "Multiattack",
+							"entries": [
+								"The troll attacks five times, once with its bite and four times with its claws. If two or more claws hit the same target, the troll rends the target, dealing an extra {@dice 2d6} slashing damage."
+							]
+						}
+					}
+				}
+			},
+			"cr": "6",
+			"hasToken": true,
+			"hasFluff": true,
+			"hasFluffImages": true
+		},
+		{
 			"name": "Frulam Mondath",
 			"isNpc": true,
+			"isNamedCreature": true,
 			"source": "HotDQ",
 			"page": 90,
+			"otherSources": [
+				{
+					"source": "ToD",
+					"page": 184
+				}
+			],
 			"size": [
 				"M"
 			],
@@ -1086,6 +1170,12 @@
 			"name": "Golden Stag",
 			"source": "HotDQ",
 			"page": 35,
+			"otherSources": [
+				{
+					"source": "ToD",
+					"page": 51
+				}
+			],
 			"_copy": {
 				"name": "Elk",
 				"source": "MM"
@@ -1100,6 +1190,10 @@
 				{
 					"source": "RoT",
 					"page": 90
+				},
+				{
+					"source": "ToD",
+					"page": 185
 				}
 			],
 			"reprintedAs": [
@@ -1193,8 +1287,15 @@
 		{
 			"name": "Jamna Gleamsilver",
 			"isNpc": true,
+			"isNamedCreature": true,
 			"source": "HotDQ",
 			"page": 91,
+			"otherSources": [
+				{
+					"source": "ToD",
+					"page": 185
+				}
+			],
 			"size": [
 				"S"
 			],
@@ -1337,8 +1438,15 @@
 		{
 			"name": "Langdedrosa Cyanwrath",
 			"isNpc": true,
+			"isNamedCreature": true,
 			"source": "HotDQ",
 			"page": 91,
+			"otherSources": [
+				{
+					"source": "ToD",
+					"page": 186
+				}
+			],
 			"size": [
 				"M"
 			],
@@ -1464,8 +1572,15 @@
 		{
 			"name": "Leosin Erlanthar",
 			"isNpc": true,
+			"isNamedCreature": true,
 			"source": "HotDQ",
 			"page": 87,
+			"otherSources": [
+				{
+					"source": "ToD",
+					"page": 34
+				}
+			],
 			"_copy": {
 				"name": "Martial Arts Adept",
 				"source": "VGM",
@@ -1475,7 +1590,7 @@
 						"items": {
 							"name": "5etools Note",
 							"entries": [
-								"Leosin Erlanthar is presented in {@adventure Hoard of the Dragon Queen|HotDQ} as a half-elf monk. The {@creature martial arts adept|vgm} statblock from {@book Volo's Guide to Monsters|VGM} has been provided here for ease of use."
+								"Leosin Erlanthar is presented in {@adventure Hoard of the Dragon Queen|HotDQ} as a half-elf monk. The {@creature martial arts adept|vgm} stat block from {@book Volo's Guide to Monsters|VGM} has been provided here for ease of use."
 							]
 						}
 					}
@@ -1486,8 +1601,15 @@
 		{
 			"name": "Linan Swift",
 			"isNpc": true,
+			"isNamedCreature": true,
 			"source": "HotDQ",
 			"page": 8,
+			"otherSources": [
+				{
+					"source": "ToD",
+					"page": 24
+				}
+			],
 			"_copy": {
 				"name": "Commoner",
 				"source": "MM"
@@ -1523,8 +1645,15 @@
 		{
 			"name": "Ontharr Frume",
 			"isNpc": true,
+			"isNamedCreature": true,
 			"source": "HotDQ",
 			"page": 28,
+			"otherSources": [
+				{
+					"source": "ToD",
+					"page": 15
+				}
+			],
 			"_copy": {
 				"name": "War Priest",
 				"source": "VGM",
@@ -1534,7 +1663,7 @@
 						"items": {
 							"name": "5etools Note",
 							"entries": [
-								"Ontharr Frume is presented in {@adventure Hoard of the Dragon Queen|HotDQ} and The {@adventure Rise of Tiamat|RoT} as a lawful good, human paladin of Torm. The {@creature war priest|vgm} statblock from {@book Volo's Guide to Monsters|VGM} has been provided here for ease of use."
+								"Ontharr Frume is presented in {@adventure Hoard of the Dragon Queen|HotDQ} and The {@adventure Rise of Tiamat|RoT} as a lawful good, human paladin of Torm. The {@creature war priest|vgm} stat block from {@book Volo's Guide to Monsters|VGM} has been provided here for ease of use."
 							]
 						}
 					}
@@ -1551,8 +1680,15 @@
 		{
 			"name": "Pharblex Spattergoo",
 			"isNpc": true,
+			"isNamedCreature": true,
 			"source": "HotDQ",
 			"page": 91,
+			"otherSources": [
+				{
+					"source": "ToD",
+					"page": 187
+				}
+			],
 			"size": [
 				"M"
 			],
@@ -1725,8 +1861,15 @@
 		{
 			"name": "Raggnar Redtooth",
 			"isNpc": true,
+			"isNamedCreature": true,
 			"source": "HotDQ",
 			"page": 74,
+			"otherSources": [
+				{
+					"source": "ToD",
+					"page": 90
+				}
+			],
 			"_copy": {
 				"name": "Veteran",
 				"source": "MM",
@@ -1741,17 +1884,23 @@
 			},
 			"ac": [
 				11
-			]
+			],
+			"hasToken": true
 		},
 		{
 			"name": "Rath Modar",
 			"isNpc": true,
+			"isNamedCreature": true,
 			"source": "HotDQ",
 			"page": 92,
 			"otherSources": [
 				{
 					"source": "RoT",
 					"page": 91
+				},
+				{
+					"source": "ToD",
+					"page": 188
 				}
 			],
 			"size": [
@@ -1933,6 +2082,10 @@
 			"otherSources": [
 				{
 					"source": "RoT"
+				},
+				{
+					"source": "ToD",
+					"page": 180
 				}
 			],
 			"size": [
@@ -2063,7 +2216,7 @@
 				{
 					"name": "Darkness (Costs 2 Actions)",
 					"entries": [
-						"A 15-foot radius of magical darkness extends from a point Rezmir can see within 60 feet of her and spreads around corners. The darkness lasts as long as Rezmir maintains concentration, up to 1 minute. A creature with darkvision can't see through this darkness, and no natural light can illuminate it. If any of the area overlaps with a area of light created by a spell of 2nd level or lower, the spell creating the light is dispelled."
+						"A 15-foot radius of magical darkness extends from a point Rezmir can see within 60 feet of her and spreads around corners. The darkness lasts as long as Rezmir maintains {@status concentration}, up to 1 minute. A creature with darkvision can't see through this darkness, and no natural light can illuminate it. If any of the area overlaps with a area of light created by a spell of 2nd level or lower, the spell creating the light is dispelled."
 					]
 				},
 				{
@@ -2112,8 +2265,15 @@
 		{
 			"name": "Sandesyl Morgia",
 			"isNpc": true,
+			"isNamedCreature": true,
 			"source": "HotDQ",
 			"page": 81,
+			"otherSources": [
+				{
+					"source": "ToD",
+					"page": 98
+				}
+			],
 			"_copy": {
 				"name": "Vampire",
 				"source": "MM",
@@ -2131,8 +2291,15 @@
 		{
 			"name": "Talis the White",
 			"isNpc": true,
+			"isNamedCreature": true,
 			"source": "HotDQ",
 			"page": 93,
+			"otherSources": [
+				{
+					"source": "ToD",
+					"page": 189
+				}
+			],
 			"size": [
 				"M"
 			],
@@ -2313,8 +2480,15 @@
 		{
 			"name": "Trepsin",
 			"isNpc": true,
+			"isNamedCreature": true,
 			"source": "HotDQ",
 			"page": 63,
+			"otherSources": [
+				{
+					"source": "ToD",
+					"page": 79
+				}
+			],
 			"size": [
 				"L"
 			],

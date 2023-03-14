@@ -592,11 +592,13 @@
 				"prone"
 			],
 			"hasToken": true,
-			"hasFluff": true
+			"hasFluff": true,
+			"hasFluffImages": true
 		},
 		{
 			"name": "Corrin Delmaco",
 			"isNpc": true,
+			"isNamedCreature": true,
 			"source": "ERLW",
 			"page": 271,
 			"_copy": {
@@ -1340,6 +1342,7 @@
 		{
 			"name": "Garra",
 			"isNpc": true,
+			"isNamedCreature": true,
 			"source": "ERLW",
 			"page": 272,
 			"_copy": {
@@ -1641,7 +1644,7 @@
 									"type": "entries",
 									"name": "All Around Vision",
 									"entries": [
-										"The Inspired can't be surprised."
+										"The Inspired can't be {@quickref Surprise|PHB|3|0|surprised}."
 									]
 								},
 								{
@@ -1727,7 +1730,7 @@
 							"items": {
 								"name": "All Around Vision",
 								"entries": [
-									"The Inspired can't be surprised."
+									"The Inspired can't be {@quickref Surprise|PHB|3|0|surprised}."
 								]
 							}
 						}
@@ -1959,7 +1962,7 @@
 				{
 					"name": "All-Around Vision",
 					"entries": [
-						"The quori can't be surprised while it isn't {@condition incapacitated}."
+						"The quori can't be {@quickref Surprise|PHB|3|0|surprised} while it isn't {@condition incapacitated}."
 					]
 				},
 				{
@@ -2762,7 +2765,7 @@
 					"name": "Spell Mimicry {@recharge 5}",
 					"entries": [
 						"The living spell creates a 40-foot-diameter sphere of fog within 60 feet of it (the fog spreads around corners). When a creature enters the fog for the first time on a turn or starts its turn there, it must make a {@dc 16} Constitution saving throw, taking 22 ({@damage 5d8}) poison damage on a failed save, or half as much damage on a successful one.",
-						"The fog moves 10 feet away from the living spell at the start of each of its turns, rolling along the ground and through openings. The fog lasts for 10 minutes or until the living spell's concentration ends (as if concentrating on a spell)."
+						"The fog moves 10 feet away from the living spell at the start of each of its turns, rolling along the ground and through openings. The fog lasts for 10 minutes or until the living spell's {@status concentration} ends (as if {@status concentration||concentrating} on a spell)."
 					]
 				}
 			],
@@ -2972,6 +2975,9 @@
 			],
 			"damageTags": [
 				"P"
+			],
+			"spellcastingTags": [
+				"O"
 			],
 			"miscTags": [
 				"MW",
@@ -3549,7 +3555,7 @@
 		},
 		{
 			"name": "Sergeant",
-			"source": "WDH",
+			"source": "ERLW",
 			"page": 197,
 			"_copy": {
 				"name": "Guard",
@@ -3783,7 +3789,7 @@
 				{
 					"name": "Master of Magic",
 					"entries": [
-						"Sul Khatesh has advantage on Constitution saving throws to maintain concentration."
+						"Sul Khatesh has advantage on Constitution saving throws to maintain {@status concentration}."
 					]
 				}
 			],
@@ -3830,7 +3836,7 @@
 				{
 					"name": "Consume Magic (Costs 2 Actions)",
 					"entries": [
-						"Sul Khatesh targets a creature within 120 feet of her who is concentrating on a spell. The target must succeed on a {@dc 26} Constitution saving throw or its concentration is broken on the spell, and Sul Khatesh gains 5 temporary hit points per level of that spell."
+						"Sul Khatesh targets a creature within 120 feet of her who is {@status concentration||concentrating} on a spell. The target must succeed on a {@dc 26} Constitution saving throw or its {@status concentration} is broken on the spell, and Sul Khatesh gains 5 temporary hit points per level of that spell."
 					]
 				},
 				{

@@ -381,11 +381,11 @@
 								],
 								[
 									"2",
-									"{@b  Nature.} In the midst of war, it is often the forest that suffers most\u2014unless we protect it."
+									"{@b Nature.} In the midst of war, it is often the forest that suffers most\u2014unless we protect it."
 								],
 								[
 									"3",
-									"{@b  Knowledge.} True understanding of one's self and the world is the highest good."
+									"{@b Knowledge.} True understanding of one's self and the world is the highest good."
 								],
 								[
 									"4",
@@ -393,11 +393,11 @@
 								],
 								[
 									"5",
-									"{@b  Cleverness.} The best way to defeat your opponents is to outsmart them."
+									"{@b Cleverness.} The best way to defeat your opponents is to outsmart them."
 								],
 								[
 									"6",
-									"{@b  Defense.} The golden city must remain hidden, and its power kept from those who would abuse it."
+									"{@b Defense.} The golden city must remain hidden, and its power kept from those who would abuse it."
 								]
 							]
 						},
@@ -938,7 +938,21 @@
 					"type": "list",
 					"columns": 2,
 					"items": [
+						"{@creature Aegisaur|PSX}",
+						"{@creature Aerosaur (Large)|PSX}",
+						"{@creature Aerosaur (Small)|PSX}",
+						"{@creature Air Totem Elemental|PSX}",
+						"{@creature Armasaur|PSX}",
+						"{@creature Awakened Shrub Totem Elemental|PSX}",
+						"{@creature Blight Totem Elemental|PSX}",
+						"{@creature Brontodon|PSX}",
+						"{@creature Ceratops|PSX}",
 						"{@creature Chupacabra|PSX}",
+						"{@creature Coatl|PSX}",
+						"{@creature Deinonychus|PSX}",
+						"{@creature Demon|PSX}",
+						"{@creature Dryad|PSX}",
+						"{@creature Earth Totem Elemental|PSX}",
 						"{@creature Elder Dinosaur|PSX}",
 						"{@creature Elder Dinosaur (Etali, Primal Storm)|PSX}",
 						"{@creature Elder Dinosaur (Ghalta, Primal Hunger)|PSX}",
@@ -946,10 +960,32 @@
 						"{@creature Elder Dinosaur (Tetzimoc, Primal Death)|PSX}",
 						"{@creature Elder Dinosaur (Zacama, Primal Calamity)|PSX}",
 						"{@creature Elder Dinosaur (Zetalpa, Primal Dawn)|PSX}",
+						"{@creature Ferocidon|PSX}",
+						"{@creature Fire Guardian|PSX}",
 						"{@creature Frilled Deathspitter|PSX}",
 						"{@creature Gishath, Sun's Avatar|PSX}",
+						"{@creature Griffin|PSX}",
+						"{@creature Hadrosaur|PSX}",
+						"{@creature Hammerskull|PSX}",
 						"{@creature Harpy|PSX}",
-						"{@creature Sunbird|PSX}"
+						"{@creature Horned Frog|PSX}",
+						"{@creature Macaw|PSX}",
+						"{@creature Parrot|PSX}",
+						"{@creature Piranha|PSX}",
+						"{@creature Sailback|PSX}",
+						"{@creature Shambling Mound Totem Elemental|PSX}",
+						"{@creature Stone Guardian (Animated Armor)|PSX}",
+						"{@creature Stone Guardian (Helmed Horror)|PSX}",
+						"{@creature Stone Guardian (Shield Guardian)|PSX}",
+						"{@creature Stone Guardian (Stone Golem)|PSX}",
+						"{@creature Sunbird|PSX}",
+						"{@creature Swarm of Piranhas|PSX}",
+						"{@creature Treant Totem Elemental|PSX}",
+						"{@creature Trilobite|PSX}",
+						"{@creature Trilobite (Giant)|PSX}",
+						"{@creature Tyrant|PSX}",
+						"{@creature Velociraptor|PSX}",
+						"{@creature Water Totem Elemental|PSX}"
 					]
 				},
 				{
@@ -1408,7 +1444,11 @@
 											"rows": [
 												[
 													"1",
-													"The best way to get me to do something is to tell me I can't do it. 2 If you do me an injury, I will crush you, ruin your name, and salt your family's lands for all time."
+													"The best way to get me to do something is to tell me I can't do it."
+												],
+												[
+													"2",
+													"If you do me an injury, I will crush you, ruin your name, and salt your family's lands for all time."
 												],
 												[
 													"3",

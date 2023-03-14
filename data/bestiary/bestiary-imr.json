@@ -28,6 +28,7 @@
 		{
 			"name": "\"The Demogorgon\"",
 			"isNpc": true,
+			"isNamedCreature": true,
 			"source": "IMR",
 			"page": 53,
 			"size": [
@@ -174,6 +175,7 @@
 		{
 			"name": "Andras",
 			"isNpc": true,
+			"isNamedCreature": true,
 			"source": "IMR",
 			"page": 31,
 			"_copy": {
@@ -238,11 +240,13 @@
 			],
 			"damageTags": [
 				"P"
-			]
+			],
+			"hasToken": true
 		},
 		{
 			"name": "Barbatos",
 			"isNpc": true,
+			"isNamedCreature": true,
 			"source": "IMR",
 			"page": 52,
 			"size": [
@@ -386,7 +390,8 @@
 			],
 			"conditionInflictSpell": [
 				"restrained"
-			]
+			],
+			"hasToken": true
 		},
 		{
 			"name": "Brain in Iron",
@@ -421,7 +426,8 @@
 			],
 			"speed": {
 				"walk": 20
-			}
+			},
+			"hasToken": true
 		},
 		{
 			"name": "Dwarven Worker",
@@ -459,7 +465,8 @@
 			"damageTags": [
 				"B",
 				"P"
-			]
+			],
+			"hasToken": true
 		},
 		{
 			"name": "Enhanced Medusa",
@@ -496,7 +503,7 @@
 					"name": "Petrifying Gaze",
 					"entries": [
 						"When a creature that can see the medusa's eyes starts its turn within 30 feet of the medusa, the medusa can force it to make a {@dc 14} Constitution saving throw if the medusa isn't {@condition incapacitated} and can see the creature. If the saving throw fails by 5 or more, the creature is instantly {@condition petrified}. Otherwise, a creature that fails the save begins to turn to metal, wood, or porcelain (the medusa's choice) and is {@condition restrained}. The {@condition restrained} creature must repeat the saving throw at the end of its next turn, becoming {@condition petrified} on a failure or ending the effect on a success. The petrification lasts until the creature is freed by the  {@spell greater restoration} spell or other magic.",
-						"Unless surprised, a creature can avert its eyes to avoid the saving throw at the start of its turn. If the creature does so, it can't see the medusa until the start of its next turn, when it can avert its eyes again. If the creature looks at the medusa in the meantime, it must immediately make the save.",
+						"Unless {@quickref Surprise|PHB|3|0|surprised}, a creature can avert its eyes to avoid the saving throw at the start of its turn. If the creature does so, it can't see the medusa until the start of its next turn, when it can avert its eyes again. If the creature looks at the medusa in the meantime, it must immediately make the save.",
 						"If the medusa sees itself reflected on a polished surface within 30 feet of it and in an area of bright light, the medusa is, due to its curse, affected by its own gaze."
 					]
 				}
@@ -507,11 +514,13 @@
 			"conditionInflict": [
 				"petrified",
 				"restrained"
-			]
+			],
+			"hasToken": true
 		},
 		{
 			"name": "Grandfather Oak",
 			"isNpc": true,
+			"isNamedCreature": true,
 			"source": "IMR",
 			"page": 5,
 			"_copy": {
@@ -534,11 +543,13 @@
 						}
 					}
 				}
-			}
+			},
+			"hasToken": true
 		},
 		{
 			"name": "Lynx Creatlach",
 			"isNpc": true,
+			"isNamedCreature": true,
 			"source": "IMR",
 			"page": 54,
 			"size": [
@@ -686,11 +697,13 @@
 			"miscTags": [
 				"MW"
 			],
+			"hasToken": true,
 			"hasFluff": true
 		},
 		{
 			"name": "Moghadam",
 			"isNpc": true,
+			"isNamedCreature": true,
 			"source": "IMR",
 			"page": 55,
 			"size": [
@@ -1011,6 +1024,7 @@
 		{
 			"name": "Seodra",
 			"isNpc": true,
+			"isNamedCreature": true,
 			"source": "IMR",
 			"page": 41,
 			"_copy": {
@@ -1057,11 +1071,13 @@
 			"languageTags": [
 				"C",
 				"P"
-			]
+			],
+			"hasToken": true
 		},
 		{
 			"name": "Sir Ursas",
 			"isNpc": true,
+			"isNamedCreature": true,
 			"source": "IMR",
 			"page": 56,
 			"size": [
@@ -1195,6 +1211,7 @@
 			"conditionInflict": [
 				"prone"
 			],
+			"hasToken": true,
 			"hasFluff": true
 		},
 		{
@@ -1215,7 +1232,8 @@
 			"conditionImmune": [
 				"exhaustion",
 				"poisoned"
-			]
+			],
+			"hasToken": true
 		},
 		{
 			"name": "Skeletal Owlbear",
@@ -1235,7 +1253,8 @@
 			"conditionImmune": [
 				"exhaustion",
 				"poisoned"
-			]
+			],
+			"hasToken": true
 		},
 		{
 			"name": "Skeletal Polar Bear",
@@ -1255,7 +1274,8 @@
 			"conditionImmune": [
 				"exhaustion",
 				"poisoned"
-			]
+			],
+			"hasToken": true
 		},
 		{
 			"name": "Skeletal Two-Headed Owlbear",
@@ -1275,11 +1295,13 @@
 			"conditionImmune": [
 				"exhaustion",
 				"poisoned"
-			]
+			],
+			"hasToken": true
 		},
 		{
 			"name": "Stolos",
 			"isNpc": true,
+			"isNamedCreature": true,
 			"source": "IMR",
 			"page": 33,
 			"_copy": {
@@ -1316,11 +1338,13 @@
 			],
 			"miscTags": [
 				"MW"
-			]
+			],
+			"hasToken": true
 		},
 		{
 			"name": "Tarnhem",
 			"isNpc": true,
+			"isNamedCreature": true,
 			"source": "IMR",
 			"page": 19,
 			"_copy": {
@@ -1349,11 +1373,13 @@
 				"F",
 				"L",
 				"S"
-			]
+			],
+			"hasToken": true
 		},
 		{
 			"name": "Thessalar",
 			"isNpc": true,
+			"isNamedCreature": true,
 			"source": "IMR",
 			"page": 57,
 			"size": [
@@ -1540,6 +1566,7 @@
 		{
 			"name": "Thessalar's Homunculus",
 			"isNpc": true,
+			"isNamedCreature": true,
 			"source": "IMR",
 			"page": 35,
 			"_copy": {
@@ -1564,7 +1591,9 @@
 			"miscTags": [
 				"MW",
 				"RW"
-			]
+			],
+			"hasToken": true,
+			"hasFluffImages": true
 		},
 		{
 			"name": "Thessalheart Construct",
@@ -1833,6 +1862,7 @@
 				"prone",
 				"restrained"
 			],
+			"hasToken": true,
 			"hasFluff": true
 		},
 		{
@@ -1864,7 +1894,8 @@
 			],
 			"spellcastingTags": [
 				"I"
-			]
+			],
+			"hasToken": true
 		},
 		{
 			"name": "Two-Headed Crocodile",
@@ -1954,7 +1985,8 @@
 			"conditionInflict": [
 				"grappled",
 				"restrained"
-			]
+			],
+			"hasToken": true
 		},
 		{
 			"name": "Two-Headed Owlbear",

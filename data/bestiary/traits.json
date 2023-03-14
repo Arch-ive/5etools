@@ -1,6 +1,29 @@
 {
 	"trait": [
 		{
+			"name": "Aarakocra",
+			"source": "DMG",
+			"page": 282,
+			"ref": "{@race Aarakocra|DMG}",
+			"apply": {
+				"_root": {
+					"size": [
+						"M"
+					],
+					"type": {
+						"type": "humanoid",
+						"tags": [
+							"aarakocra"
+						]
+					},
+					"speed": {
+						"walk": 30,
+						"fly": 50
+					}
+				}
+			}
+		},
+		{
 			"name": "Awakened",
 			"source": "PHB",
 			"page": 216,
@@ -95,10 +118,15 @@
 					"type": {
 						"type": "humanoid",
 						"tags": [
-							"gnome"
+							{
+								"tag": "gnome",
+								"prefix": "Deep"
+							}
 						]
 					},
-					"speed": 20
+					"speed": {
+						"walk": 20
+					}
 				},
 				"_mod": {
 					"_": {
@@ -145,6 +173,12 @@
 								"name": "Gnome Cunning",
 								"entries": [
 									"<$title_short_name$> has advantage on all Intelligence, Wisdom, and Charisma saving throws against magic."
+								]
+							},
+							{
+								"name": "Stone Camouflage",
+								"entries": [
+									"<$title_short_name$> has advantage on Dexterity ({@skill Stealth}) checks to hide in rocky terrain."
 								]
 							}
 						]
@@ -208,6 +242,35 @@
 			}
 		},
 		{
+			"name": "Dragonborn (Red)",
+			"source": "PHB",
+			"page": 32,
+			"ref": "{@race Dragonborn||Dragonborn (Red)}",
+			"apply": {
+				"_root": {
+					"size": [
+						"M"
+					],
+					"type": {
+						"type": "humanoid",
+						"tags": [
+							"dragonborn"
+						]
+					}
+				},
+				"_mod": {
+					"resist": {
+						"mode": "appendIfNotExistsArr",
+						"items": "fire"
+					},
+					"languages": {
+						"mode": "appendIfNotExistsArr",
+						"items": "Draconic"
+					}
+				}
+			}
+		},
+		{
 			"name": "Drow",
 			"source": "PHB",
 			"page": 21,
@@ -220,7 +283,10 @@
 					"type": {
 						"type": "humanoid",
 						"tags": [
-							"elf"
+							{
+								"tag": "elf",
+								"prefix": "Drow"
+							}
 						]
 					}
 				},
@@ -298,10 +364,15 @@
 					"type": {
 						"type": "humanoid",
 						"tags": [
-							"dwarf"
+							{
+								"tag": "dwarf",
+								"prefix": "Duergar"
+							}
 						]
 					},
-					"speed": 25
+					"speed": {
+						"walk": 25
+					}
 				},
 				"_mod": {
 					"_": {
@@ -342,7 +413,7 @@
 							{
 								"name": "Invisibility (Recharges after a Short or Long Rest)",
 								"entries": [
-									"<$title_short_name$> magically turns {@condition invisible} until they attack, cast a spell, or use their Enlarge, or until their concentration is broken, up to 1 hour (as if concentrating on a spell). Any equipment <$short_name$> wears or carries is invisible with them."
+									"<$title_short_name$> magically turns {@condition invisible} until they attack, cast a spell, or use their Enlarge, or until their {@status concentration} is broken, up to 1 hour (as if {@status concentration||concentrating} on a spell). Any equipment <$short_name$> wears or carries is invisible with them."
 								]
 							}
 						]
@@ -1058,12 +1129,6 @@
 								"entries": [
 									"When reduced to 0 hit points, <$title_short_name$> drops to 1 hit point instead (but can't do this again until they finish a long rest)."
 								]
-							},
-							{
-								"name": "Savage Attacks",
-								"entries": [
-									"When they score a critical hit, <$title_short_name$> can roll one of the weapon's damage dice and add it to the extra damage of the critical hit."
-								]
 							}
 						]
 					}
@@ -1083,7 +1148,10 @@
 					"type": {
 						"type": "humanoid",
 						"tags": [
-							"elf"
+							{
+								"tag": "elf",
+								"prefix": "High"
+							}
 						]
 					}
 				},
@@ -2138,7 +2206,7 @@
 				"_root": {
 					"legendaryGroup": {
 						"name": "Shadow Dragon",
-						"source": "FTB"
+						"source": "FTD"
 					}
 				},
 				"_mod": {
@@ -2286,10 +2354,15 @@
 					"type": {
 						"type": "humanoid",
 						"tags": [
-							"dwarf"
+							{
+								"tag": "dwarf",
+								"prefix": "Shield"
+							}
 						]
 					},
-					"speed": 25
+					"speed": {
+						"walk": 25
+					}
 				},
 				"_mod": {
 					"_": {
@@ -2358,7 +2431,7 @@
 							{
 								"name": "Aggressive",
 								"entries": [
-									"As a bonus action, <$title_short_name$> can move up to your speed toward a hostile creature that they can see."
+									"As a bonus action, <$short_name$> can move up to your speed toward a hostile creature that they can see."
 								]
 							}
 						]
@@ -2381,14 +2454,6 @@
 							"mode": "scalarMultXp",
 							"scalar": 0.5,
 							"floor": true
-						},
-						{
-							"mode": "addAllSaves",
-							"saves": 0
-						},
-						{
-							"mode": "addAllSkills",
-							"skills": 0
 						}
 					],
 					"hp": {
@@ -2425,6 +2490,15 @@
 						{
 							"mode": "scalarAddDc",
 							"scalar": -2
+						},
+						{
+							"mode": "prependArr",
+							"items": {
+								"name": "Reduced Threat",
+								"entries": [
+									"A reduced-threat monster takes a \u22122 penalty on attack rolls (included in the stat block), ability checks (included in the stat block for skill proficiencies), saving throws (included in the stat block for saving throw proficiencies), and saving throw DCs (included in the stat block)."
+								]
+							}
 						}
 					],
 					"action": [
@@ -2483,10 +2557,15 @@
 					"type": {
 						"type": "humanoid",
 						"tags": [
-							"gnome"
+							{
+								"tag": "gnome",
+								"prefix": "Rock"
+							}
 						]
 					},
-					"speed": 25
+					"speed": {
+						"walk": 25
+					}
 				},
 				"_mod": {
 					"_": {
@@ -2572,10 +2651,15 @@
 					"type": {
 						"type": "humanoid",
 						"tags": [
-							"halfling"
+							{
+								"tag": "halfling",
+								"prefix": "Stout"
+							}
 						]
 					},
-					"speed": 25
+					"speed": {
+						"walk": 25
+					}
 				},
 				"_mod": {
 					"languages": {
@@ -2635,7 +2719,7 @@
 							{
 								"name": "Feline Agility",
 								"entries": [
-									"When <$title_short_name$> moves on its turn in combat, they can double their speed until the end of the turn. Once they uses this ability, <$title_short_name$> can't use it again until they moves 0 feet on one of their turns."
+									"When <$short_name$> moves on its turn in combat, they can double their speed until the end of the turn. Once they uses this ability, <$title_short_name$> can't use it again until they moves 0 feet on one of their turns."
 								]
 							}
 						]
@@ -2764,7 +2848,10 @@
 					"type": {
 						"type": "humanoid",
 						"tags": [
-							"water genasi"
+							{
+								"tag": "genasi",
+								"prefix": "Water"
+							}
 						]
 					},
 					"speed": {
@@ -2804,10 +2891,15 @@
 					"type": {
 						"type": "humanoid",
 						"tags": [
-							"elf"
+							{
+								"tag": "elf",
+								"prefix": "Wood"
+							}
 						]
 					},
-					"speed": 35
+					"speed": {
+						"walk": 35
+					}
 				},
 				"_mod": {
 					"_": [
@@ -2865,7 +2957,9 @@
 							"yuan-ti"
 						]
 					},
-					"speed": 35
+					"speed": {
+						"walk": 35
+					}
 				},
 				"_mod": {
 					"_": [

@@ -29,14 +29,5 @@ This runs the following: "http-server -c-1 --cors --port 5000 -o"
 
 The server will push the site open in an applicable browser and/or you can manually go to http://localhost:5000/ in the browser of your choice.
 
--------------------------------------------------------------------------
-
-You can visit the [main site](https://5e.tools/index.html) or go to the GitHub [mirror](https://github.com/5etools-mirror-1/5etools-mirror-1.github.io) that this repo is (hopefully) in sync with which is hosted on GitHub [here](https://arch-ive.github.io/5etools-Archived/)
-
-Check out the offical wiki [here](https://wiki.tercept.net/) 
-
-You can join the 5etools Discord [here](https://discord.gg/5etools)
-
 ## License
 
-This project is licensed under the terms of the MIT license.

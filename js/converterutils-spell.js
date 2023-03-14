@@ -74,40 +74,72 @@ class SpellAttackTagger {
 // TODO areaTags
 
 class MiscTagsTagger {
+	static _addTag ({tags, tag, options}) {
+		if (options?.allowlistTags && !options?.allowlistTags.has(tag)) return;
+		tags.add(tag);
+	}
+
 	static tryRun (sp, options) {
 		const tags = new Set(sp.miscTags || []);
 
-		MiscTagsTagger._WALKER = MiscTagsTagger._WALKER || MiscUtil.getWalker({isNoModification: true, keyBlacklist: MiscUtil.GENERIC_WALKER_ENTRIES_KEY_BLACKLIST});
+		MiscTagsTagger._WALKER = MiscTagsTagger._WALKER || MiscUtil.getWalker({isNoModification: true, keyBlocklist: MiscUtil.GENERIC_WALKER_ENTRIES_KEY_BLOCKLIST});
 		MiscTagsTagger._WALKER.walk(
 			[sp.entries, sp.entriesHigherLevel],
 			{
 				string: (str) => {
-					if (/becomes permanent/ig.test(str)) tags.add("PRM");
-					if (/when you reach/ig.test(str)) tags.add("SCL");
-					if ((/regain|restore/ig.test(str) && /hit point/ig.test(str)) || /heal/ig.test(str)) tags.add("HL");
-					if (/temporary hit points/ig.test(str)) tags.add("THP");
-					if (/you summon/ig.test(str)) tags.add("SMN");
-					if (/you can see/ig.test(str)) tags.add("SGT");
-					if (/you (?:can then )?teleport/i.test(str) || /instantly (?:transports you|teleport)/i.test(str) || /enters(?:[^.]+)portal instantly/i.test(str) || /entering the portal exits from the other portal/i.test(str)) tags.add("TP");
+					if (/becomes permanent/ig.test(str)) this._addTag({tags, tag: "PRM", options});
+					if (/when you reach/ig.test(str)) this._addTag({tags, tag: "SCL", options});
+					if ((/regain|restore/ig.test(str) && /hit point/ig.test(str)) || /heal/ig.test(str)) this._addTag({tags, tag: "HL", options});
+					if (/temporary hit points/ig.test(str)) this._addTag({tags, tag: "THP", options});
+					if (/you summon/ig.test(str) || /creature shares your initiative count/ig.test(str)) this._addTag({tags, tag: "SMN", options});
+					if (/you can see/ig.test(str)) this._addTag({tags, tag: "SGT", options});
+					if (/you (?:can then )?teleport/i.test(str) || /instantly (?:transports you|teleport)/i.test(str) || /enters(?:[^.]+)portal instantly/i.test(str) || /entering the portal exits from the other portal/i.test(str)) this._addTag({tags, tag: "TP", options});
 
-					if ((str.includes("bonus") || str.includes("penalty")) && str.includes("AC")) tags.add("MAC");
-					if (/target's (?:base )?AC becomes/.exec(str)) tags.add("MAC");
-					if (/target's AC can't be less than/.exec(str)) tags.add("MAC");
+					if ((str.includes("bonus") || str.includes("penalty")) && str.includes("AC")) this._addTag({tags, tag: "MAC", options});
+					if (/target's (?:base )?AC becomes/.exec(str)) this._addTag({tags, tag: "MAC", options});
+					if (/target's AC can't be less than/.exec(str)) this._addTag({tags, tag: "MAC", options});
 
-					if (/(?:^|\W)(?:pull(?:|ed|s)|push(?:|ed|s)) [^.!?:]*\d+\s+(?:ft|feet|foot|mile|square)/ig.test(str)) tags.add("FMV");
+					if (/(?:^|\W)(?:pull(?:|ed|s)|push(?:|ed|s)) [^.!?:]*\d+\s+(?:ft|feet|foot|mile|square)/ig.test(str)) this._addTag({tags, tag: "FMV", options});
 
-					if (/rolls? (?:a )?{@dice [^}]+} and consults? the table/.test(str)) tags.add("RO");
+					if (/rolls? (?:a )?{@dice [^}]+} and consults? the table/.test(str)) this._addTag({tags, tag: "RO", options});
 
 					if ((/\bbright light\b/i.test(str) || /\bdim light\b/i.test(str)) && /\b\d+[- ]foot[- ]radius\b/i.test(str)) {
-						if (/\bsunlight\b/.test(str)) tags.add("LGTS");
-						else tags.add("LGT");
+						if (/\bsunlight\b/.test(str)) this._addTag({tags, tag: "LGTS", options});
+						else this._addTag({tags, tag: "LGT", options});
 					}
+
+					if (/\bbonus action\b/i.test(str)) this._addTag({tags, tag: "UBA", options});
+
+					if (/\b(?:lightly|heavily) obscured\b/i.test(str)) this._addTag({tags, tag: "OBS", options});
+
+					if (/\bis difficult terrain\b/i.test(Renderer.stripTags(str)) || /spends? \d+ (?:feet|foot) of movement for every 1 foot/.test(str)) this._addTag({tags, tag: "DFT", options});
+
+					if (
+						/\battacks? deals? an extra\b[^.!?]+\bdamage\b/.test(str)
+						|| /\bdeals? an extra\b[^.!?]+\bdamage\b[^.!?]+\b(?:weapon attack|when it hits)\b/.test(str)
+						|| /weapon attacks?\b[^.!?]+\b(?:takes an extra|deal an extra)\b[^.!?]+\bdamage/.test(str)
+					) this._addTag({tags, tag: "AAD", options});
+
+					if (
+						/\b(?:any|one|a) creatures? or objects?\b/i.test(str)
+						|| /\b(?:flammable|nonmagical|metal|unsecured) objects?\b/.test(str)
+						|| /\bobjects?\b[^.!?]+\b(?:created by magic|(?:that )?you touch|that is neither held nor carried)\b/.test(str)
+						|| /\bobject\b[^.!?]+\bthat isn't being worn or carried\b/.test(str)
+						|| /\bobjects? (?:of your choice|that is familiar to you|of (?:Tiny|Small|Medium|Large|Huge|Gargantuan) size)\b/.test(str)
+						|| /\b(?:Tiny|Small|Medium|Large|Huge|Gargantuan) or smaller object\b/.test(str)
+						|| /\baffected by this spell, the object is\b/.test(str)
+						|| /\ball creatures and objects\b/i.test(str)
+						|| /\ba(?:ny|n)? (?:(?:willing|visible|affected) )?(?:creature|place) or an object\b/i.test(str)
+						|| /\bone creature, object, or magical effect\b/i.test(str)
+						|| /\ba person, place, or object\b/i.test(str)
+						|| /\b(choose|touch|manipulate|soil) (an|one) object\b/i.test(str)
+					) this._addTag({tags, tag: "OBJ", options});
 				},
 				object: (obj) => {
 					if (obj.type !== "table") return;
 
 					const rollMode = Renderer.getAutoConvertedTableRollMode(obj);
-					if (rollMode !== RollerUtil.ROLL_COL_NONE) tags.add("RO");
+					if (rollMode !== RollerUtil.ROLL_COL_NONE) this._addTag({tags, tag: "RO", options});
 				},
 			},
 		);
@@ -348,16 +380,12 @@ class AffectedCreatureTypeTagger {
 }
 AffectedCreatureTypeTagger._RE_TYPES = new RegExp(`\\b(${[...Parser.MON_TYPES, ...Object.values(Parser.MON_TYPE_TO_PLURAL)].map(it => it.escapeRegexp()).join("|")})\\b`, "gi");
 
-if (typeof module !== "undefined") {
-	module.exports = {
-		DamageInflictTagger,
-		DamageResVulnImmuneTagger,
-		ConditionInflictTagger,
-		SavingThrowTagger,
-		AbilityCheckTagger,
-		SpellAttackTagger,
-		MiscTagsTagger,
-		ScalingLevelDiceTagger,
-		AffectedCreatureTypeTagger,
-	};
-}
+globalThis.DamageInflictTagger = DamageInflictTagger;
+globalThis.DamageResVulnImmuneTagger = DamageResVulnImmuneTagger;
+globalThis.ConditionInflictTagger = ConditionInflictTagger;
+globalThis.SavingThrowTagger = SavingThrowTagger;
+globalThis.AbilityCheckTagger = AbilityCheckTagger;
+globalThis.SpellAttackTagger = SpellAttackTagger;
+globalThis.MiscTagsTagger = MiscTagsTagger;
+globalThis.ScalingLevelDiceTagger = ScalingLevelDiceTagger;
+globalThis.AffectedCreatureTypeTagger = AffectedCreatureTypeTagger;

@@ -5,7 +5,7 @@
 			"source": "VGM",
 			"raceName": "Aasimar (Protector)",
 			"raceSource": "VGM",
-			"data": {
+			"system": {
 				"activation.type": "action",
 				"activation.cost": 1
 			}
@@ -15,7 +15,7 @@
 			"source": "GGR",
 			"raceName": "Centaur",
 			"raceSource": "GGR",
-			"data": {
+			"system": {
 				"activation.type": "action",
 				"activation.cost": 1
 			}
@@ -28,6 +28,7 @@
 			"effects": [
 				{
 					"name": "HP Increase",
+					"transfer": true,
 					"changes": [
 						{
 							"key": "data.attributes.hp.max",
@@ -46,6 +47,7 @@
 			"effects": [
 				{
 					"name": "Lightly Armored Defense",
+					"transfer": true,
 					"changes": [
 						{
 							"key": "data.attributes.ac.bonus",
@@ -64,6 +66,7 @@
 			"effects": [
 				{
 					"name": "Natural Armor",
+					"transfer": true,
 					"changes": [
 						{
 							"key": "data.attributes.ac.calc",
@@ -87,6 +90,7 @@
 			"effects": [
 				{
 					"name": "Natural Armor",
+					"transfer": true,
 					"changes": [
 						{
 							"key": "data.attributes.ac.bonus",
@@ -105,6 +109,7 @@
 			"effects": [
 				{
 					"name": "Natural Armor",
+					"transfer": true,
 					"changes": [
 						{
 							"key": "data.attributes.ac.calc",
@@ -128,6 +133,7 @@
 			"effects": [
 				{
 					"name": "Natural Armor",
+					"transfer": true,
 					"changes": [
 						{
 							"key": "data.attributes.ac.calc",
@@ -151,6 +157,7 @@
 			"effects": [
 				{
 					"name": "Natural Armor",
+					"transfer": true,
 					"changes": [
 						{
 							"key": "data.attributes.ac.calc",
@@ -174,6 +181,7 @@
 			"effects": [
 				{
 					"name": "Natural Armor",
+					"transfer": true,
 					"changes": [
 						{
 							"key": "data.attributes.ac.calc",
@@ -197,6 +205,7 @@
 			"effects": [
 				{
 					"name": "Natural Armor",
+					"transfer": true,
 					"changes": [
 						{
 							"key": "data.attributes.ac.bonus",
@@ -216,6 +225,7 @@
 			"effects": [
 				{
 					"name": "Natural Armor",
+					"transfer": true,
 					"changes": [
 						{
 							"key": "data.attributes.ac.bonus",
@@ -235,6 +245,7 @@
 			"effects": [
 				{
 					"name": "Natural Armor",
+					"transfer": true,
 					"changes": [
 						{
 							"key": "data.attributes.ac.bonus",
@@ -254,6 +265,7 @@
 			"effects": [
 				{
 					"name": "Carapace",
+					"transfer": true,
 					"changes": [
 						{
 							"key": "data.attributes.ac.bonus",
@@ -273,6 +285,7 @@
 			"effects": [
 				{
 					"name": "Carapace",
+					"transfer": true,
 					"changes": [
 						{
 							"key": "data.attributes.ac.bonus",
@@ -292,6 +305,7 @@
 			"effects": [
 				{
 					"name": "Natural Armor",
+					"transfer": true,
 					"changes": [
 						{
 							"key": "data.attributes.ac.calc",
@@ -315,6 +329,7 @@
 			"effects": [
 				{
 					"name": "Natural Armor",
+					"transfer": true,
 					"changes": [
 						{
 							"key": "data.attributes.ac.bonus",
@@ -334,6 +349,7 @@
 			"effects": [
 				{
 					"name": "Natural Armor",
+					"transfer": true,
 					"changes": [
 						{
 							"key": "data.attributes.ac.bonus",
@@ -352,6 +368,7 @@
 			"effects": [
 				{
 					"name": "Natural Armor",
+					"transfer": true,
 					"changes": [
 						{
 							"key": "data.attributes.ac.bonus",
@@ -370,6 +387,7 @@
 			"effects": [
 				{
 					"name": "Natural Armor",
+					"transfer": true,
 					"changes": [
 						{
 							"key": "data.attributes.ac.bonus",
@@ -388,6 +406,7 @@
 			"effects": [
 				{
 					"name": "Darkwood Core",
+					"transfer": true,
 					"changes": [
 						{
 							"key": "data.attributes.ac.calc",
@@ -397,13 +416,14 @@
 						{
 							"key": "data.attributes.ac.formula",
 							"mode": "OVERRIDE",
-							"value": "11 + @abilities.dex.mod + @prof"
+							"value": "11 + @abilities.dex.mod + @attributes.prof"
 						}
 					],
 					"disabled": true
 				},
 				{
 					"name": "Composite Plating",
+					"transfer": true,
 					"changes": [
 						{
 							"key": "data.attributes.ac.calc",
@@ -413,13 +433,14 @@
 						{
 							"key": "data.attributes.ac.formula",
 							"mode": "OVERRIDE",
-							"value": "13 + {2, @abilities.dex.mod}kl + @prof"
+							"value": "13 + {2, @abilities.dex.mod}kl + @attributes.prof"
 						}
 					],
 					"disabled": true
 				},
 				{
 					"name": "Heavy Plating",
+					"transfer": true,
 					"changes": [
 						{
 							"key": "data.attributes.ac.calc",
@@ -429,7 +450,7 @@
 						{
 							"key": "data.attributes.ac.formula",
 							"mode": "OVERRIDE",
-							"value": "16 + @prof"
+							"value": "16 + @attributes.prof"
 						}
 					],
 					"disabled": true
@@ -441,7 +462,7 @@
 			"source": "PHB",
 			"raceName": "Dragonborn (Black)",
 			"raceSource": "PHB",
-			"data": {
+			"system": {
 				"activation.type": "action",
 				"activation.cost": 1,
 				"target.value": 30,
@@ -458,7 +479,7 @@
 			"source": "PHB",
 			"raceName": "Dragonborn (Blue)",
 			"raceSource": "PHB",
-			"data": {
+			"system": {
 				"activation.type": "action",
 				"activation.cost": 1,
 				"target.value": 30,
@@ -475,7 +496,7 @@
 			"source": "PHB",
 			"raceName": "Dragonborn (Brass)",
 			"raceSource": "PHB",
-			"data": {
+			"system": {
 				"activation.type": "action",
 				"activation.cost": 1,
 				"target.value": 30,
@@ -492,7 +513,7 @@
 			"source": "PHB",
 			"raceName": "Dragonborn (Bronze)",
 			"raceSource": "PHB",
-			"data": {
+			"system": {
 				"activation.type": "action",
 				"activation.cost": 1,
 				"target.value": 30,
@@ -509,7 +530,7 @@
 			"source": "PHB",
 			"raceName": "Dragonborn (Copper)",
 			"raceSource": "PHB",
-			"data": {
+			"system": {
 				"activation.type": "action",
 				"activation.cost": 1,
 				"target.value": 30,
@@ -526,7 +547,7 @@
 			"source": "PHB",
 			"raceName": "Dragonborn (Gold)",
 			"raceSource": "PHB",
-			"data": {
+			"system": {
 				"activation.type": "action",
 				"activation.cost": 1,
 				"target.value": 15,
@@ -543,7 +564,7 @@
 			"source": "PHB",
 			"raceName": "Dragonborn (Green)",
 			"raceSource": "PHB",
-			"data": {
+			"system": {
 				"activation.type": "action",
 				"activation.cost": 1,
 				"target.value": 15,
@@ -560,7 +581,7 @@
 			"source": "PHB",
 			"raceName": "Dragonborn (Red)",
 			"raceSource": "PHB",
-			"data": {
+			"system": {
 				"activation.type": "action",
 				"activation.cost": 1,
 				"target.value": 15,
@@ -577,7 +598,7 @@
 			"source": "PHB",
 			"raceName": "Dragonborn (Silver)",
 			"raceSource": "PHB",
-			"data": {
+			"system": {
 				"activation.type": "action",
 				"activation.cost": 1,
 				"target.value": 15,
@@ -594,7 +615,7 @@
 			"source": "PHB",
 			"raceName": "Dragonborn (White)",
 			"raceSource": "PHB",
-			"data": {
+			"system": {
 				"activation.type": "action",
 				"activation.cost": 1,
 				"target.value": 15,
@@ -606,21 +627,12 @@
 				"save.scaling": "con"
 			}
 		},
-
-
-
-
-
-
-
-
-
 		{
 			"name": "Breath Weapon",
 			"source": "EGW",
 			"raceName": "Dragonborn (Draconblood; Black)",
 			"raceSource": "EGW",
-			"data": {
+			"system": {
 				"activation.type": "action",
 				"activation.cost": 1,
 				"target.value": 30,
@@ -637,7 +649,7 @@
 			"source": "EGW",
 			"raceName": "Dragonborn (Draconblood; Blue)",
 			"raceSource": "EGW",
-			"data": {
+			"system": {
 				"activation.type": "action",
 				"activation.cost": 1,
 				"target.value": 30,
@@ -654,7 +666,7 @@
 			"source": "EGW",
 			"raceName": "Dragonborn (Draconblood; Brass)",
 			"raceSource": "EGW",
-			"data": {
+			"system": {
 				"activation.type": "action",
 				"activation.cost": 1,
 				"target.value": 30,
@@ -671,7 +683,7 @@
 			"source": "EGW",
 			"raceName": "Dragonborn (Draconblood; Bronze)",
 			"raceSource": "EGW",
-			"data": {
+			"system": {
 				"activation.type": "action",
 				"activation.cost": 1,
 				"target.value": 30,
@@ -688,7 +700,7 @@
 			"source": "EGW",
 			"raceName": "Dragonborn (Draconblood; Copper)",
 			"raceSource": "EGW",
-			"data": {
+			"system": {
 				"activation.type": "action",
 				"activation.cost": 1,
 				"target.value": 30,
@@ -705,7 +717,7 @@
 			"source": "EGW",
 			"raceName": "Dragonborn (Draconblood; Gold)",
 			"raceSource": "EGW",
-			"data": {
+			"system": {
 				"activation.type": "action",
 				"activation.cost": 1,
 				"target.value": 15,
@@ -722,7 +734,7 @@
 			"source": "EGW",
 			"raceName": "Dragonborn (Draconblood; Green)",
 			"raceSource": "EGW",
-			"data": {
+			"system": {
 				"activation.type": "action",
 				"activation.cost": 1,
 				"target.value": 15,
@@ -739,7 +751,7 @@
 			"source": "EGW",
 			"raceName": "Dragonborn (Draconblood; Red)",
 			"raceSource": "EGW",
-			"data": {
+			"system": {
 				"activation.type": "action",
 				"activation.cost": 1,
 				"target.value": 15,
@@ -756,7 +768,7 @@
 			"source": "EGW",
 			"raceName": "Dragonborn (Draconblood; Silver)",
 			"raceSource": "EGW",
-			"data": {
+			"system": {
 				"activation.type": "action",
 				"activation.cost": 1,
 				"target.value": 15,
@@ -773,7 +785,7 @@
 			"source": "EGW",
 			"raceName": "Dragonborn (Draconblood; White)",
 			"raceSource": "EGW",
-			"data": {
+			"system": {
 				"activation.type": "action",
 				"activation.cost": 1,
 				"target.value": 15,
@@ -785,22 +797,12 @@
 				"save.scaling": "con"
 			}
 		},
-
-
-
-
-
-
-
-
-
-
 		{
 			"name": "Breath Weapon",
 			"source": "EGW",
 			"raceName": "Dragonborn (Ravenite; Black)",
 			"raceSource": "EGW",
-			"data": {
+			"system": {
 				"activation.type": "action",
 				"activation.cost": 1,
 				"target.value": 30,
@@ -817,7 +819,7 @@
 			"source": "EGW",
 			"raceName": "Dragonborn (Ravenite; Blue)",
 			"raceSource": "EGW",
-			"data": {
+			"system": {
 				"activation.type": "action",
 				"activation.cost": 1,
 				"target.value": 30,
@@ -834,7 +836,7 @@
 			"source": "EGW",
 			"raceName": "Dragonborn (Ravenite; Brass)",
 			"raceSource": "EGW",
-			"data": {
+			"system": {
 				"activation.type": "action",
 				"activation.cost": 1,
 				"target.value": 30,
@@ -851,7 +853,7 @@
 			"source": "EGW",
 			"raceName": "Dragonborn (Ravenite; Bronze)",
 			"raceSource": "EGW",
-			"data": {
+			"system": {
 				"activation.type": "action",
 				"activation.cost": 1,
 				"target.value": 30,
@@ -868,7 +870,7 @@
 			"source": "EGW",
 			"raceName": "Dragonborn (Ravenite; Copper)",
 			"raceSource": "EGW",
-			"data": {
+			"system": {
 				"activation.type": "action",
 				"activation.cost": 1,
 				"target.value": 30,
@@ -885,7 +887,7 @@
 			"source": "EGW",
 			"raceName": "Dragonborn (Ravenite; Gold)",
 			"raceSource": "EGW",
-			"data": {
+			"system": {
 				"activation.type": "action",
 				"activation.cost": 1,
 				"target.value": 15,
@@ -902,7 +904,7 @@
 			"source": "EGW",
 			"raceName": "Dragonborn (Ravenite; Green)",
 			"raceSource": "EGW",
-			"data": {
+			"system": {
 				"activation.type": "action",
 				"activation.cost": 1,
 				"target.value": 15,
@@ -919,7 +921,7 @@
 			"source": "EGW",
 			"raceName": "Dragonborn (Ravenite; Red)",
 			"raceSource": "EGW",
-			"data": {
+			"system": {
 				"activation.type": "action",
 				"activation.cost": 1,
 				"target.value": 15,
@@ -936,7 +938,7 @@
 			"source": "EGW",
 			"raceName": "Dragonborn (Ravenite; Silver)",
 			"raceSource": "EGW",
-			"data": {
+			"system": {
 				"activation.type": "action",
 				"activation.cost": 1,
 				"target.value": 15,
@@ -953,7 +955,7 @@
 			"source": "EGW",
 			"raceName": "Dragonborn (Ravenite; White)",
 			"raceSource": "EGW",
-			"data": {
+			"system": {
 				"activation.type": "action",
 				"activation.cost": 1,
 				"target.value": 15,
@@ -965,19 +967,13 @@
 				"save.scaling": "con"
 			}
 		},
-
-
-
-
-
 		{
 			"name": "Breath Weapon",
 			"source": "FTD",
 			"raceName": "Dragonborn (Chromatic; Black)",
 			"raceSource": "FTD",
-			"data": {
+			"system": {
 				"activation.type": "special",
-
 				"target.value": 30,
 				"target.units": "ft",
 				"target.type": "line",
@@ -992,9 +988,8 @@
 			"source": "FTD",
 			"raceName": "Dragonborn (Chromatic; Blue)",
 			"raceSource": "FTD",
-			"data": {
+			"system": {
 				"activation.type": "special",
-
 				"target.value": 30,
 				"target.units": "ft",
 				"target.type": "line",
@@ -1009,9 +1004,8 @@
 			"source": "FTD",
 			"raceName": "Dragonborn (Chromatic; Green)",
 			"raceSource": "FTD",
-			"data": {
+			"system": {
 				"activation.type": "special",
-
 				"target.value": 30,
 				"target.units": "ft",
 				"target.type": "line",
@@ -1026,9 +1020,8 @@
 			"source": "FTD",
 			"raceName": "Dragonborn (Chromatic; Red)",
 			"raceSource": "FTD",
-			"data": {
+			"system": {
 				"activation.type": "special",
-
 				"target.value": 30,
 				"target.units": "ft",
 				"target.type": "line",
@@ -1043,9 +1036,8 @@
 			"source": "FTD",
 			"raceName": "Dragonborn (Chromatic; White)",
 			"raceSource": "FTD",
-			"data": {
+			"system": {
 				"activation.type": "special",
-
 				"target.value": 30,
 				"target.units": "ft",
 				"target.type": "line",
@@ -1055,23 +1047,13 @@
 				"save.scaling": "con"
 			}
 		},
-
-
-
-
-
-
-
-
-
 		{
 			"name": "Breath Weapon",
 			"source": "FTD",
 			"raceName": "Dragonborn (Metallic; Brass)",
 			"raceSource": "FTD",
-			"data": {
+			"system": {
 				"activation.type": "special",
-
 				"target.value": 15,
 				"target.units": "ft",
 				"target.type": "cone",
@@ -1086,9 +1068,8 @@
 			"source": "FTD",
 			"raceName": "Dragonborn (Metallic; Bronze)",
 			"raceSource": "FTD",
-			"data": {
+			"system": {
 				"activation.type": "special",
-
 				"target.value": 15,
 				"target.units": "ft",
 				"target.type": "cone",
@@ -1103,9 +1084,8 @@
 			"source": "FTD",
 			"raceName": "Dragonborn (Metallic; Copper)",
 			"raceSource": "FTD",
-			"data": {
+			"system": {
 				"activation.type": "special",
-
 				"target.value": 15,
 				"target.units": "ft",
 				"target.type": "cone",
@@ -1120,9 +1100,8 @@
 			"source": "FTD",
 			"raceName": "Dragonborn (Metallic; Gold)",
 			"raceSource": "FTD",
-			"data": {
+			"system": {
 				"activation.type": "special",
-
 				"target.value": 15,
 				"target.units": "ft",
 				"target.type": "cone",
@@ -1137,9 +1116,8 @@
 			"source": "FTD",
 			"raceName": "Dragonborn (Metallic; Silver)",
 			"raceSource": "FTD",
-			"data": {
+			"system": {
 				"activation.type": "special",
-
 				"target.value": 15,
 				"target.units": "ft",
 				"target.type": "cone",
@@ -1149,24 +1127,13 @@
 				"save.scaling": "con"
 			}
 		},
-
-
-
-
-
-
-
-
-
-
 		{
 			"name": "Breath Weapon",
 			"source": "FTD",
 			"raceName": "Dragonborn (Gem; Amethyst)",
 			"raceSource": "FTD",
-			"data": {
+			"system": {
 				"activation.type": "special",
-
 				"target.value": 15,
 				"target.units": "ft",
 				"target.type": "cone",
@@ -1181,9 +1148,8 @@
 			"source": "FTD",
 			"raceName": "Dragonborn (Gem; Crystal)",
 			"raceSource": "FTD",
-			"data": {
+			"system": {
 				"activation.type": "special",
-
 				"target.value": 15,
 				"target.units": "ft",
 				"target.type": "cone",
@@ -1198,9 +1164,8 @@
 			"source": "FTD",
 			"raceName": "Dragonborn (Gem; Emerald)",
 			"raceSource": "FTD",
-			"data": {
+			"system": {
 				"activation.type": "special",
-
 				"target.value": 15,
 				"target.units": "ft",
 				"target.type": "cone",
@@ -1215,9 +1180,8 @@
 			"source": "FTD",
 			"raceName": "Dragonborn (Gem; Sapphire)",
 			"raceSource": "FTD",
-			"data": {
+			"system": {
 				"activation.type": "special",
-
 				"target.value": 15,
 				"target.units": "ft",
 				"target.type": "cone",
@@ -1232,9 +1196,8 @@
 			"source": "FTD",
 			"raceName": "Dragonborn (Gem; Topaz)",
 			"raceSource": "FTD",
-			"data": {
+			"system": {
 				"activation.type": "special",
-
 				"target.value": 15,
 				"target.units": "ft",
 				"target.type": "cone",
@@ -1249,10 +1212,10 @@
 			"source": "MPMM",
 			"raceName": "Aasimar",
 			"raceSource": "MPMM",
-			"data": {
+			"system": {
 				"damage.parts": [
 					[
-						"(@prof)d4",
+						"(@attributes.prof)d4",
 						"healing"
 					]
 				]
@@ -1263,7 +1226,7 @@
 			"source": "VGM",
 			"raceName": "Aasimar",
 			"raceSource": "VGM",
-			"data": {
+			"system": {
 				"damage.parts": [
 					[
 						"@details.level",
@@ -1271,6 +1234,49 @@
 					]
 				]
 			}
+		},
+		{
+			"name": "Armored Casing",
+			"source": "AAG",
+			"raceName": "Autognome",
+			"raceSource": "AAG",
+			"effects": [
+				{
+					"name": "Armored Casing",
+					"transfer": true,
+					"changes": [
+						{
+							"key": "data.attributes.ac.calc",
+							"mode": "OVERRIDE",
+							"value": "custom"
+						},
+						{
+							"key": "data.attributes.ac.formula",
+							"mode": "OVERRIDE",
+							"value": "13 + @abilities.dex.mod"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Hare-Trigger",
+			"source": "MPMM",
+			"raceName": "Harengon",
+			"raceSource": "MPMM",
+			"effects": [
+				{
+					"name": "Bonus Initiative",
+					"transfer": true,
+					"changes": [
+						{
+							"key": "data.attributes.init.total",
+							"mode": "ADD",
+							"value": "@attributes.prof"
+						}
+					]
+				}
+			]
 		}
 	]
 }

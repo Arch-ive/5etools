@@ -408,6 +408,7 @@
 				}
 			],
 			"hasFluff": true,
+			"hasFluffImages": true,
 			"_versions": [
 				{
 					"name": "Aasimar; Necrotic Shroud",
@@ -463,8 +464,7 @@
 						}
 					}
 				}
-			],
-			"hasFluffImages": true
+			]
 		},
 		{
 			"name": "Aasimar",
@@ -680,12 +680,143 @@
 						"An aetherborn with this gift gains the Drain Life ability: a natural attack that deals {@dice 1d6} necrotic damage and restores the same number of hit points to the aetherborn. However, if the aetherborn goes for 7 days without dealing this damage, their hit point maximum is reduced by {@dice 1d6} per week. This reduction can't be removed until the aetherborn has used their Drain Life ability and completed a long rest."
 					]
 				}
-			]
+			],
+			"hasFluff": true,
+			"hasFluffImages": true
+		},
+		{
+			"name": "Astral Elf",
+			"source": "AAG",
+			"page": 10,
+			"lineage": "VRGR",
+			"creatureTypes": [
+				"humanoid"
+			],
+			"creatureTypeTags": [
+				"elf"
+			],
+			"size": [
+				"M"
+			],
+			"speed": 30,
+			"age": {
+				"max": 750
+			},
+			"darkvision": 60,
+			"traitTags": [
+				"Improved Resting"
+			],
+			"skillProficiencies": [
+				{
+					"perception": true
+				}
+			],
+			"additionalSpells": [
+				{
+					"known": {
+						"1": [
+							"dancing lights#c"
+						]
+					},
+					"ability": {
+						"choose": [
+							"int",
+							"wis",
+							"cha"
+						]
+					}
+				},
+				{
+					"known": {
+						"1": [
+							"light#c"
+						]
+					},
+					"ability": {
+						"choose": [
+							"int",
+							"wis",
+							"cha"
+						]
+					}
+				},
+				{
+					"known": {
+						"1": [
+							"sacred flame#c"
+						]
+					},
+					"ability": {
+						"choose": [
+							"int",
+							"wis",
+							"cha"
+						]
+					}
+				}
+			],
+			"entries": [
+				{
+					"type": "entries",
+					"name": "Creature Type",
+					"entries": [
+						"You are a Humanoid. You are also considered an elf for any prerequisite or effect that requires you to be an elf."
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Astral Fire",
+					"entries": [
+						"You know one of the following cantrips of your choice: {@spell dancing lights}, {@spell light}, or {@spell sacred flame}. Intelligence, Wisdom, or Charisma is your spellcasting ability for it (choose when you select this race)."
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Darkvision",
+					"entries": [
+						"You can see in dim light within 60 feet of yourself as if it were bright light, and in darkness as if it were dim light. You discern colors in that darkness only as shades of gray."
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Fey Ancestry",
+					"entries": [
+						"You have advantage on saving throws you make to avoid or end the {@condition charmed} condition on yourself."
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Keen Senses",
+					"entries": [
+						"You have proficiency in the {@skill Perception} skill."
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Starlight Step",
+					"entries": [
+						"As a bonus action, you can magically teleport up to 30 feet to an unoccupied space you can see. You can use this trait a number of times equal to your proficiency bonus, and you regain all expended uses when you finish a long rest."
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Astral Trance",
+					"entries": [
+						"You don't need to sleep, and magic can't put you to sleep. You can finish a long rest in 4 hours if you spend those hours in a trancelike meditation, during which you remain conscious.",
+						"Whenever you finish this trance, you gain proficiency in one skill of your choice and with one weapon or tool of your choice, selected from the {@book Player's Handbook|PHB}. You mystically acquire these proficiencies by drawing them from shared elven memory and the experiences of entities on the Astral Plane, and you retain them until you finish your next long rest."
+					]
+				}
+			],
+			"hasFluff": true,
+			"hasFluffImages": true
 		},
 		{
 			"name": "Astral Elf",
 			"source": "UA2021TravelersOfTheMultiverse",
 			"page": 1,
+			"reprintedAs": [
+				"Astral Elf|AAG"
+			],
 			"lineage": "VRGR",
 			"size": [
 				"M"
@@ -799,8 +930,93 @@
 		},
 		{
 			"name": "Autognome",
+			"source": "AAG",
+			"page": 11,
+			"lineage": "VRGR",
+			"creatureTypes": [
+				"construct"
+			],
+			"size": [
+				"S"
+			],
+			"speed": 30,
+			"traitTags": [
+				"Improved Resting",
+				"Natural Armor"
+			],
+			"toolProficiencies": [
+				{
+					"any": 2
+				}
+			],
+			"resist": [
+				"poison"
+			],
+			"conditionImmune": [
+				"disease"
+			],
+			"entries": [
+				{
+					"type": "entries",
+					"name": "Creature Type",
+					"entries": [
+						"You are a Construct."
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Armored Casing",
+					"entries": [
+						"You are encased in thin metal or some other durable material. While you aren't wearing armor, your base Armor Class is 13 + your Dexterity modifier."
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Built for Success",
+					"entries": [
+						"You can add a {@dice d4} to one attack roll, ability check, or saving throw you make, and you can do so after seeing the {@dice d20} roll but before the effects of the roll are resolved. You can use this trait a number of times equal to your proficiency bonus, and you regain all expended uses when you finish a long rest."
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Healing Machine",
+					"entries": [
+						"If the {@spell mending} spell is cast on you, you can spend a Hit Die, roll it, and regain a number of hit points equal to the roll plus your Constitution modifier (minimum of 1 hit point).",
+						"In addition, your creator designed you to benefit from several spells that preserve life but that normally don't affect Constructs: {@spell cure wounds}, {@spell healing word}, {@spell mass cure wounds}, {@spell mass healing word}, and {@spell spare the dying}."
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Mechanical Nature",
+					"entries": [
+						"You have resistance to poison damage and immunity to disease, and you have advantage on saving throws against being {@condition paralyzed} or {@condition poisoned}. You don't need to eat, drink, or breathe."
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Sentry's Rest",
+					"entries": [
+						"When you take a long rest, you spend at least 6 hours in an inactive, motionless state, instead of sleeping. In this state, you appear inert, but you remain conscious."
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Specialized Design",
+					"entries": [
+						"You gain two tool proficiencies of your choice, selected from the {@book Player's Handbook|PHB}."
+					]
+				}
+			],
+			"hasFluff": true,
+			"hasFluffImages": true
+		},
+		{
+			"name": "Autognome",
 			"source": "UA2021TravelersOfTheMultiverse",
 			"page": 2,
+			"reprintedAs": [
+				"Autognome|AAG"
+			],
 			"lineage": "VRGR",
 			"creatureTypes": [
 				"construct"
@@ -1019,7 +1235,9 @@
 					],
 					"type": "entries"
 				}
-			]
+			],
+			"hasFluff": true,
+			"hasFluffImages": true
 		},
 		{
 			"name": "Bugbear",
@@ -1507,6 +1725,9 @@
 			"name": "Centaur",
 			"source": "MOT",
 			"page": 18,
+			"reprintedAs": [
+				"Centaur|MPMM"
+			],
 			"_copy": {
 				"name": "Centaur",
 				"source": "GGR",
@@ -1624,6 +1845,9 @@
 			"name": "Centaur",
 			"source": "UACentaursMinotaurs",
 			"page": 1,
+			"reprintedAs": [
+				"Centaur|GGR"
+			],
 			"creatureTypes": [
 				"humanoid",
 				"monstrosity"
@@ -1898,6 +2122,9 @@
 			"name": "Changeling",
 			"source": "UAEberron",
 			"page": 1,
+			"reprintedAs": [
+				"Changeling|UARacesOfEberron"
+			],
 			"size": [
 				"M"
 			],
@@ -1954,6 +2181,9 @@
 			"name": "Changeling",
 			"source": "UARacesOfEberron",
 			"page": 1,
+			"reprintedAs": [
+				"Changeling|ERLW"
+			],
 			"size": [
 				"M"
 			],
@@ -2271,6 +2501,9 @@
 			"name": "Dhampir",
 			"source": "UA2021GothicLineages",
 			"page": 2,
+			"reprintedAs": [
+				"Dhampir|VRGR"
+			],
 			"lineage": "UA1",
 			"creatureTypes": [
 				"humanoid",
@@ -2743,6 +2976,9 @@
 			"name": "Dragonborn (Chromatic)",
 			"source": "UA2021DraconicOptions",
 			"page": 2,
+			"reprintedAs": [
+				"Dragonborn (Chromatic)|FTD"
+			],
 			"lineage": "VRGR",
 			"size": [
 				"M"
@@ -3015,6 +3251,9 @@
 			"name": "Dragonborn (Gem)",
 			"source": "UA2021DraconicOptions",
 			"page": 3,
+			"reprintedAs": [
+				"Dragonborn (Gem)|FTD"
+			],
 			"lineage": "VRGR",
 			"size": [
 				"M"
@@ -3307,6 +3546,9 @@
 			"name": "Dragonborn (Metallic)",
 			"source": "UA2021DraconicOptions",
 			"page": 2,
+			"reprintedAs": [
+				"Dragonborn (Metallic)|FTD"
+			],
 			"lineage": "VRGR",
 			"size": [
 				"M"
@@ -3696,7 +3938,9 @@
 					],
 					"type": "entries"
 				}
-			]
+			],
+			"hasFluff": true,
+			"hasFluffImages": true
 		},
 		{
 			"name": "Eladrin",
@@ -3717,6 +3961,11 @@
 				"max": 750
 			},
 			"darkvision": 60,
+			"traitTags": [
+				"Improved Resting",
+				"Tool Proficiency",
+				"Weapon Proficiency"
+			],
 			"skillProficiencies": [
 				{
 					"perception": true
@@ -3997,7 +4246,9 @@
 					],
 					"type": "entries"
 				}
-			]
+			],
+			"hasFluff": true,
+			"hasFluffImages": true
 		},
 		{
 			"name": "Elf (Zendikar)",
@@ -4079,7 +4330,8 @@
 					"type": "entries"
 				}
 			],
-			"hasFluff": true
+			"hasFluff": true,
+			"hasFluffImages": true
 		},
 		{
 			"name": "Fairy",
@@ -4159,6 +4411,9 @@
 			"name": "Fairy",
 			"source": "UA2021FolkOfTheFeywild",
 			"page": 2,
+			"reprintedAs": [
+				"Fairy|WBtW"
+			],
 			"lineage": "VRGR",
 			"creatureTypes": [
 				"fey"
@@ -4582,9 +4837,6 @@
 				"max": 120
 			},
 			"darkvision": 60,
-			"resist": [
-				"lightning"
-			],
 			"entries": [
 				{
 					"type": "entries",
@@ -4606,8 +4858,58 @@
 		},
 		{
 			"name": "Giff",
+			"source": "AAG",
+			"page": 12,
+			"lineage": "VRGR",
+			"size": [
+				"M"
+			],
+			"speed": {
+				"walk": 30,
+				"swim": true
+			},
+			"traitTags": [
+				"Powerful Build"
+			],
+			"weaponProficiencies": [
+				{
+					"firearms": true
+				}
+			],
+			"entries": [
+				{
+					"type": "entries",
+					"name": "Astral Spark",
+					"entries": [
+						"Your psychic connection to the Astral Plane enables you to mystically access a spark of divine power, which you can channel through your weapons. When you hit a target with a {@filter simple or martial weapon|items|source=phb|category=basic|type=martial weapon;simple weapon}, you can cause the target to take extra force damage equal to your proficiency bonus.",
+						"You can use this trait a number of times equal to your proficiency bonus, but you can use it no more than once per turn. You regain all expended uses when you finish a long rest."
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Firearms Mastery",
+					"entries": [
+						"You have a mystical connection to firearms that traces back to the gods of the giff, who delighted in such weapons. You have proficiency with all firearms and ignore the loading property of any firearm. In addition, attacking at long range with a firearm doesn't impose disadvantage on your attack roll."
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Hippo Build",
+					"entries": [
+						"You have advantage on Strength-based ability checks and Strength saving throws. In addition, you count as one size larger when determining your carrying capacity and the weight you can push, drag, or lift."
+					]
+				}
+			],
+			"hasFluff": true,
+			"hasFluffImages": true
+		},
+		{
+			"name": "Giff",
 			"source": "UA2021TravelersOfTheMultiverse",
 			"page": 2,
+			"reprintedAs": [
+				"Giff|AAG"
+			],
 			"lineage": "VRGR",
 			"size": [
 				"M"
@@ -4742,7 +5044,7 @@
 			],
 			"speed": 30,
 			"traitTags": [
-				"Tool Proficiency"
+				"Weapon Proficiency"
 			],
 			"skillProficiencies": [
 				{
@@ -4802,7 +5104,7 @@
 					"name": "Githyanki Psionics",
 					"entries": [
 						"You know the {@spell mage hand} cantrip, and the hand is {@condition invisible} when you cast the cantrip with this trait.",
-						"Starting at 3rd level, you can cast the {@spell jump} spell with this trait. Starting at 5th level, you can also cast {@spell misty step} with it. Once you cast {@spell jump} or misty step with this trait, you can't cast that spell with it again until you finish a long rest. You can also cast either of those spells using any spell slots you have of the appropriate level.",
+						"Starting at 3rd level, you can cast the {@spell jump} spell with this trait. Starting at 5th level, you can also cast {@spell misty step} with it. Once you cast {@spell jump} or {@spell misty step} with this trait, you can't cast that spell with it again until you finish a long rest. You can also cast either of those spells using any spell slots you have of the appropriate level.",
 						"Intelligence, Wisdom, or Charisma is your spellcasting ability for these spells when you cast them with this trait (choose when you select this race). None of these spells require spell components when you cast them with this trait."
 					]
 				},
@@ -4888,6 +5190,67 @@
 			],
 			"hasFluff": true,
 			"hasFluffImages": true
+		},
+		{
+			"name": "Glitchling",
+			"source": "UA2022WondersOfTheMultiverse",
+			"page": 1,
+			"lineage": "VRGR",
+			"creatureTypes": [
+				"construct"
+			],
+			"size": [
+				"M"
+			],
+			"speed": 30,
+			"traitTags": [
+				"Natural Armor"
+			],
+			"entries": [
+				{
+					"type": "entries",
+					"name": "Creature Type",
+					"entries": [
+						"You are a Construct."
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Armored Plating",
+					"entries": [
+						"Your metal skin is reinforced with armor plates. While you aren't wearing armor, your base Armor Class is 14 + your Dexterity modifier."
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Balance Chaos",
+					"entries": [
+						"When you make an attack roll or a saving throw and roll a 9 or lower on the {@dice d20}, you can balance chaos and treat the roll as a 10. You can balance chaos in this way a number of times equal to your proficiency bonus, and you regain all expended uses when you finish a long rest."
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Living Construct",
+					"entries": [
+						"You were created to benefit from several spells that preserve life but that normally don't affect Constructs: {@spell cure wounds}, {@spell healing word}, {@spell mass cure wounds}, {@spell mass healing word}, and {@spell spare the dying}."
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Ordered Mind",
+					"entries": [
+						"You have advantage on Wisdom ({@skill Insight}) checks and on saving throws made to avoid or end the {@condition charmed} condition on yourself."
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Vestigial Wings",
+					"entries": [
+						"You have vestigial wings that allow limited flight. When you move, you can engage your wings to gain a flying speed equal to your walking speed until the end of the current turn. If you are still aloft at the end of the turn with nothing else supporting you, you fall. You can use this trait a number of times equal to your proficiency bonus, and you regain all expended uses when you finish a long rest"
+					]
+				}
+			],
+			"hasFluff": true
 		},
 		{
 			"name": "Gnoll",
@@ -5069,6 +5432,13 @@
 							]
 						},
 						"Intelligence is your spellcasting ability for these spells."
+					],
+					"type": "entries"
+				},
+				{
+					"name": "Stone Camouflage",
+					"entries": [
+						"You have advantage on Dexterity ({@skill Stealth}) checks to hide in rocky terrain."
 					],
 					"type": "entries"
 				},
@@ -5498,7 +5868,9 @@
 					],
 					"type": "entries"
 				}
-			]
+			],
+			"hasFluff": true,
+			"hasFluffImages": true
 		},
 		{
 			"name": "Goblin (Zendikar)",
@@ -5575,7 +5947,8 @@
 					"type": "entries"
 				}
 			],
-			"hasFluff": true
+			"hasFluff": true,
+			"hasFluffImages": true
 		},
 		{
 			"name": "Goliath",
@@ -5909,8 +6282,58 @@
 		},
 		{
 			"name": "Hadozee",
+			"source": "AAG",
+			"page": 13,
+			"lineage": "VRGR",
+			"size": [
+				"S",
+				"M"
+			],
+			"speed": {
+				"walk": 30,
+				"climb": true
+			},
+			"entries": [
+				{
+					"type": "entries",
+					"name": "Size",
+					"entries": [
+						"You are Medium or Small. You choose the size when you select this race."
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Dexterous Feet",
+					"entries": [
+						"As a bonus action, you can use your feet to manipulate an object, open or close a door or container, or pick up or set down a Tiny object."
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Glide",
+					"entries": [
+						"When you fall at least 10 feet above the ground, you can use your reaction to extend your skin membranes to glide horizontally a number of feet equal to your walking speed, and you take 0 damage from the fall. You determine the direction of the glide."
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Hadozee Dodge",
+					"entries": [
+						"The magic that runs in your veins heightens your natural defenses. When you take damage, you can use your reaction to roll a {@dice d6}. Add your proficiency bonus to the number rolled, and reduce the damage you take by an amount equal to that total (minimum of 0 damage).",
+						"You can use this trait a number of times equal to your proficiency bonus. You regain all expended uses when you finish a long rest."
+					]
+				}
+			],
+			"hasFluff": true,
+			"hasFluffImages": true
+		},
+		{
+			"name": "Hadozee",
 			"source": "UA2021TravelersOfTheMultiverse",
 			"page": 3,
+			"reprintedAs": [
+				"Hadozee|AAG"
+			],
 			"lineage": "VRGR",
 			"size": [
 				"S",
@@ -6152,182 +6575,6 @@
 			"hasFluffImages": true
 		},
 		{
-			"name": "Half-Orc (Mark of Finding)",
-			"source": "ERLW",
-			"page": 41,
-			"otherSources": [
-				{
-					"source": "UAWGE",
-					"page": 98
-				}
-			],
-			"size": [
-				"M"
-			],
-			"speed": 30,
-			"ability": [
-				{
-					"con": 1,
-					"wis": 2
-				}
-			],
-			"heightAndWeight": {
-				"baseHeight": 58,
-				"heightMod": "2d10",
-				"baseWeight": 140,
-				"weightMod": "2d6"
-			},
-			"age": {
-				"mature": 14,
-				"max": 75
-			},
-			"darkvision": 60,
-			"traitTags": [
-				"Dragonmark",
-				"Skill Bonus Dice"
-			],
-			"languageProficiencies": [
-				{
-					"common": true,
-					"goblin": true
-				}
-			],
-			"soundClip": {
-				"type": "internal",
-				"path": "races/half-orc.mp3"
-			},
-			"additionalSpells": [
-				{
-					"innate": {
-						"1": [
-							"hunter's mark"
-						],
-						"3": {
-							"daily": {
-								"1": [
-									"locate object"
-								]
-							}
-						}
-					},
-					"expanded": {
-						"s1": [
-							"faerie fire",
-							"longstrider"
-						],
-						"s2": [
-							"locate animals or plants",
-							"locate object"
-						],
-						"s3": [
-							"clairvoyance",
-							"speak with plants"
-						],
-						"s4": [
-							"divination",
-							"locate creature"
-						],
-						"s5": [
-							"commune with nature"
-						]
-					},
-					"ability": "wis"
-				}
-			],
-			"entries": [
-				{
-					"name": "Age",
-					"type": "entries",
-					"entries": [
-						"Half-orcs mature a little faster than humans, reaching adulthood around age 14. They age noticeably faster and rarely live longer than 75 years."
-					]
-				},
-				{
-					"name": "Alignment",
-					"type": "entries",
-					"entries": [
-						"Half-orcs inherit a tendency toward chaos from their orc parents and are not strongly inclined toward good. Half-orcs raised among orcs and willing to live out their lives among them are usually evil."
-					]
-				},
-				{
-					"type": "entries",
-					"name": "Size",
-					"entries": [
-						"Half-orcs are somewhat larger and bulkier than humans, and they range from 5 to well over 6 feet tall. Your size is Medium."
-					]
-				},
-				{
-					"type": "entries",
-					"name": "Darkvision",
-					"entries": [
-						"You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray."
-					]
-				},
-				{
-					"type": "entries",
-					"name": "Hunter's Intuition",
-					"entries": [
-						"When you make a Wisdom ({@skill Perception}) or Wisdom ({@skill Survival}) check, you can roll a {@dice d4} and add the number rolled to the ability check."
-					]
-				},
-				{
-					"type": "entries",
-					"name": "Finder's Magic",
-					"entries": [
-						"You can cast the {@spell hunter's mark} spell with this trait. Starting at 3rd level, you can also cast the {@spell locate object} spell with it. Once you cast either spell with this trait, you can't cast that spell with it again until you finish a long rest. Wisdom is your spellcasting ability for these spells."
-					]
-				},
-				{
-					"type": "entries",
-					"name": "Languages",
-					"entries": [
-						"You can speak, read, and write Common and Goblin."
-					]
-				},
-				{
-					"type": "entries",
-					"name": "Spells of the Mark",
-					"entries": [
-						"If you have the Spellcasting or the Pact Magic class feature, the spells on the Mark of Finding Spells table are added to the spell list of your spellcasting class.",
-						{
-							"type": "table",
-							"caption": "Mark of Finding Spells",
-							"colLabels": [
-								"Spell Level",
-								"Spells"
-							],
-							"colStyles": [
-								"col-2 text-center",
-								"col-10"
-							],
-							"rows": [
-								[
-									"1st",
-									"{@spell faerie fire}, {@spell longstrider}"
-								],
-								[
-									"2nd",
-									"{@spell locate animals or plants}, {@spell locate object}"
-								],
-								[
-									"3rd",
-									"{@spell clairvoyance}, {@spell speak with plants}"
-								],
-								[
-									"4th",
-									"{@spell divination}, {@spell locate creature}"
-								],
-								[
-									"5th",
-									"{@spell commune with nature}"
-								]
-							]
-						}
-					]
-				}
-			]
-		},
-		{
 			"name": "Halfling",
 			"source": "PHB",
 			"page": 26,
@@ -6525,6 +6772,9 @@
 			"name": "Hexblood",
 			"source": "UA2021GothicLineages",
 			"page": 3,
+			"reprintedAs": [
+				"Hexblood|VRGR"
+			],
 			"lineage": "UA1",
 			"creatureTypes": [
 				"humanoid",
@@ -6873,6 +7123,9 @@
 			"name": "Hobgoblin",
 			"source": "UA2021FolkOfTheFeywild",
 			"page": 2,
+			"reprintedAs": [
+				"Hobgoblin|MPMM"
+			],
 			"lineage": "VRGR",
 			"size": [
 				"M"
@@ -7158,13 +7411,6 @@
 					]
 				},
 				{
-					"name": "Ability Score Increase",
-					"entries": [
-						"Two different ability scores of your choice increase by 1."
-					],
-					"type": "entries"
-				},
-				{
 					"name": "Skills",
 					"entries": [
 						"You gain proficiency in one skill of your choice."
@@ -7236,7 +7482,9 @@
 					],
 					"type": "entries"
 				}
-			]
+			],
+			"hasFluff": true,
+			"hasFluffImages": true
 		},
 		{
 			"name": "Human (Ixalan)",
@@ -7300,7 +7548,9 @@
 					],
 					"type": "entries"
 				}
-			]
+			],
+			"hasFluff": true,
+			"hasFluffImages": true
 		},
 		{
 			"name": "Human (Zendikar)",
@@ -7333,7 +7583,8 @@
 					"cha": 1
 				}
 			],
-			"hasFluff": true
+			"hasFluff": true,
+			"hasFluffImages": true
 		},
 		{
 			"name": "Kalashtar",
@@ -7441,6 +7692,9 @@
 			"name": "Kalashtar",
 			"source": "UARacesOfEberron",
 			"page": 3,
+			"reprintedAs": [
+				"Kalashtar|ERLW"
+			],
 			"size": [
 				"M"
 			],
@@ -7545,8 +7799,60 @@
 		},
 		{
 			"name": "Kender",
+			"source": "DSotDQ",
+			"page": 27,
+			"lineage": "VRGR",
+			"size": [
+				"S"
+			],
+			"speed": 30,
+			"skillProficiencies": [
+				{
+					"choose": {
+						"from": [
+							"insight",
+							"investigation",
+							"sleight of hand",
+							"stealth",
+							"survival"
+						]
+					}
+				}
+			],
+			"entries": [
+				{
+					"type": "entries",
+					"name": "Fearless",
+					"entries": [
+						"You have advantage on saving throws you make to avoid or end the {@condition frightened} condition on yourself. When you fail a saving throw to avoid or end the {@condition frightened} condition on yourself, you can choose to succeed instead. Once you succeed on a saving throw in this way, you can't do so again until you finish a long rest."
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Kender Curiosity",
+					"entries": [
+						"Thanks to the mystical origin of your people, you gain proficiency with one of the following skills of your choice: {@skill Insight}, {@skill Investigation}, {@skill Sleight of Hand}, {@skill Stealth}, or {@skill Survival}."
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Taunt",
+					"entries": [
+						"You have an extraordinary ability to fluster creatures. As a bonus action, you can unleash a string of provoking words at a creature within 60 feet of yourself that can hear and understand you. The target must succeed on a Wisdom saving throw, or it has disadvantage on attack rolls against targets other than you until the start of your next turn. The DC equals 8 + your proficiency bonus + your Intelligence, Wisdom, or Charisma modifier (choose when you select this race).",
+						"You can use this bonus action a number of times equal to your proficiency bonus, and you regain all expended uses when you finish a long rest."
+					]
+				}
+			],
+			"hasFluff": true,
+			"hasFluffImages": true
+		},
+		{
+			"name": "Kender",
 			"source": "UA2022HeroesOfKrynn",
 			"page": 1,
+			"reprintedAs": [
+				"Kender|UA2022HeroesOfKrynnRevisited"
+			],
 			"lineage": "VRGR",
 			"size": [
 				"S"
@@ -7625,6 +7931,9 @@
 			"name": "Kender",
 			"source": "UA2022HeroesOfKrynnRevisited",
 			"page": 1,
+			"reprintedAs": [
+				"Kender|DSotDQ"
+			],
 			"lineage": "VRGR",
 			"size": [
 				"S"
@@ -7700,7 +8009,7 @@
 				{
 					"name": "Ambusher",
 					"entries": [
-						"In the first round of a combat, you have advantage on attack rolls against any creature who is surprised."
+						"In the first round of a combat, you have advantage on attack rolls against any creature who is {@quickref Surprise|PHB|3|0|surprised}."
 					],
 					"type": "entries"
 				},
@@ -8093,6 +8402,7 @@
 				}
 			],
 			"hasFluff": true,
+			"hasFluffImages": true,
 			"_versions": [
 				{
 					"name": "Kobold; Craftiness",
@@ -8149,13 +8459,15 @@
 					},
 					"skillProficiencies": null
 				}
-			],
-			"hasFluffImages": true
+			]
 		},
 		{
 			"name": "Kobold",
 			"source": "UA2021DraconicOptions",
 			"page": 3,
+			"reprintedAs": [
+				"Kobold|MPMM"
+			],
 			"lineage": "VRGR",
 			"size": [
 				"S"
@@ -8376,7 +8688,8 @@
 					"type": "entries"
 				}
 			],
-			"hasFluff": true
+			"hasFluff": true,
+			"hasFluffImages": true
 		},
 		{
 			"name": "Kuo-Toa",
@@ -9021,6 +9334,9 @@
 			"name": "Loxodon",
 			"source": "UARacesOfRavnica",
 			"page": 1,
+			"reprintedAs": [
+				"Loxodon|GGR"
+			],
 			"size": [
 				"M"
 			],
@@ -9236,7 +9552,9 @@
 					],
 					"type": "entries"
 				}
-			]
+			],
+			"hasFluff": true,
+			"hasFluffImages": true
 		},
 		{
 			"name": "Merfolk (Zendikar)",
@@ -9312,7 +9630,8 @@
 					"type": "entries"
 				}
 			],
-			"hasFluff": true
+			"hasFluff": true,
+			"hasFluffImages": true
 		},
 		{
 			"name": "Minotaur",
@@ -9431,6 +9750,9 @@
 			"name": "Minotaur",
 			"source": "MOT",
 			"page": 22,
+			"reprintedAs": [
+				"Minotaur|MPMM"
+			],
 			"_copy": {
 				"name": "Minotaur",
 				"source": "GGR",
@@ -9513,6 +9835,9 @@
 			"name": "Minotaur",
 			"source": "UACentaursMinotaurs",
 			"page": 2,
+			"reprintedAs": [
+				"Minotaur|GGR"
+			],
 			"creatureTypes": [
 				"humanoid",
 				"monstrosity"
@@ -10392,12 +10717,17 @@
 					],
 					"type": "entries"
 				}
-			]
+			],
+			"hasFluff": true,
+			"hasFluffImages": true
 		},
 		{
 			"name": "Owlfolk",
 			"source": "UA2021FolkOfTheFeywild",
 			"page": 3,
+			"reprintedAs": [
+				"Owlin|SCC"
+			],
 			"lineage": "VRGR",
 			"size": [
 				"S",
@@ -10524,8 +10854,84 @@
 		},
 		{
 			"name": "Plasmoid",
+			"source": "AAG",
+			"page": 14,
+			"lineage": "VRGR",
+			"creatureTypes": [
+				"ooze"
+			],
+			"size": [
+				"S",
+				"M"
+			],
+			"speed": 30,
+			"darkvision": 60,
+			"resist": [
+				"acid",
+				"poison"
+			],
+			"entries": [
+				{
+					"type": "entries",
+					"name": "Creature Type",
+					"entries": [
+						"You are an Ooze."
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Size",
+					"entries": [
+						"You are Medium or Small. You choose the size when you select this race."
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Amorphous",
+					"entries": [
+						"You can squeeze through a space as narrow as 1 inch wide, provided you are wearing and carrying nothing. You have advantage on ability checks you make to initiate or escape a grapple."
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Darkvision",
+					"entries": [
+						"You can see in dim light within 60 feet of yourself as if it were bright light, and in darkness as if it were dim light. You discern colors in that darkness only as shades of gray."
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Hold Breath",
+					"entries": [
+						"You can hold your breath for 1 hour."
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Natural Resilience",
+					"entries": [
+						"You have resistance to acid and poison damage, and you have advantage on saving throws against being {@condition poisoned}."
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Shape Self",
+					"entries": [
+						"As an action, you can reshape your body to give yourself a head, one or two arms, one or two legs, and makeshift hands and feet, or you can revert to a limbless blob. While you have a humanlike shape, you can wear clothing and armor made for a Humanoid of your size.",
+						"As a bonus action, you can extrude a pseudopod that is up to 6 inches wide and 10 feet long or reabsorb it into your body. As part of the same bonus action, you can use this pseudopod to manipulate an object, open or close a door or container, or pick up or set down a Tiny object. The pseudopod contains no sensory organs and can't attack, activate magic items, or lift more than 10 pounds."
+					]
+				}
+			],
+			"hasFluff": true,
+			"hasFluffImages": true
+		},
+		{
+			"name": "Plasmoid",
 			"source": "UA2021TravelersOfTheMultiverse",
 			"page": 3,
+			"reprintedAs": [
+				"Plasmoid|AAG"
+			],
 			"lineage": "VRGR",
 			"creatureTypes": [
 				"ooze"
@@ -10598,6 +11004,9 @@
 			"name": "Rabbitfolk",
 			"source": "UA2021FolkOfTheFeywild",
 			"page": 3,
+			"reprintedAs": [
+				"Harengon|WBtW"
+			],
 			"lineage": "VRGR",
 			"size": [
 				"S",
@@ -10652,6 +11061,9 @@
 			"name": "Reborn",
 			"source": "UA2021GothicLineages",
 			"page": 4,
+			"reprintedAs": [
+				"Reborn|VRGR"
+			],
 			"lineage": "UA1",
 			"creatureTypes": [
 				"humanoid",
@@ -10739,9 +11151,6 @@
 			],
 			"resist": [
 				"poison"
-			],
-			"conditionImmune": [
-				"poisoned"
 			],
 			"entries": [
 				{
@@ -11006,7 +11415,8 @@
 			],
 			"speed": 35,
 			"traitTags": [
-				"Magic Resistance"
+				"Magic Resistance",
+				"Natural Weapon"
 			],
 			"skillProficiencies": [
 				{
@@ -11082,7 +11492,10 @@
 			},
 			"darkvision": 60,
 			"traitTags": [
-				"Amphibious"
+				"Amphibious",
+				"Improved Resting",
+				"Tool Proficiency",
+				"Weapon Proficiency"
 			],
 			"skillProficiencies": [
 				{
@@ -11173,6 +11586,11 @@
 				"max": 750
 			},
 			"darkvision": 60,
+			"traitTags": [
+				"Improved Resting",
+				"Tool Proficiency",
+				"Weapon Proficiency"
+			],
 			"skillProficiencies": [
 				{
 					"perception": true
@@ -11398,6 +11816,7 @@
 				}
 			],
 			"hasFluff": true,
+			"hasFluffImages": true,
 			"_versions": [
 				{
 					"name": "Shifter; Beasthide",
@@ -11471,13 +11890,15 @@
 						}
 					}
 				}
-			],
-			"hasFluffImages": true
+			]
 		},
 		{
 			"name": "Shifter",
 			"source": "UAEberron",
 			"page": 2,
+			"reprintedAs": [
+				"Shifter|ERLW"
+			],
 			"size": [
 				"M"
 			],
@@ -11746,6 +12167,9 @@
 			"name": "Simic Hybrid",
 			"source": "UARacesOfRavnica",
 			"page": 2,
+			"reprintedAs": [
+				"Simic Hybrid|GGR"
+			],
 			"size": [
 				"M"
 			],
@@ -11936,7 +12360,9 @@
 					],
 					"type": "entries"
 				}
-			]
+			],
+			"hasFluff": true,
+			"hasFluffImages": true
 		},
 		{
 			"name": "Skeleton",
@@ -12013,6 +12439,9 @@
 				"climb": true
 			},
 			"darkvision": 60,
+			"traitTags": [
+				"Natural Weapon"
+			],
 			"skillProficiencies": [
 				{
 					"perception": true,
@@ -12178,8 +12607,84 @@
 		},
 		{
 			"name": "Thri-kreen",
+			"source": "AAG",
+			"page": 15,
+			"lineage": "VRGR",
+			"creatureTypes": [
+				"monstrosity"
+			],
+			"size": [
+				"S",
+				"M"
+			],
+			"speed": 30,
+			"darkvision": 60,
+			"traitTags": [
+				"Improved Resting",
+				"Natural Armor"
+			],
+			"entries": [
+				{
+					"type": "entries",
+					"name": "Creature Type",
+					"entries": [
+						"You are a Monstrosity."
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Size",
+					"entries": [
+						"You are Medium or Small. You choose the size when you select this race."
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Chameleon Carapace",
+					"entries": [
+						"While you aren't wearing armor, your carapace gives you a base Armor Class of 13 + your Dexterity modifier.",
+						"As an action, you can change the color of your carapace to match the color and texture of your surroundings, giving you advantage on Dexterity ({@skill Stealth}) checks made to {@action hide} in those surroundings."
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Darkvision",
+					"entries": [
+						"You can see in dim light within 60 feet of yourself as if it were bright light, and in darkness as if it were dim light. You discern colors in that darkness only as shades of gray."
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Secondary Arms",
+					"entries": [
+						"You have two slightly smaller secondary arms below your primary pair of arms. The secondary arms can manipulate an object, open or close a door or container, pick up or set down a Tiny object, or wield a weapon that has the light property."
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Sleepless",
+					"entries": [
+						"You do not require sleep and can remain conscious during a long rest, though you must still refrain from strenuous activity to gain the benefit of the rest."
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Thri-kreen Telepathy",
+					"entries": [
+						"Without the assistance of magic, you can't speak the non-thri-kreen languages you know. Instead you use telepathy to convey your thoughts. You have the magical ability to transmit your thoughts mentally to willing creatures within 120 feet of yourself. A contacted creature doesn't need to share a language with you to understand your thoughts, but it must be able to understand at least one language. Your telepathic link to a creature is broken if you and the creature move more than 120 feet apart, if either of you is {@condition incapacitated}, or if either of you mentally breaks the contact (no action required)."
+					]
+				}
+			],
+			"hasFluff": true,
+			"hasFluffImages": true
+		},
+		{
+			"name": "Thri-kreen",
 			"source": "UA2021TravelersOfTheMultiverse",
 			"page": 4,
+			"reprintedAs": [
+				"Thri-kreen|AAG"
+			],
 			"lineage": "VRGR",
 			"creatureTypes": [
 				"monstrosity"
@@ -12741,9 +13246,13 @@
 			"additionalSpells": [
 				{
 					"innate": {
-						"1": [
-							"fog cloud"
-						],
+						"1": {
+							"daily": {
+								"1": [
+									"fog cloud"
+								]
+							}
+						},
 						"3": {
 							"daily": {
 								"1": [
@@ -12983,7 +13492,9 @@
 					],
 					"type": "entries"
 				}
-			]
+			],
+			"hasFluff": true,
+			"hasFluffImages": true
 		},
 		{
 			"name": "Vampire (Zendikar)",
@@ -13060,7 +13571,8 @@
 					"type": "entries"
 				}
 			],
-			"hasFluff": true
+			"hasFluff": true,
+			"hasFluffImages": true
 		},
 		{
 			"name": "Vedalken",
@@ -13238,12 +13750,17 @@
 					],
 					"type": "entries"
 				}
-			]
+			],
+			"hasFluff": true,
+			"hasFluffImages": true
 		},
 		{
 			"name": "Vedalken",
 			"source": "UARacesOfRavnica",
 			"page": 4,
+			"reprintedAs": [
+				"Vedalken|GGR"
+			],
 			"size": [
 				"M"
 			],
@@ -13642,6 +14159,9 @@
 			"name": "Warforged",
 			"source": "UAEberron",
 			"page": 3,
+			"reprintedAs": [
+				"Warforged|UARacesOfEberron"
+			],
 			"size": [
 				"M"
 			],
@@ -13701,6 +14221,9 @@
 			"name": "Warforged",
 			"source": "UARacesOfEberron",
 			"page": 7,
+			"reprintedAs": [
+				"Warforged|ERLW"
+			],
 			"size": [
 				"M"
 			],
@@ -14932,7 +15455,8 @@
 			"overwrite": {
 				"languageProficiencies": true
 			},
-			"hasFluff": true
+			"hasFluff": true,
+			"hasFluffImages": false
 		},
 		{
 			"name": "Hill",
@@ -15353,6 +15877,9 @@
 			"raceName": "Elf",
 			"raceSource": "PHB",
 			"page": 1,
+			"reprintedAs": [
+				"Elf (Eladrin)|MTF"
+			],
 			"ability": [
 				{
 					"choose": {
@@ -15514,6 +16041,13 @@
 				"baseWeight": 90,
 				"weightMod": "1d4"
 			},
+			"languageProficiencies": [
+				{
+					"common": true,
+					"elvish": true,
+					"anyStandard": 1
+				}
+			],
 			"weaponProficiencies": [
 				{
 					"longsword|phb": true,
@@ -15559,6 +16093,9 @@
 					"type": "entries"
 				}
 			],
+			"overwrite": {
+				"languageProficiencies": true
+			},
 			"hasFluff": true,
 			"hasFluffImages": true
 		},
@@ -16059,6 +16596,9 @@
 			"raceName": "Elf",
 			"raceSource": "PHB",
 			"page": 2,
+			"reprintedAs": [
+				"Elf (Shadar-kai)|MTF"
+			],
 			"ability": [
 				{
 					"cha": 1
@@ -16282,10 +16822,12 @@
 					],
 					"type": "entries"
 				}
-			]
+			],
+			"hasFluff": true,
+			"hasFluffImages": true
 		},
 		{
-			"name": "Vadahar",
+			"name": "Vahadar",
 			"source": "PSK",
 			"raceName": "Elf (Kaladesh)",
 			"raceSource": "PSK",
@@ -16319,7 +16861,9 @@
 					],
 					"type": "entries"
 				}
-			]
+			],
+			"hasFluff": true,
+			"hasFluffImages": true
 		},
 		{
 			"name": "Joraga Nation",
@@ -16363,7 +16907,9 @@
 					],
 					"type": "entries"
 				}
-			]
+			],
+			"hasFluff": true,
+			"hasFluffImages": true
 		},
 		{
 			"name": "Mul Daya Nation",
@@ -16446,7 +16992,9 @@
 					],
 					"type": "entries"
 				}
-			]
+			],
+			"hasFluff": true,
+			"hasFluffImages": true
 		},
 		{
 			"name": "Tajuru Nation",
@@ -16484,7 +17032,9 @@
 					],
 					"type": "entries"
 				}
-			]
+			],
+			"hasFluff": true,
+			"hasFluffImages": true
 		},
 		{
 			"name": "Air",
@@ -16776,7 +17326,9 @@
 						"Intelligence, Wisdom, or Charisma is your spellcasting ability for these spells when you cast them with this trait (choose when you select this race)."
 					]
 				}
-			]
+			],
+			"hasFluff": true,
+			"hasFluffImages": true
 		},
 		{
 			"name": "Earth",
@@ -16822,7 +17374,9 @@
 						"Intelligence, Wisdom, or Charisma is your spellcasting ability for these spells when you cast them with this trait (choose when you select this race)."
 					]
 				}
-			]
+			],
+			"hasFluff": true,
+			"hasFluffImages": true
 		},
 		{
 			"name": "Fire",
@@ -16881,7 +17435,9 @@
 						"Intelligence, Wisdom, or Charisma is your spellcasting ability for these spells when you cast them with this trait (choose when you select this race)."
 					]
 				}
-			]
+			],
+			"hasFluff": true,
+			"hasFluffImages": true
 		},
 		{
 			"name": "Water",
@@ -16961,7 +17517,9 @@
 						"Intelligence, Wisdom, or Charisma is your spellcasting ability for these spells when you cast them with this trait (choose when you select this race)."
 					]
 				}
-			]
+			],
+			"hasFluff": true,
+			"hasFluffImages": true
 		},
 		{
 			"name": "Githyanki",
@@ -17152,6 +17710,9 @@
 			"raceName": "Gith",
 			"raceSource": "UAEladrinAndGith",
 			"page": 2,
+			"reprintedAs": [
+				"Gith (Githyanki)|MTF"
+			],
 			"ability": [
 				{
 					"str": 2
@@ -17243,6 +17804,9 @@
 			"raceName": "Gith",
 			"raceSource": "UAEladrinAndGith",
 			"page": 3,
+			"reprintedAs": [
+				"Gith (Githzerai)|MTF"
+			],
 			"ability": [
 				{
 					"wis": 2
@@ -17729,7 +18293,9 @@
 					],
 					"type": "entries"
 				}
-			]
+			],
+			"hasFluff": true,
+			"hasFluffImages": true
 		},
 		{
 			"name": "Lavastep Tribe",
@@ -17745,7 +18311,9 @@
 					],
 					"type": "entries"
 				}
-			]
+			],
+			"hasFluff": true,
+			"hasFluffImages": true
 		},
 		{
 			"name": "Tuktuk Tribe",
@@ -17764,7 +18332,9 @@
 					],
 					"type": "entries"
 				}
-			]
+			],
+			"hasFluff": true,
+			"hasFluffImages": true
 		},
 		{
 			"source": "PHB",
@@ -17992,6 +18562,7 @@
 				"Dragonmark",
 				"Skill Bonus Dice"
 			],
+			"skillProficiencies": null,
 			"additionalSpells": [
 				{
 					"innate": {
@@ -18118,6 +18689,7 @@
 				"Skill Bonus Dice",
 				"Tool Bonus Dice"
 			],
+			"skillProficiencies": null,
 			"resist": [
 				"lightning"
 			],
@@ -18357,7 +18929,6 @@
 			"raceName": "Half-Elf",
 			"raceSource": "PHB",
 			"page": 116,
-			"speed": 35,
 			"skillProficiencies": [
 				{
 					"any": 2
@@ -18430,7 +19001,6 @@
 							}
 						}
 					},
-					"speed": 30,
 					"skillProficiencies": null
 				},
 				{
@@ -18449,6 +19019,7 @@
 							}
 						}
 					},
+					"speed": 35,
 					"skillProficiencies": null,
 					"weaponProficiencies": null
 				},
@@ -18468,7 +19039,6 @@
 							}
 						}
 					},
-					"speed": 30,
 					"skillProficiencies": null,
 					"weaponProficiencies": null
 				},
@@ -18488,8 +19058,167 @@
 							}
 						}
 					},
-					"speed": 30,
 					"weaponProficiencies": null
+				}
+			]
+		},
+		{
+			"source": "PHB",
+			"raceName": "Half-Orc",
+			"raceSource": "PHB",
+			"page": 40,
+			"srd": true,
+			"hasFluff": true,
+			"hasFluffImages": true
+		},
+		{
+			"name": "Variant; Mark of Finding",
+			"source": "ERLW",
+			"raceName": "Half-Orc",
+			"raceSource": "PHB",
+			"page": 41,
+			"otherSources": [
+				{
+					"source": "UAWGE",
+					"page": 98
+				}
+			],
+			"traitTags": [
+				"Dragonmark",
+				"Skill Bonus Dice"
+			],
+			"languageProficiencies": [
+				{
+					"common": true,
+					"goblin": true
+				}
+			],
+			"soundClip": {
+				"type": "internal",
+				"path": "races/half-orc.mp3"
+			},
+			"additionalSpells": [
+				{
+					"innate": {
+						"1": [
+							"hunter's mark"
+						],
+						"3": {
+							"daily": {
+								"1": [
+									"locate object"
+								]
+							}
+						}
+					},
+					"expanded": {
+						"s1": [
+							"faerie fire",
+							"longstrider"
+						],
+						"s2": [
+							"locate animals or plants",
+							"locate object"
+						],
+						"s3": [
+							"clairvoyance",
+							"speak with plants"
+						],
+						"s4": [
+							"divination",
+							"locate creature"
+						],
+						"s5": [
+							"commune with nature"
+						]
+					},
+					"ability": "wis"
+				}
+			],
+			"entries": [
+				{
+					"type": "entries",
+					"name": "Darkvision",
+					"entries": [
+						"You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray."
+					],
+					"data": {
+						"overwrite": "Darkvision"
+					}
+				},
+				{
+					"type": "entries",
+					"name": "Hunter's Intuition",
+					"entries": [
+						"When you make a Wisdom ({@skill Perception}) or Wisdom ({@skill Survival}) check, you can roll a {@dice d4} and add the number rolled to the ability check."
+					],
+					"data": {
+						"overwrite": "Menacing"
+					}
+				},
+				{
+					"type": "entries",
+					"name": "Finder's Magic",
+					"entries": [
+						"You can cast the {@spell hunter's mark} spell with this trait. Starting at 3rd level, you can also cast the {@spell locate object} spell with it. Once you cast either spell with this trait, you can't cast that spell with it again until you finish a long rest. Wisdom is your spellcasting ability for these spells."
+					],
+					"data": {
+						"overwrite": "Relentless Endurance"
+					}
+				},
+				{
+					"type": "entries",
+					"name": "Languages",
+					"entries": [
+						"You can speak, read, and write Common and Goblin."
+					],
+					"data": {
+						"overwrite": "Languages"
+					}
+				},
+				{
+					"type": "entries",
+					"name": "Spells of the Mark",
+					"entries": [
+						"If you have the Spellcasting or the Pact Magic class feature, the spells on the Mark of Finding Spells table are added to the spell list of your spellcasting class.",
+						{
+							"type": "table",
+							"caption": "Mark of Finding Spells",
+							"colLabels": [
+								"Spell Level",
+								"Spells"
+							],
+							"colStyles": [
+								"col-2 text-center",
+								"col-10"
+							],
+							"rows": [
+								[
+									"1st",
+									"{@spell faerie fire}, {@spell longstrider}"
+								],
+								[
+									"2nd",
+									"{@spell locate animals or plants}, {@spell locate object}"
+								],
+								[
+									"3rd",
+									"{@spell clairvoyance}, {@spell speak with plants}"
+								],
+								[
+									"4th",
+									"{@spell divination}, {@spell locate creature}"
+								],
+								[
+									"5th",
+									"{@spell commune with nature}"
+								]
+							]
+						}
+					],
+					"data": {
+						"overwrite": "Savage Attacks"
+					}
 				}
 			]
 		},
@@ -18966,147 +19695,9 @@
 			],
 			"overwrite": {
 				"languageProficiencies": true
-			}
-		},
-		{
-			"name": "Mark of Finding",
-			"source": "ERLW",
-			"raceName": "Human",
-			"raceSource": "PHB",
-			"page": 41,
-			"ability": [
-				{
-					"con": 1,
-					"wis": 2
-				}
-			],
-			"darkvision": 60,
-			"traitTags": [
-				"Dragonmark",
-				"Skill Bonus Dice"
-			],
-			"languageProficiencies": [
-				{
-					"common": true,
-					"goblin": true
-				}
-			],
-			"additionalSpells": [
-				{
-					"innate": {
-						"1": [
-							"hunter's mark"
-						],
-						"3": {
-							"daily": {
-								"1": [
-									"locate object"
-								]
-							}
-						}
-					},
-					"expanded": {
-						"s1": [
-							"faerie fire",
-							"longstrider"
-						],
-						"s2": [
-							"locate animals or plants",
-							"locate object"
-						],
-						"s3": [
-							"clairvoyance",
-							"speak with plants"
-						],
-						"s4": [
-							"divination",
-							"locate creature"
-						],
-						"s5": [
-							"commune with nature"
-						]
-					},
-					"ability": "wis"
-				}
-			],
-			"entries": [
-				{
-					"type": "entries",
-					"name": "Darkvision",
-					"entries": [
-						"You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray."
-					]
-				},
-				{
-					"type": "entries",
-					"name": "Hunter's Intuition",
-					"entries": [
-						"When you make a Wisdom ({@skill Perception}) or Wisdom ({@skill Survival}) check, you can roll a {@dice d4} and add the number rolled to the ability check."
-					]
-				},
-				{
-					"type": "entries",
-					"name": "Finder's Magic",
-					"entries": [
-						"You can cast the {@spell hunter's mark} spell with this trait. Starting at 3rd level, you can also cast the {@spell locate object} spell with it. Once you cast either spell with this trait, you can't cast that spell with it again until you finish a long rest. Wisdom is your spellcasting ability for these spells."
-					]
-				},
-				{
-					"type": "entries",
-					"name": "Languages",
-					"entries": [
-						"You can speak, read, and write Common and Goblin."
-					],
-					"data": {
-						"overwrite": "Languages"
-					}
-				},
-				{
-					"type": "entries",
-					"name": "Spells of the Mark",
-					"entries": [
-						"If you have the Spellcasting or the Pact Magic class feature, the spells on the Mark of Finding Spells table are added to the spell list of your spellcasting class.",
-						{
-							"type": "table",
-							"caption": "Mark of Finding Spells",
-							"colLabels": [
-								"Spell Level",
-								"Spells"
-							],
-							"colStyles": [
-								"col-2 text-center",
-								"col-10"
-							],
-							"rows": [
-								[
-									"1st",
-									"{@spell faerie fire}, {@spell longstrider}"
-								],
-								[
-									"2nd",
-									"{@spell locate animals or plants}, {@spell locate object}"
-								],
-								[
-									"3rd",
-									"{@spell clairvoyance}, {@spell speak with plants}"
-								],
-								[
-									"4th",
-									"{@spell divination}, {@spell locate creature}"
-								],
-								[
-									"5th",
-									"{@spell commune with nature}"
-								]
-							]
-						}
-					]
-				}
-			],
-			"overwrite": {
-				"traitTags": true,
-				"languageProficiencies": true
-			}
+			},
+			"hasFluff": true,
+			"hasFluffImages": true
 		},
 		{
 			"name": "Mark of Handling",
@@ -19328,7 +19919,7 @@
 					"type": "entries",
 					"name": "Spellsmith",
 					"entries": [
-						"You know the {@spell mending} cantrip. You can also cast the {@spell magic weapon} spell with this trait. When you do so, the spell lasts for 1 hour and doesn't require concentration. Once you cast the spell with this trait, you can't do so again until you finish a long rest. Intelligence is your spellcasting ability for these spells."
+						"You know the {@spell mending} cantrip. You can also cast the {@spell magic weapon} spell with this trait. When you do so, the spell lasts for 1 hour and doesn't require {@status concentration}. Once you cast the spell with this trait, you can't do so again until you finish a long rest. Intelligence is your spellcasting ability for these spells."
 					]
 				},
 				{
@@ -19669,6 +20260,146 @@
 			]
 		},
 		{
+			"name": "Variant; Mark of Finding",
+			"source": "ERLW",
+			"raceName": "Human",
+			"raceSource": "PHB",
+			"page": 41,
+			"ability": [
+				{
+					"con": 1,
+					"wis": 2
+				}
+			],
+			"darkvision": 60,
+			"traitTags": [
+				"Dragonmark",
+				"Skill Bonus Dice"
+			],
+			"languageProficiencies": [
+				{
+					"common": true,
+					"goblin": true
+				}
+			],
+			"additionalSpells": [
+				{
+					"innate": {
+						"1": [
+							"hunter's mark"
+						],
+						"3": {
+							"daily": {
+								"1": [
+									"locate object"
+								]
+							}
+						}
+					},
+					"expanded": {
+						"s1": [
+							"faerie fire",
+							"longstrider"
+						],
+						"s2": [
+							"locate animals or plants",
+							"locate object"
+						],
+						"s3": [
+							"clairvoyance",
+							"speak with plants"
+						],
+						"s4": [
+							"divination",
+							"locate creature"
+						],
+						"s5": [
+							"commune with nature"
+						]
+					},
+					"ability": "wis"
+				}
+			],
+			"entries": [
+				{
+					"type": "entries",
+					"name": "Darkvision",
+					"entries": [
+						"You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray."
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Hunter's Intuition",
+					"entries": [
+						"When you make a Wisdom ({@skill Perception}) or Wisdom ({@skill Survival}) check, you can roll a {@dice d4} and add the number rolled to the ability check."
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Finder's Magic",
+					"entries": [
+						"You can cast the {@spell hunter's mark} spell with this trait. Starting at 3rd level, you can also cast the {@spell locate object} spell with it. Once you cast either spell with this trait, you can't cast that spell with it again until you finish a long rest. Wisdom is your spellcasting ability for these spells."
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Languages",
+					"entries": [
+						"You can speak, read, and write Common and Goblin."
+					],
+					"data": {
+						"overwrite": "Languages"
+					}
+				},
+				{
+					"type": "entries",
+					"name": "Spells of the Mark",
+					"entries": [
+						"If you have the Spellcasting or the Pact Magic class feature, the spells on the Mark of Finding Spells table are added to the spell list of your spellcasting class.",
+						{
+							"type": "table",
+							"caption": "Mark of Finding Spells",
+							"colLabels": [
+								"Spell Level",
+								"Spells"
+							],
+							"colStyles": [
+								"col-2 text-center",
+								"col-10"
+							],
+							"rows": [
+								[
+									"1st",
+									"{@spell faerie fire}, {@spell longstrider}"
+								],
+								[
+									"2nd",
+									"{@spell locate animals or plants}, {@spell locate object}"
+								],
+								[
+									"3rd",
+									"{@spell clairvoyance}, {@spell speak with plants}"
+								],
+								[
+									"4th",
+									"{@spell divination}, {@spell locate creature}"
+								],
+								[
+									"5th",
+									"{@spell commune with nature}"
+								]
+							]
+						}
+					]
+				}
+			],
+			"overwrite": {
+				"traitTags": true,
+				"languageProficiencies": true
+			}
+		},
+		{
 			"name": "Gavony",
 			"source": "PSI",
 			"raceName": "Human (Innistrad)",
@@ -19684,15 +20415,8 @@
 					"cha": 1
 				}
 			],
-			"entries": [
-				{
-					"name": "Ability Score Increase",
-					"entries": [
-						"Your ability scores each increase by 1."
-					],
-					"type": "entries"
-				}
-			]
+			"hasFluff": true,
+			"hasFluffImages": true
 		},
 		{
 			"name": "Kessig",
@@ -19741,7 +20465,9 @@
 					],
 					"type": "entries"
 				}
-			]
+			],
+			"hasFluff": true,
+			"hasFluffImages": true
 		},
 		{
 			"name": "Nephalia",
@@ -19780,7 +20506,9 @@
 					],
 					"type": "entries"
 				}
-			]
+			],
+			"hasFluff": true,
+			"hasFluffImages": true
 		},
 		{
 			"name": "Stensia",
@@ -19814,7 +20542,9 @@
 					],
 					"type": "entries"
 				}
-			]
+			],
+			"hasFluff": true,
+			"hasFluffImages": true
 		},
 		{
 			"name": "Blue",
@@ -19862,7 +20592,9 @@
 					],
 					"type": "entries"
 				}
-			]
+			],
+			"hasFluff": true,
+			"hasFluffImages": true
 		},
 		{
 			"name": "Green",
@@ -19904,7 +20636,9 @@
 					],
 					"type": "entries"
 				}
-			]
+			],
+			"hasFluff": true,
+			"hasFluffImages": true
 		},
 		{
 			"name": "Cosi Creed",
@@ -19953,7 +20687,9 @@
 					],
 					"type": "entries"
 				}
-			]
+			],
+			"hasFluff": true,
+			"hasFluffImages": true
 		},
 		{
 			"name": "Emeria Creed",
@@ -20001,7 +20737,9 @@
 					],
 					"type": "entries"
 				}
-			]
+			],
+			"hasFluff": true,
+			"hasFluffImages": true
 		},
 		{
 			"name": "Ula Creed",
@@ -20051,7 +20789,9 @@
 					],
 					"type": "entries"
 				}
-			]
+			],
+			"hasFluff": true,
+			"hasFluffImages": true
 		},
 		{
 			"name": "Beasthide",
@@ -20209,6 +20949,9 @@
 			"raceName": "Shifter",
 			"raceSource": "UAEberron",
 			"page": 2,
+			"reprintedAs": [
+				"Shifter (Beasthide)|UARacesOfEberron"
+			],
 			"ability": [
 				{
 					"con": 1
@@ -20275,6 +21018,9 @@
 			"raceName": "Shifter",
 			"raceSource": "UAEberron",
 			"page": 2,
+			"reprintedAs": [
+				"Shifter (Longtooth)|UARacesOfEberron"
+			],
 			"ability": [
 				{
 					"str": 1
@@ -20320,6 +21066,9 @@
 			"raceName": "Shifter",
 			"raceSource": "UAEberron",
 			"page": 3,
+			"reprintedAs": [
+				"Shifter (Wildhunt)|UARacesOfEberron"
+			],
 			"ability": [
 				{
 					"wis": 1
@@ -20341,6 +21090,9 @@
 			"raceName": "Shifter",
 			"raceSource": "UARacesOfEberron",
 			"page": 6,
+			"reprintedAs": [
+				"Shifter (Beasthide)|ERLW"
+			],
 			"ability": [
 				{
 					"con": 2
@@ -20377,6 +21129,9 @@
 			"raceName": "Shifter",
 			"raceSource": "UARacesOfEberron",
 			"page": 6,
+			"reprintedAs": [
+				"Shifter (Longtooth)|ERLW"
+			],
 			"ability": [
 				{
 					"str": 2
@@ -20413,6 +21168,9 @@
 			"raceName": "Shifter",
 			"raceSource": "UARacesOfEberron",
 			"page": 6,
+			"reprintedAs": [
+				"Shifter (Swiftstride)|ERLW"
+			],
 			"speed": 35,
 			"ability": [
 				{
@@ -20455,6 +21213,9 @@
 			"raceName": "Shifter",
 			"raceSource": "UARacesOfEberron",
 			"page": 6,
+			"reprintedAs": [
+				"Shifter (Wildhunt)|ERLW"
+			],
 			"ability": [
 				{
 					"wis": 2
@@ -20669,7 +21430,10 @@
 			"raceName": "Tiefling",
 			"raceSource": "PHB",
 			"page": 1,
-			"srd": true
+			"srd": true,
+			"reprintedAs": [
+				"Tiefling (Asmodeus)|MTF"
+			]
 		},
 		{
 			"name": "Baalzebul",
@@ -20724,6 +21488,9 @@
 			"raceName": "Tiefling",
 			"raceSource": "PHB",
 			"page": 1,
+			"reprintedAs": [
+				"Tiefling (Baalzebul)|MTF"
+			],
 			"additionalSpells": [
 				{
 					"innate": {
@@ -20825,6 +21592,9 @@
 			"raceName": "Tiefling",
 			"raceSource": "PHB",
 			"page": 1,
+			"reprintedAs": [
+				"Tiefling (Dispater)|MTF"
+			],
 			"ability": [
 				{
 					"cha": 2,
@@ -20935,6 +21705,9 @@
 			"raceName": "Tiefling",
 			"raceSource": "PHB",
 			"page": 1,
+			"reprintedAs": [
+				"Tiefling (Fierna)|MTF"
+			],
 			"ability": [
 				{
 					"cha": 2,
@@ -21045,6 +21818,9 @@
 			"raceName": "Tiefling",
 			"raceSource": "PHB",
 			"page": 2,
+			"reprintedAs": [
+				"Tiefling (Glasya)|MTF"
+			],
 			"ability": [
 				{
 					"cha": 2,
@@ -21155,6 +21931,9 @@
 			"raceName": "Tiefling",
 			"raceSource": "PHB",
 			"page": 2,
+			"reprintedAs": [
+				"Tiefling (Levistus)|MTF"
+			],
 			"ability": [
 				{
 					"cha": 2,
@@ -21256,6 +22035,9 @@
 			"raceName": "Tiefling",
 			"raceSource": "PHB",
 			"page": 2,
+			"reprintedAs": [
+				"Tiefling (Mammon)|MTF"
+			],
 			"additionalSpells": [
 				{
 					"innate": {
@@ -21348,6 +22130,9 @@
 			"raceName": "Tiefling",
 			"raceSource": "PHB",
 			"page": 2,
+			"reprintedAs": [
+				"Tiefling (Mephistopheles)|MTF"
+			],
 			"additionalSpells": [
 				{
 					"innate": {
@@ -21453,7 +22238,9 @@
 			],
 			"overwrite": {
 				"ability": true
-			}
+			},
+			"hasFluff": true,
+			"hasFluffImages": true
 		},
 		{
 			"name": "Variant; Hellfire",
@@ -21521,7 +22308,9 @@
 			],
 			"overwrite": {
 				"ability": true
-			}
+			},
+			"hasFluff": true,
+			"hasFluffImages": true
 		},
 		{
 			"name": "Variant; Infernal Legacy",
@@ -21579,7 +22368,9 @@
 			],
 			"overwrite": {
 				"ability": true
-			}
+			},
+			"hasFluff": true,
+			"hasFluffImages": true
 		},
 		{
 			"name": "Variant; Winged",
@@ -21630,7 +22421,9 @@
 			"overwrite": {
 				"ability": true,
 				"traitTags": true
-			}
+			},
+			"hasFluff": true,
+			"hasFluffImages": true
 		},
 		{
 			"name": "Zariel",
@@ -21694,6 +22487,9 @@
 			"raceName": "Tiefling",
 			"raceSource": "PHB",
 			"page": 2,
+			"reprintedAs": [
+				"Tiefling (Zariel)|MTF"
+			],
 			"ability": [
 				{
 					"cha": 2,

@@ -1,13 +1,5 @@
 "use strict";
 
-if (typeof module !== "undefined") {
-	const cv = require("./converterutils.js");
-	Object.assign(global, cv);
-	const cvSpells = require("./converterutils-spell.js");
-	Object.assign(global, cvSpells);
-	global.PropOrder = require("./utils-proporder.js");
-}
-
 class SpellParser extends BaseParser {
 	/**
 	 * Parses spells from raw text pastes
@@ -88,6 +80,8 @@ class SpellParser extends BaseParser {
 
 			// casting time
 			if (i === 2) {
+				// noinspection StatementWithEmptyBodyJS
+				while (absorbBrokenLine(true)) ;
 				this._setCleanCastingTime(spell, curLine, options);
 				continue;
 			}
@@ -163,8 +157,11 @@ class SpellParser extends BaseParser {
 		if (!school) return cbMan ? cbMan(s.school, "Spell school requires manual conversion") : null;
 
 		const out = SpellParser._RES_SCHOOL.find(it => it.regex.test(school));
-		if (out) s.school = out.output;
-		else cbMan(s.school, "Spell school requires manual conversion");
+		if (out) {
+			s.school = out.output;
+			return;
+		}
+		if (cbMan) cbMan(s.school, "Spell school requires manual conversion");
 	}
 
 	static _doSpellPostProcess (stats, options) {
@@ -215,7 +212,7 @@ class SpellParser extends BaseParser {
 		line = ConvertUtil.cleanDashes(line).toLowerCase().trim();
 
 		const mCantrip = /cantrip/i.exec(line);
-		const mSpellLevel = /^(\d+)(?:st|nd|rd|th)-level/i.exec(line);
+		const mSpellLevel = /^(\d+)(?:st|nd|rd|th)?-level/i.exec(line);
 
 		if (mCantrip) {
 			const trailing = line.slice(mCantrip.index + "cantrip".length, line.length);
@@ -231,7 +228,7 @@ class SpellParser extends BaseParser {
 
 			this._tryConvertSchool(stats);
 		} else if (mSpellLevel) {
-			line = line.slice(mSpellLevel.index + mSpellLevel[1].length);
+			line = line.slice(mSpellLevel.index + mSpellLevel[0].length);
 
 			let isRitual = false;
 			line = line.replace(/\((.*?)(?:[,;]\s*)?ritual(?:[,;]\s*)?(.*?)\)/i, (...m) => {
@@ -291,6 +288,11 @@ class SpellParser extends BaseParser {
 		const mSelfHemisphere = /^self \((\d+)-(foot|mile)-radius hemisphere\)$/i.exec(cleanRange);
 		if (mSelfHemisphere) return stats.range = {type: "hemisphere", distance: {type: getUnit(mSelfHemisphere[2]), amount: Number(mSelfHemisphere[1])}};
 
+		// region Homebrew
+		const mPointCube = /^(?<point>\d+) (?<unit>feet|foot|miles?) \((\d+)-(foot|mile) cube\)$/i.exec(cleanRange);
+		if (mPointCube) return stats.range = {type: "point", distance: {type: getUnit(mPointCube.groups.unit), amount: Number(mPointCube.groups.point)}};
+		// endregion
+
 		options.cbWarning(`${stats.name ? `(${stats.name}) ` : ""}Range part "${range}" requires manual conversion`);
 	}
 
@@ -330,17 +332,17 @@ class SpellParser extends BaseParser {
 			.map(it => it.trim())
 			.filter(Boolean)
 			.map(str => {
-				const mNumber = /^(\d+)(.*?)$/.exec(str);
+				const mNumber = /^(?<count>\d+)?(?<rest>.*?)$/.exec(str);
 
 				if (!mNumber) {
 					options.cbWarning(`${stats.name ? `(${stats.name}) ` : ""}Casting time part "${str}" requires manual conversion`);
 					return str;
 				}
 
-				const amount = Number(mNumber[1].trim());
-				const [unit, ...conditionParts] = mNumber[2].split(", ");
+				const amount = mNumber.groups.count ? Number(mNumber.groups.count.trim()) : null;
+				const [unit, ...conditionParts] = mNumber.groups.rest.split(", ");
 				const out = {
-					number: amount,
+					number: amount ?? 1,
 					unit: this._getCleanTimeUnit(unit, false, options),
 					condition: conditionParts.join(", "),
 				};
@@ -491,8 +493,4 @@ Object.entries({
 	});
 });
 
-if (typeof module !== "undefined") {
-	module.exports = {
-		SpellParser,
-	};
-}
+globalThis.SpellParser = SpellParser;

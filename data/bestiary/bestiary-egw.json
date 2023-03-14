@@ -596,10 +596,10 @@
 					"headerEntries": [
 						"The blood hunter can innately cast {@spell hex}. Its innate spellcasting ability is Intelligence."
 					],
-					"ability": "int",
 					"will": [
 						"{@spell hex}"
 					],
+					"ability": "int",
 					"hidden": [
 						"will"
 					]
@@ -681,6 +681,7 @@
 		{
 			"name": "Bol'bara",
 			"isNpc": true,
+			"isNamedCreature": true,
 			"source": "EGW",
 			"page": 261,
 			"size": [
@@ -804,7 +805,7 @@
 				{
 					"name": "Zone of Calamity (Costs 2 Actions)",
 					"entries": [
-						"A 15-foot-radius sphere of magical confusion extends from a point Bol'bara can see within 60 feet of her and spreads around corners. Each creature that starts its turn in that area is treated as if targeted by the {@spell confusion} spell (save {@dc 12}). The sphere lasts as long as Bol'bara maintains concentration, up to 1 minute (as if concentrating on a spell)."
+						"A 15-foot-radius sphere of magical confusion extends from a point Bol'bara can see within 60 feet of her and spreads around corners. Each creature that starts its turn in that area is treated as if targeted by the {@spell confusion} spell (save {@dc 12}). The sphere lasts as long as Bol'bara maintains {@status concentration}, up to 1 minute (as if {@status concentration||concentrating} on a spell)."
 					]
 				}
 			],
@@ -1123,7 +1124,7 @@
 					]
 				},
 				{
-					"name": "Alluring Thrum (Recharges 5-6)",
+					"name": "Alluring Thrum {@recharge 5}",
 					"entries": [
 						"The emissary emits a dreadful yet alluring hum. Each creature within 20 feet of the emissary that can hear it and that isn't an aberration must succeed on a {@dc 14} Constitution saving throw or be {@condition charmed} for 1 minute. A creature can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success."
 					]
@@ -1460,6 +1461,7 @@
 		{
 			"name": "Ferol Sal",
 			"isNpc": true,
+			"isNamedCreature": true,
 			"source": "EGW",
 			"page": 249,
 			"_copy": {
@@ -2150,7 +2152,7 @@
 			"languages": [
 				"understands Goblin but can't speak"
 			],
-			"cr": "7",
+			"cr": "8",
 			"trait": [
 				{
 					"name": "Amphibious",
@@ -2208,6 +2210,7 @@
 		{
 			"name": "Hulil Lutan",
 			"isNpc": true,
+			"isNamedCreature": true,
 			"source": "EGW",
 			"page": 240,
 			"_copy": {
@@ -2356,6 +2359,7 @@
 		{
 			"name": "Ishel",
 			"isNpc": true,
+			"isNamedCreature": true,
 			"source": "EGW",
 			"page": 231,
 			"_copy": {
@@ -2402,7 +2406,8 @@
 				"P",
 				"S"
 			],
-			"damageTagsLegendary": []
+			"damageTagsLegendary": [],
+			"hasToken": true
 		},
 		{
 			"name": "Kobold Underling",
@@ -2714,6 +2719,7 @@
 		{
 			"name": "Mossback Steward",
 			"isNpc": true,
+			"isNamedCreature": true,
 			"source": "EGW",
 			"page": 256,
 			"_copy": {
@@ -2768,7 +2774,8 @@
 				"I"
 			],
 			"hasToken": true,
-			"hasFluff": true
+			"hasFluff": true,
+			"hasFluffImages": true
 		},
 		{
 			"name": "Nergaliid",
@@ -2901,6 +2908,7 @@
 		{
 			"name": "Ogre Lord Buhfal II",
 			"isNpc": true,
+			"isNamedCreature": true,
 			"source": "EGW",
 			"page": 251,
 			"_copy": {
@@ -2926,6 +2934,7 @@
 		{
 			"name": "Old Croaker",
 			"isNpc": true,
+			"isNamedCreature": true,
 			"source": "EGW",
 			"page": 240,
 			"_copy": {
@@ -2975,11 +2984,13 @@
 				"Legendary Resistances",
 				"Magic Resistance"
 			],
-			"damageTagsLegendary": []
+			"damageTagsLegendary": [],
+			"hasToken": true
 		},
 		{
 			"name": "Parson Pellinost",
 			"isNpc": true,
+			"isNamedCreature": true,
 			"source": "EGW",
 			"page": 261,
 			"_copy": {
@@ -3044,6 +3055,7 @@
 		{
 			"name": "Raegrin Mau",
 			"isNpc": true,
+			"isNamedCreature": true,
 			"source": "EGW",
 			"page": 240,
 			"_copy": {
@@ -3608,6 +3620,7 @@
 		{
 			"name": "Sken Zabriss",
 			"isNpc": true,
+			"isNamedCreature": true,
 			"source": "EGW",
 			"page": 221,
 			"size": [
@@ -3662,7 +3675,7 @@
 				{
 					"name": "Special Equipment",
 					"entries": [
-						"Sken wears a ring of obscuring. With it, she can cast the {@spell fog cloud} spell centered on herself three times per day. The cloud lasts for 1 minute (no concentration required)."
+						"Sken wears a ring of obscuring. With it, she can cast the {@spell fog cloud} spell centered on herself three times per day. The cloud lasts for 1 minute (no {@status concentration} required)."
 					]
 				}
 			],
@@ -3698,6 +3711,7 @@
 		{
 			"name": "Skr'a S'orsk",
 			"isNpc": true,
+			"isNamedCreature": true,
 			"source": "EGW",
 			"page": 254,
 			"_copy": {
@@ -3884,6 +3898,7 @@
 		{
 			"name": "Three Earrings",
 			"isNpc": true,
+			"isNamedCreature": true,
 			"source": "EGW",
 			"page": 211,
 			"_copy": {
@@ -4134,6 +4149,7 @@
 		{
 			"name": "Yinra Emberwind",
 			"isNpc": true,
+			"isNamedCreature": true,
 			"source": "EGW",
 			"page": 223,
 			"size": [

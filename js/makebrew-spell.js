@@ -7,7 +7,6 @@ class SpellBuilder extends Builder {
 			titleSidebarDownloadJson: "Download Spells as JSON",
 			prop: "spell",
 			titleSelectDefaultSource: "(Same as Spell)",
-			typeRenderData: "dataSpell",
 		});
 
 		this._subclassLookup = {};
@@ -16,13 +15,13 @@ class SpellBuilder extends Builder {
 	}
 
 	static _getAsMarkdown (sp) {
-		return RendererMarkdown.get().render({entries: [{type: "dataSpell", dataSpell: sp}]});
+		return RendererMarkdown.get().render({entries: [{type: "statblockInline", dataType: "spell", data: sp}]});
 	}
 
 	async pHandleSidebarLoadExistingClick () {
 		const result = await SearchWidget.pGetUserSpellSearch();
 		if (result) {
-			const spell = MiscUtil.copy(await Renderer.hover.pCacheAndGet(result.page, result.source, result.hash));
+			const spell = MiscUtil.copy(await DataLoader.pCacheAndGet(result.page, result.source, result.hash));
 			return this.pHandleSidebarLoadExistingData(spell);
 		}
 	}
@@ -39,6 +38,7 @@ class SpellBuilder extends Builder {
 
 		delete spell.srd;
 		delete spell.uniqueId;
+		delete spell.reprintedAs;
 
 		const meta = {...(opts.meta || {}), ...this._getInitialMetaState()};
 
@@ -79,7 +79,7 @@ class SpellBuilder extends Builder {
 				fromClassList: [
 					{
 						name: "Wizard",
-						source: SRC_PHB,
+						source: Parser.SRC_PHB,
 					},
 				],
 			},
@@ -112,7 +112,7 @@ class SpellBuilder extends Builder {
 				.forEach(srcJson => $sel.append(`<option value="${srcJson.escapeQuotes()}">${Parser.sourceJsonToFull(srcJson).escapeQuotes()}</option>`));
 
 			if (this._ui.allSources.indexOf(currSrcJson)) $sel.val(currSrcJson);
-			else $sel.val(SRC_PHB);
+			else $sel.val(Parser.SRC_PHB);
 
 			return $sel;
 		}).forEach($sel => $sel.change());
@@ -325,7 +325,7 @@ class SpellBuilder extends Builder {
 			.change(() => doUpdateState())
 			.val(os && os.page ? os.page : null);
 
-		const $selSource = this._$getSelSource("$selOtherSourceSources", doUpdateState, os ? os.source.escapeQuotes() : SRC_PHB);
+		const $selSource = this._$getSelSource("$selOtherSourceSources", doUpdateState, os ? os.source.escapeQuotes() : Parser.SRC_PHB);
 
 		const out = {getOtherSource};
 
@@ -748,8 +748,8 @@ class SpellBuilder extends Builder {
 	}
 
 	__$getClassesInputs (cb) {
-		const DEFAULT_CLASS = {name: "Wizard", source: SRC_PHB};
-		const DEFAULT_SUBCLASS = {name: "Evocation", source: SRC_PHB};
+		const DEFAULT_CLASS = {name: "Wizard", source: Parser.SRC_PHB};
+		const DEFAULT_SUBCLASS = {name: "Evocation", source: Parser.SRC_PHB};
 
 		const [$rowCls, $rowInnerCls] = BuilderUi.getLabelledRowTuple("Classes", {isMarked: true});
 		const [$rowSc, $rowInnerSc] = BuilderUi.getLabelledRowTuple("Subclasses", {isMarked: true});
@@ -824,6 +824,7 @@ class SpellBuilder extends Builder {
 		const getSubclass = () => {
 			const className = $iptClass.val().trim();
 			const subclassName = $iptSubclass.val().trim();
+			const subclassShortName = $iptSubclassShort.val().trim();
 			if (!className || !subclassName) return null;
 			const out = {
 				class: {
@@ -832,6 +833,7 @@ class SpellBuilder extends Builder {
 				},
 				subclass: {
 					name: $iptSubclass.val(),
+					shortName: $iptSubclassShort.val(),
 					source: $selSubclassSource.val().unescapeQuotes(),
 				},
 			};
@@ -848,6 +850,9 @@ class SpellBuilder extends Builder {
 		const $iptSubclass = $(`<input class="form-control form-control--minimal input-xs">`)
 			.change(() => doUpdateState())
 			.val(subclass.subclass.name);
+		const $iptSubclassShort = $(`<input class="form-control form-control--minimal input-xs">`)
+			.change(() => doUpdateState())
+			.val(subclass.subclass.shortName);
 		const $selSubclassSource = this._$getSelSource("$selSubclassSources", doUpdateState, subclass.subclass.source.escapeQuotes());
 
 		const $iptSubSubclass = $(`<input class="form-control form-control--minimal input-xs">`)
@@ -861,6 +866,7 @@ class SpellBuilder extends Builder {
 			<div class="ve-flex-v-center mb-2"><span class="mr-2 mkbru__sub-name--33">Class Name</span>${$iptClass}</div>
 			<div class="ve-flex-v-center mb-2"><span class="mr-2 mkbru__sub-name--33">Class Source</span>${$selClassSource}</div>
 			<div class="ve-flex-v-center mb-2"><span class="mr-2 mkbru__sub-name--33">Subclass Name</span>${$iptSubclass}</div>
+			<div class="ve-flex-v-center mb-2"><span class="mr-2 mkbru__sub-name--33">Subclass Short Name</span>${$iptSubclassShort}</div>
 			<div class="ve-flex-v-center mb-2"><span class="mr-2 mkbru__sub-name--33">Subclass Source</span>${$selSubclassSource}</div>
 			<div class="ve-flex-v-center mb-2"><span class="mr-2 mkbru__sub-name--33 help" title="For example, for a Circle of the Coast Land Druid, enter &quot;Coast&quot;">Sub-Subclass Name</span>${$iptSubSubclass}</div>
 			${$wrpBtnRemove}
@@ -922,8 +928,8 @@ class SpellBuilder extends Builder {
 			.change(() => doUpdateState())
 			.val(race ? race.baseName : null);
 
-		const $selSource = this._$getSelSource("$selRaceSources", doUpdateState, race ? race.source.escapeQuotes() : SRC_PHB);
-		const $selBaseSource = this._$getSelSource("$selBaseRaceSources", doUpdateState, race && race.baseSource ? race.baseSource.escapeQuotes() : SRC_PHB);
+		const $selSource = this._$getSelSource("$selRaceSources", doUpdateState, race ? race.source.escapeQuotes() : Parser.SRC_PHB);
+		const $selBaseSource = this._$getSelSource("$selBaseRaceSources", doUpdateState, race && race.baseSource ? race.baseSource.escapeQuotes() : Parser.SRC_PHB);
 
 		const out = {getRace};
 
@@ -932,7 +938,7 @@ class SpellBuilder extends Builder {
 			<div class="ve-flex-v-center mb-2"><span class="mr-2 mkbru__sub-name--33">Name</span>${$iptRace}</div>
 			<div class="ve-flex-v-center mb-2"><span class="mr-2 mkbru__sub-name--33">Source</span>${$selSource}</div>
 			<div class="ve-flex-v-center mb-2"><span class="mr-2 mkbru__sub-name--33 help" title="The name of the base race, e.g. &quot;Elf&quot;. This is used in filtering.">Base Name</span>${$iptBaseRace}</div>
-			<div class="ve-flex-v-center mb-2"><span class="mr-2 mkbru__sub-name--33 help" title="For example, the &quot;Elf&quot; base race has a source of &quot;${SRC_PHB}&quot;">Base Source</span>${$selBaseSource}</div>
+			<div class="ve-flex-v-center mb-2"><span class="mr-2 mkbru__sub-name--33 help" title="For example, the &quot;Elf&quot; base race has a source of &quot;${Parser.SRC_PHB}&quot;">Base Source</span>${$selBaseSource}</div>
 			${$wrpBtnRemove}
 		</div>`;
 		Builder.$getBtnRemoveRow(doUpdateState, raceRows, out, $wrp, "Race").appendTo($wrpBtnRemove);
@@ -982,7 +988,7 @@ class SpellBuilder extends Builder {
 			.change(() => doUpdateState())
 			.val(bg ? bg.name : null);
 
-		const $selSource = this._$getSelSource("$selBackgroundSources", doUpdateState, bg ? bg.source.escapeQuotes() : SRC_PHB);
+		const $selSource = this._$getSelSource("$selBackgroundSources", doUpdateState, bg ? bg.source.escapeQuotes() : Parser.SRC_PHB);
 
 		const out = {getBackground};
 
@@ -1043,14 +1049,14 @@ class SpellBuilder extends Builder {
 		tabs.forEach(it => it.$wrpTab.appendTo($wrp));
 
 		// Spell
-		const $tblSpell = $(`<table class="stats"/>`).appendTo(spellTab.$wrpTab);
+		const $tblSpell = $(`<table class="w-100 stats"/>`).appendTo(spellTab.$wrpTab);
 		// Make a copy of the spell, and add the data that would be displayed in the spells page
 		const procSpell = MiscUtil.copy(this._state);
-		Renderer.spell.initClasses(procSpell);
+		Renderer.spell.initBrewSources(procSpell);
 		RenderSpells.$getRenderedSpell(procSpell, this._subclassLookup, {isSkipExcludesRender: true}).appendTo($tblSpell);
 
 		// Info
-		const $tblInfo = $(`<table class="stats"/>`).appendTo(infoTab.$wrpTab);
+		const $tblInfo = $(`<table class="w-100 stats"/>`).appendTo(infoTab.$wrpTab);
 		Renderer.utils.pBuildFluffTab({
 			isImageTab: false,
 			$content: $tblInfo,
@@ -1059,7 +1065,7 @@ class SpellBuilder extends Builder {
 		});
 
 		// Images
-		const $tblImages = $(`<table class="stats"/>`).appendTo(imageTab.$wrpTab);
+		const $tblImages = $(`<table class="w-100 stats"/>`).appendTo(imageTab.$wrpTab);
 		Renderer.utils.pBuildFluffTab({
 			isImageTab: true,
 			$content: $tblImages,
@@ -1068,7 +1074,7 @@ class SpellBuilder extends Builder {
 		});
 
 		// Data
-		const $tblData = $(`<table class="stats stats--book mkbru__wrp-output-tab-data"/>`).appendTo(dataTab.$wrpTab);
+		const $tblData = $(`<table class="w-100 stats stats--book mkbru__wrp-output-tab-data"/>`).appendTo(dataTab.$wrpTab);
 		const asCode = Renderer.get().render({
 			type: "entries",
 			entries: [
@@ -1084,7 +1090,7 @@ class SpellBuilder extends Builder {
 		$tblData.append(Renderer.utils.getBorderTr());
 
 		// Markdown
-		const $tblMarkdown = $(`<table class="stats stats--book mkbru__wrp-output-tab-data"/>`).appendTo(markdownTab.$wrpTab);
+		const $tblMarkdown = $(`<table class="w-100 stats stats--book mkbru__wrp-output-tab-data"/>`).appendTo(markdownTab.$wrpTab);
 		$tblMarkdown.append(Renderer.utils.getBorderTr());
 		$tblMarkdown.append(`<tr><td colspan="6">${this._getRenderedMarkdownCode()}</td></tr>`);
 		$tblMarkdown.append(Renderer.utils.getBorderTr());

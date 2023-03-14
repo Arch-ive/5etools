@@ -40,6 +40,8 @@ class PageUi {
 
 	get creatureBuilder () { return this._builders.creatureBuilder; }
 
+	get builders () { return this._builders; }
+
 	get activeBuilder () { return this._settings.activeBuilder || PageUi._DEFAULT_ACTIVE_BUILDER; }
 
 	get $wrpInput () { return this._$wrpInput; }
@@ -314,7 +316,6 @@ class Builder extends ProxyBase {
 	 * @param opts.titleSidebarDownloadJson Text for "Download JSON" sidebar button.
 	 * @param opts.metaSidebarDownloadMarkdown Meta for a "Download Markdown" sidebar button.
 	 * @param opts.prop Homebrew prop.
-	 * @param opts.typeRenderData Renderer "dataX" entry type.
 	 */
 	constructor (opts) {
 		super();
@@ -323,7 +324,6 @@ class Builder extends ProxyBase {
 		this._titleSidebarDownloadJson = opts.titleSidebarDownloadJson;
 		this._metaSidebarDownloadMarkdown = opts.metaSidebarDownloadMarkdown;
 		this._prop = opts.prop;
-		this._typeRenderData = opts.typeRenderData;
 
 		Builder._BUILDERS.push(this);
 		TabUiUtil.decorate(this);
@@ -358,6 +358,20 @@ class Builder extends ProxyBase {
 	}
 
 	set ui (ui) { this._ui = ui; }
+
+	get prop () { return this._prop; }
+
+	prepareExistingEditableBrew ({brew}) {
+		let isAnyMod = false;
+		if (!brew.body[this.prop]?.length) return;
+
+		brew.body[this.prop].forEach(ent => {
+			if (ent.uniqueId) return;
+			ent.uniqueId = CryptUtil.uid();
+			isAnyMod = true;
+		});
+		return isAnyMod;
+	}
 
 	getSaveableState () {
 		return {
@@ -574,7 +588,15 @@ class Builder extends ProxyBase {
 					async (evt) => {
 						const entry = MiscUtil.copy(await BrewUtil2.pGetEditableBrewEntity(this._prop, ent.uniqueId));
 						const name = `${entry._displayName || entry.name} \u2014 Markdown`;
-						const mdText = RendererMarkdown.get().render({entries: [{type: this._typeRenderData, [this._typeRenderData]: entry}]});
+						const mdText = RendererMarkdown.get().render({
+							entries: [
+								{
+									type: "statblockInline",
+									dataType: this._prop,
+									data: entry,
+								},
+							],
+						});
 						const $content = Renderer.hover.$getHoverContent_miscCode(name, mdText);
 
 						Renderer.hover.getShowWindow(
@@ -649,29 +671,71 @@ class Builder extends ProxyBase {
 		this._addHook("meta", "isModified", hkBtnSaveText);
 		hkBtnSaveText();
 
-		$(`<button class="btn btn-xs btn-default">New</button>`)
-			.click(() => {
-				if (!confirm("Are you sure?")) return;
-				this.reset();
+		$(`<button class="btn btn-xs btn-default" title="SHIFT to reset additional state (such as whether or not certain attributes are auto-calculated)">New</button>`)
+			.click(async (evt) => {
+				if (!await InputUiUtil.pGetUserBoolean({title: "Reset Builder", htmlDescription: "Are you sure?", textYes: "Yes", textNo: "Cancel"})) return;
+				this.reset({isResetAllMeta: !!evt.shiftKey});
 			})
 			.appendTo($wrpControls);
 	}
 
-	reset () {
-		this.setStateFromLoaded({s: this._getInitialState(), m: this._getInitialMetaState()});
+	reset ({isResetAllMeta = false} = {}) {
+		const metaNext = this._getInitialMetaState();
+		if (!isResetAllMeta) this._reset_mutNextMetaState({metaNext});
+		this.setStateFromLoaded({
+			s: this._getInitialState(),
+			m: metaNext,
+		});
 		this.renderInput();
 		this.renderOutput();
 		this.doUiSave();
 	}
 
+	_reset_mutNextMetaState ({metaNext}) { /* Implement as required */ }
+
 	async _pHandleClick_pSaveBrew () {
-		if (!this._state.source) throw new Error(`Current state has no "source"!`);
+		const source = this._state.source;
+		if (!source) throw new Error(`Current state has no "source"!`);
 
 		const clean = DataUtil.cleanJson(MiscUtil.copy(this.__state), {isDeleteUniqueId: false});
 		if (this._meta.isPersisted) {
 			await BrewUtil2.pPersistEditableBrewEntity(this._prop, clean);
 			await this.pRenderSideMenu();
 		} else {
+			// If we are e.g. editing a copy of a non-editable brew's entity, we need to first convert the parent brew
+			//   to "editable."
+			if (
+				BrewUtil2.sourceJsonToSource(source)
+				&& !await BrewUtil2.pIsEditableSourceJson(source)
+			) {
+				const isMove = await InputUiUtil.pGetUserBoolean({
+					title: "Move to Editable Homebrew Document",
+					htmlDescription: `<div>Saving "${this._state.name}" with source "${this._state.source}" will move all homebrew from that source to the editable homebrew document.<br>Moving homebrew to the editable document will prevent it from being automatically updated in future.<br>Do you wish to proceed?<br><i class="ve-muted">Giving "${this._state.name}" an editable source will avoid this issue.</i></div>`,
+					textYes: "Yes",
+					textNo: "Cancel",
+				});
+				if (!isMove) return;
+
+				const brew = await BrewUtil2.pMoveOrCopyToEditableBySourceJson(source);
+				if (!brew) throw new Error(`Failed to make brew for source "${source}" editable!`);
+
+				const nxtBrew = MiscUtil.copy(brew);
+				// Ensure everything has a `uniqueId`
+				let isAnyMod = this.prepareExistingEditableBrew({brew: nxtBrew});
+
+				// We then need to attempt a find-replace on the hash of our current entity, as we may be trying to update
+				//   one exact entity. This is not needed if e.g. a renamed copy of an existing entity is being made.
+				const hash = UrlUtil.URL_TO_HASH_BUILDER[this._prop](clean);
+				const ixExisting = (brew.body[this._prop] || []).findIndex(it => UrlUtil.URL_TO_HASH_BUILDER[this._prop](it) === hash);
+				if (~ixExisting) {
+					clean.uniqueId = clean.uniqueId || nxtBrew.body[this._prop][ixExisting].uniqueId;
+					nxtBrew.body[this._prop][ixExisting] = clean;
+					isAnyMod = true;
+				}
+
+				if (isAnyMod) await BrewUtil2.pSetEditableBrewDoc(nxtBrew);
+			}
+
 			await BrewUtil2.pPersistEditableBrewEntity(this._prop, clean);
 			this._meta.isPersisted = true;
 			await SearchWidget.P_LOADING_CONTENT;
@@ -968,6 +1032,7 @@ class BuilderUi {
 				if (options.withHeader && out) {
 					out = [
 						{
+							type: "entries",
 							name: options.withHeader,
 							entries: out,
 						},
@@ -1248,8 +1313,12 @@ class Makebrew {
 		Makebrew._LOCK = new VeLock();
 
 		// generic init
-		await BrewUtil2.pInit();
+		await Promise.all([
+			PrereleaseUtil.pInit(),
+			BrewUtil2.pInit(),
+		]);
 		ExcludeUtil.pInitialise().then(null); // don't await, as this is only used for search
+		await this.pPrepareExistingEditableBrew();
 		await BrewUtil2.pGetBrewProcessed();
 		await SearchUiUtil.pDoGlobalInit();
 		// Do this asynchronously, to avoid blocking the load
@@ -1268,32 +1337,56 @@ class Makebrew {
 		window.dispatchEvent(new Event("toolsLoaded"));
 	}
 
+	/**
+	 * The editor requires that each entity has a `uniqueId`, as e.g. hashing the entity does not produce a
+	 * stable ID (since there may be duplicates, or the name may change).
+	 */
+	static async pPrepareExistingEditableBrew () {
+		const brew = MiscUtil.copy(await BrewUtil2.pGetOrCreateEditableBrewDoc());
+
+		let isAnyMod = false;
+		Object.values(ui.builders)
+			.forEach(builder => {
+				const isAnyModBuilder = builder.prepareExistingEditableBrew({brew});
+				isAnyMod = isAnyMod || isAnyModBuilder;
+			});
+
+		if (!isAnyMod) return;
+
+		await BrewUtil2.pSetEditableBrewDoc(brew);
+	}
+
 	static async pHashChange () {
 		try {
 			await Makebrew._LOCK.pLock();
+			return (await this._pHashChange());
+		} finally {
+			Makebrew._LOCK.unlock();
+		}
+	}
 
-			const [builderMode, ...sub] = Hist.getHashParts();
-			Hist.initialLoad = false; // Once we've extracted the hash's parts, we no longer care about preserving it
+	static async _pHashChange () {
+		const [builderMode, ...sub] = Hist.getHashParts();
+		Hist.initialLoad = false; // Once we've extracted the hash's parts, we no longer care about preserving it
 
-			if (!builderMode) return Hist.replaceHistoryHash(UrlUtil.encodeForHash(ui.activeBuilder));
+		if (!builderMode) return Hist.replaceHistoryHash(UrlUtil.encodeForHash(ui.activeBuilder));
 
-			const builder = ui.getBuilderById(builderMode);
-			if (!builder) return Hist.replaceHistoryHash(UrlUtil.encodeForHash(ui.activeBuilder));
+		const builder = ui.getBuilderById(builderMode);
+		if (!builder) return Hist.replaceHistoryHash(UrlUtil.encodeForHash(ui.activeBuilder));
 
-			await ui.pSetActiveBuilderById(builderMode); // (This will update the hash to the active builder)
+		await ui.pSetActiveBuilderById(builderMode); // (This will update the hash to the active builder)
 
-			if (sub.length) {
-				const initialLoadMeta = UrlUtil.unpackSubHash(sub[0]);
-				if (!initialLoadMeta.statemeta) return;
+		if (!sub.length) return;
 
-				const [page, source, hash] = initialLoadMeta.statemeta;
-				let toLoad = await Renderer.hover.pCacheAndGet(page, source, hash, {isCopy: true});
+		const initialLoadMeta = UrlUtil.unpackSubHash(sub[0]);
+		if (!initialLoadMeta.statemeta) return;
 
-				toLoad = await builder._pHashChange_pHandleSubHashes(sub, toLoad);
+		const [page, source, hash] = initialLoadMeta.statemeta;
+		let toLoad = await DataLoader.pCacheAndGet(page, source, hash, {isCopy: true});
 
-				return builder.pHandleSidebarLoadExistingData(toLoad, {isForce: true, meta});
-			}
-		} finally { Makebrew._LOCK.unlock(); }
+		toLoad = await builder._pHashChange_pHandleSubHashes(sub, toLoad);
+
+		return builder.pHandleSidebarLoadExistingData(toLoad, {isForce: true});
 	}
 }
 Makebrew._LOCK = null;

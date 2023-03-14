@@ -626,7 +626,7 @@
 					"name": "Foment Madness",
 					"entries": [
 						"Any creature that isn't a demon that starts its turn within 30 feet of the alkilith must succeed on a {@dc 18} Wisdom saving throw, or it hears a faint buzzing in its head for a moment and has disadvantage on its next attack roll, saving throw, or ability check.",
-						"If the saving throw against Foment Madness fails by 5 or more, the creature is instead subjected to the {@spell confusion} spell for 1 minute (no concentration required by the alkilith). While under the effect of that confusion, the creature is immune to Foment Madness."
+						"If the saving throw against Foment Madness fails by 5 or more, the creature is instead subjected to the {@spell confusion} spell for 1 minute (no {@status concentration} required by the alkilith). While under the effect of that confusion, the creature is immune to Foment Madness."
 					]
 				},
 				{
@@ -3145,6 +3145,7 @@
 				"P"
 			],
 			"miscTags": [
+				"HPR",
 				"MW"
 			],
 			"conditionInflict": [
@@ -3389,7 +3390,7 @@
 				{
 					"name": "Uncanny Senses",
 					"entries": [
-						"The canoloth can't be surprised while it isn't {@condition incapacitated}."
+						"The canoloth can't be {@quickref Surprise|PHB|3|0|surprised} while it isn't {@condition incapacitated}."
 					]
 				}
 			],
@@ -4512,6 +4513,7 @@
 				"I"
 			],
 			"miscTags": [
+				"HPR",
 				"MW"
 			],
 			"hasToken": true,
@@ -4729,6 +4731,7 @@
 				"I"
 			],
 			"miscTags": [
+				"HPR",
 				"MW",
 				"RCH"
 			],
@@ -4750,12 +4753,6 @@
 			"name": "Derro",
 			"source": "MTF",
 			"page": 158,
-			"otherSources": [
-				{
-					"source": "OotA",
-					"page": 224
-				}
-			],
 			"reprintedAs": [
 				"Derro|MPMM"
 			],
@@ -4871,12 +4868,6 @@
 			"name": "Derro Savant",
 			"source": "MTF",
 			"page": 159,
-			"otherSources": [
-				{
-					"source": "OotA",
-					"page": 225
-				}
-			],
 			"reprintedAs": [
 				"Derro Savant|MPMM"
 			],
@@ -5432,6 +5423,13 @@
 					"headerEntries": [
 						"The drow is a 16th-level spellcaster. Its spellcasting ability is Charisma (spell save {@dc 16}, {@hit 8} to hit with spell attacks). It regains its expended spell slots when it finishes a short or long rest. It knows the following warlock spells:"
 					],
+					"daily": {
+						"1": [
+							"{@spell eyebite}",
+							"{@spell etherealness}",
+							"{@spell dominate monster}"
+						]
+					},
 					"spells": {
 						"0": {
 							"spells": [
@@ -5460,13 +5458,6 @@
 								"{@spell witch bolt}"
 							]
 						}
-					},
-					"daily": {
-						"1": [
-							"{@spell eyebite}",
-							"{@spell etherealness}",
-							"{@spell dominate monster}"
-						]
 					},
 					"ability": "cha"
 				}
@@ -5587,7 +5578,8 @@
 				"unconscious"
 			],
 			"hasToken": true,
-			"hasFluff": true
+			"hasFluff": true,
+			"hasFluffImages": true
 		},
 		{
 			"name": "Drow Favored Consort",
@@ -6252,6 +6244,7 @@
 				"I"
 			],
 			"miscTags": [
+				"HPR",
 				"MW"
 			],
 			"conditionInflictSpell": [
@@ -7150,7 +7143,7 @@
 				{
 					"name": "Shared Invisibility (Recharges after a Short or Long Rest)",
 					"entries": [
-						"The duergar magically turns {@condition invisible} for up to 1 hour or until it attacks, it casts a spell, or its concentration is broken (as if concentrating on a spell). Any equipment the duergar wears or carries is {@condition invisible} with it. While the {@condition invisible} duergar is mounted on a female steeder, the steeder is {@condition invisible} as well. The invisibility ends early on the steeder immediately after it attacks."
+						"The duergar magically turns {@condition invisible} for up to 1 hour or until it attacks, it casts a spell, or its {@status concentration} is broken (as if {@status concentration||concentrating} on a spell). Any equipment the duergar wears or carries is {@condition invisible} with it. While the {@condition invisible} duergar is mounted on a female steeder, the steeder is {@condition invisible} as well. The invisibility ends early on the steeder immediately after it attacks."
 					]
 				}
 			],
@@ -7290,7 +7283,7 @@
 				{
 					"name": "Invisibility {@recharge 4}",
 					"entries": [
-						"The duergar magically turns {@condition invisible} for up to 1 hour or until it attacks, it casts a spell, it uses its Reduce, or its concentration is broken (as if concentrating on a spell). Any equipment the duergar wears or carries is {@condition invisible} with it."
+						"The duergar magically turns {@condition invisible} for up to 1 hour or until it attacks, it casts a spell, it uses its Reduce, or its {@status concentration} is broken (as if {@status concentration||concentrating} on a spell). Any equipment the duergar wears or carries is {@condition invisible} with it."
 					]
 				},
 				{
@@ -7570,7 +7563,7 @@
 				{
 					"name": "Invisibility (Recharges after a Short or Long Rest)",
 					"entries": [
-						"The duergar magically turns {@condition invisible} for up to 1 hour or until it attacks, it casts a spell, it uses its Enlarge, or its concentration is broken (as if concentrating on a spell). Any equipment the duergar wears or carries is {@condition invisible} with it."
+						"The duergar magically turns {@condition invisible} for up to 1 hour or until it attacks, it casts a spell, it uses its Enlarge, or its {@status concentration} is broken (as if {@status concentration||concentrating} on a spell). Any equipment the duergar wears or carries is {@condition invisible} with it."
 					]
 				}
 			],
@@ -7710,7 +7703,7 @@
 				{
 					"name": "Invisibility (Recharges after a Short or Long Rest)",
 					"entries": [
-						"The duergar magically turns {@condition invisible} for up to 1 hour or until it attacks, it casts a spell, it uses its Enlarge, or its concentration is broken (as if concentrating on a spell). Any equipment the duergar wears or carries is {@condition invisible} with it."
+						"The duergar magically turns {@condition invisible} for up to 1 hour or until it attacks, it casts a spell, it uses its Enlarge, or its {@status concentration} is broken (as if {@status concentration||concentrating} on a spell). Any equipment the duergar wears or carries is {@condition invisible} with it."
 					]
 				}
 			],
@@ -7849,7 +7842,7 @@
 				{
 					"name": "Invisibility {@recharge 4}",
 					"entries": [
-						"The duergar magically turns {@condition invisible} for up to 1 hour or until it attacks, it casts a spell, it uses its Enlarge, or its concentration is broken (as if concentrating on a spell). Any equipment the duergar wears or carries is {@condition invisible} with it."
+						"The duergar magically turns {@condition invisible} for up to 1 hour or until it attacks, it casts a spell, it uses its Enlarge, or its {@status concentration} is broken (as if {@status concentration||concentrating} on a spell). Any equipment the duergar wears or carries is {@condition invisible} with it."
 					]
 				}
 			],
@@ -7993,7 +7986,7 @@
 				{
 					"name": "Invisibility (Recharges after a Short or Long Rest)",
 					"entries": [
-						"The duergar magically turns {@condition invisible} for up to 1 hour or until it attacks, it casts a spell, it uses its Enlarge, or its concentration is broken (as if concentrating on a spell). Any equipment the duergar wears or carries is {@condition invisible} with it."
+						"The duergar magically turns {@condition invisible} for up to 1 hour or until it attacks, it casts a spell, it uses its Enlarge, or its {@status concentration} is broken (as if {@status concentration||concentrating} on a spell). Any equipment the duergar wears or carries is {@condition invisible} with it."
 					]
 				}
 			],
@@ -9278,7 +9271,7 @@
 				{
 					"name": "Phantasmal Killer (Costs 2 Actions)",
 					"entries": [
-						"Fraz-Urb'luu casts {@spell phantasmal killer}, no concentration required."
+						"Fraz-Urb'luu casts {@spell phantasmal killer}, no {@status concentration} required."
 					]
 				}
 			],
@@ -9707,6 +9700,7 @@
 				"I"
 			],
 			"miscTags": [
+				"HPR",
 				"MW",
 				"RCH"
 			],
@@ -14182,6 +14176,7 @@
 				"I"
 			],
 			"miscTags": [
+				"HPR",
 				"MW",
 				"RCH"
 			],
@@ -14347,6 +14342,7 @@
 			],
 			"miscTags": [
 				"AOE",
+				"HPR",
 				"MW"
 			],
 			"hasToken": true,
@@ -14868,6 +14864,7 @@
 				"N"
 			],
 			"miscTags": [
+				"HPR",
 				"MW",
 				"RCH"
 			],
@@ -15792,6 +15789,7 @@
 				"I"
 			],
 			"miscTags": [
+				"HPR",
 				"MW"
 			],
 			"conditionInflict": [
@@ -17149,7 +17147,8 @@
 				"RW"
 			],
 			"hasToken": true,
-			"hasFluff": true
+			"hasFluff": true,
+			"hasFluffImages": true
 		},
 		{
 			"name": "Shadow Dancer",
@@ -20826,6 +20825,7 @@
 				"I"
 			],
 			"miscTags": [
+				"HPR",
 				"MW"
 			],
 			"conditionInflict": [
@@ -21263,6 +21263,9 @@
 			"damageTags": [
 				"N",
 				"R"
+			],
+			"miscTags": [
+				"HPR"
 			],
 			"hasToken": true,
 			"hasFluff": true,
@@ -22245,6 +22248,7 @@
 				"I"
 			],
 			"miscTags": [
+				"HPR",
 				"MW",
 				"RCH"
 			],
@@ -22671,7 +22675,7 @@
 				{
 					"name": "Earth-Shaking Movement",
 					"entries": [
-						"As a bonus action after moving at least 10 feet on the ground, the zaratan can send a shock wave through the ground in a 120-foot-radius circle centered on itself. That area becomes {@quickref difficult terrain||3} for 1 minute. Each creature on the ground that is concentrating must succeed on a {@dc 25} Constitution saving throw or the creature's concentration is broken.",
+						"As a bonus action after moving at least 10 feet on the ground, the zaratan can send a shock wave through the ground in a 120-foot-radius circle centered on itself. That area becomes {@quickref difficult terrain||3} for 1 minute. Each creature on the ground that is {@status concentration||concentrating} must succeed on a {@dc 25} Constitution saving throw or the creature's {@status concentration} is broken.",
 						"The shock wave deals 100 thunder damage to all structures in contact with the ground in the area. If a creature is near a structure that collapses, the creature might be buried; a creature within half the distance of the structure's height must make a {@dc 25} Dexterity saving throw. On a failed save, the creature takes 17 ({@damage 5d6}) bludgeoning damage, is knocked {@condition prone}, and is trapped in the rubble. A trapped creature is {@condition restrained}, requiring a successful {@dc 20} Strength (Athletics) check as an action to escape. Another creature within 5 feet of the buried creature can use its action to clear rubble and grant advantage on the check. If three creatures use their actions in this way, the check is an automatic success. On a successful save, the creature takes half as much damage and doesn't fall {@condition prone} or become trapped."
 					]
 				},

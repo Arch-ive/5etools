@@ -154,6 +154,7 @@
 			"isNpc": true,
 			"isNamedCreature": true,
 			"source": "CRCotN",
+			"page": 21,
 			"_copy": {
 				"name": "Orc",
 				"source": "MM",
@@ -177,6 +178,7 @@
 			"isNpc": true,
 			"isNamedCreature": true,
 			"source": "CRCotN",
+			"page": 61,
 			"_copy": {
 				"name": "Occult Initiate",
 				"source": "CRCotN",
@@ -299,7 +301,7 @@
 			],
 			"bonus": [
 				{
-					"name": "Enslave (Recharge 4-6)",
+					"name": "Enslave {@recharge 4}",
 					"entries": [
 						"The aboleth targets one creature it can see within 30 feet of itself. The target must succeed on a {@dc 14} Wisdom saving throw or be magically {@condition charmed} by the aboleth until the aboleth dies or until it is on a different plane of existence from the target. The {@condition charmed} target is under the aboleth's control and can't take reactions, and the aboleth and the target can communicate telepathically with each other over any distance.",
 						"The {@condition charmed} target can repeat the saving throw whenever it takes damage, ending the effect on itself on a success. No more than once every 24 hours, the target can repeat the saving throw when it is at least 1 mile away from the aboleth."
@@ -436,7 +438,7 @@
 				{
 					"name": "Divinely Blessed",
 					"entries": [
-						"Alyxian can't be surprised and can't be changed into another form against his will."
+						"Alyxian can't be {@quickref Surprise|PHB|3|0|surprised} and can't be changed into another form against his will."
 					]
 				},
 				{
@@ -516,6 +518,9 @@
 				"O",
 				"P",
 				"R"
+			],
+			"spellcastingTags": [
+				"O"
 			],
 			"miscTags": [
 				"AOE",
@@ -609,7 +614,7 @@
 				{
 					"name": "Divinely Blessed",
 					"entries": [
-						"Alyxian can't be surprised and can't be changed into another form against his will."
+						"Alyxian can't be {@quickref Surprise|PHB|3|0|surprised} and can't be changed into another form against his will."
 					]
 				},
 				{
@@ -775,7 +780,7 @@
 				{
 					"name": "Divinely Blessed",
 					"entries": [
-						"Alyxian can't be surprised and can't be changed into another form against his will."
+						"Alyxian can't be {@quickref Surprise|PHB|3|0|surprised} and can't be changed into another form against his will."
 					]
 				},
 				{
@@ -1018,8 +1023,8 @@
 				"exhaustion"
 			],
 			"hasToken": true,
-			"hasFluffImages": true,
-			"hasFluff": true
+			"hasFluff": true,
+			"hasFluffImages": true
 		},
 		{
 			"name": "Alyxian the Tormented",
@@ -1099,7 +1104,7 @@
 				{
 					"name": "Divinely Blessed",
 					"entries": [
-						"Alyxian can't be surprised and can't be changed into another form against his will."
+						"Alyxian can't be {@quickref Surprise|PHB|3|0|surprised} and can't be changed into another form against his will."
 					]
 				},
 				{
@@ -1287,8 +1292,9 @@
 			"isNpc": true,
 			"isNamedCreature": true,
 			"source": "CRCotN",
+			"page": 82,
 			"_copy": {
-				"name": "Occult Initiate",
+				"name": "Occult Silvertongue",
 				"source": "CRCotN",
 				"_trait": {
 					"name": "Goliath",
@@ -1297,7 +1303,7 @@
 				"_mod": {
 					"*": {
 						"mode": "replaceTxt",
-						"replace": "the initiate",
+						"replace": "the silvertongue",
 						"with": "Aradrine",
 						"flags": "i"
 					}
@@ -1321,6 +1327,7 @@
 			"isNpc": true,
 			"isNamedCreature": true,
 			"source": "CRCotN",
+			"page": 115,
 			"_copy": {
 				"name": "Occult Initiate",
 				"source": "CRCotN",
@@ -1362,7 +1369,10 @@
 				"type": "humanoid",
 				"tags": [
 					"ranger",
-					"water genasi"
+					{
+						"tag": "genasi",
+						"prefix": "Water"
+					}
 				]
 			},
 			"alignment": [
@@ -1468,6 +1478,9 @@
 			"damageTags": [
 				"P"
 			],
+			"spellcastingTags": [
+				"O"
+			],
 			"miscTags": [
 				"MW",
 				"RNG",
@@ -1493,7 +1506,10 @@
 				"type": "humanoid",
 				"tags": [
 					"ranger",
-					"water genasi"
+					{
+						"tag": "genasi",
+						"prefix": "Water"
+					}
 				]
 			},
 			"alignment": [
@@ -1608,6 +1624,9 @@
 			"damageTags": [
 				"P"
 			],
+			"spellcastingTags": [
+				"O"
+			],
 			"miscTags": [
 				"MW",
 				"RNG",
@@ -1632,7 +1651,10 @@
 				"type": "humanoid",
 				"tags": [
 					"ranger",
-					"water genasi"
+					{
+						"tag": "genasi",
+						"prefix": "Water"
+					}
 				]
 			},
 			"alignment": [
@@ -1759,6 +1781,9 @@
 				"P",
 				"Y"
 			],
+			"spellcastingTags": [
+				"O"
+			],
 			"miscTags": [
 				"MW",
 				"RNG",
@@ -1779,6 +1804,7 @@
 			"isNpc": true,
 			"isNamedCreature": true,
 			"source": "CRCotN",
+			"page": 150,
 			"_copy": {
 				"name": "Ghost",
 				"source": "MM",
@@ -2000,6 +2026,7 @@
 			],
 			"miscTags": [
 				"AOE",
+				"HPR",
 				"MW"
 			],
 			"conditionInflict": [
@@ -2243,6 +2270,9 @@
 				"B",
 				"R"
 			],
+			"spellcastingTags": [
+				"O"
+			],
 			"miscTags": [
 				"MW"
 			],
@@ -2373,6 +2403,9 @@
 			"damageTags": [
 				"B",
 				"R"
+			],
+			"spellcastingTags": [
+				"O"
 			],
 			"miscTags": [
 				"MW"
@@ -2517,6 +2550,9 @@
 				"R",
 				"Y"
 			],
+			"spellcastingTags": [
+				"O"
+			],
 			"miscTags": [
 				"MW"
 			],
@@ -2550,13 +2586,15 @@
 				"Abyssal",
 				"Common",
 				"Orc"
-			]
+			],
+			"hasToken": true
 		},
 		{
 			"name": "Foghomer",
 			"isNpc": true,
 			"isNamedCreature": true,
 			"source": "CRCotN",
+			"page": 58,
 			"_copy": {
 				"name": "Priest",
 				"source": "MM",
@@ -2576,7 +2614,12 @@
 			"alignment": [
 				"N",
 				"G"
-			]
+			],
+			"spellcastingTags": [
+				"CC",
+				"I"
+			],
+			"hasToken": true
 		},
 		{
 			"name": "Galeokaerda",
@@ -2709,6 +2752,9 @@
 			"damageTagsSpell": [
 				"Y"
 			],
+			"spellcastingTags": [
+				"O"
+			],
 			"hasToken": true,
 			"hasFluff": true,
 			"hasFluffImages": true
@@ -2830,6 +2876,9 @@
 			],
 			"damageTags": [
 				"N",
+				"O"
+			],
+			"spellcastingTags": [
 				"O"
 			],
 			"miscTags": [
@@ -2963,6 +3012,9 @@
 			],
 			"damageTags": [
 				"N",
+				"O"
+			],
+			"spellcastingTags": [
 				"O"
 			],
 			"miscTags": [
@@ -3139,6 +3191,9 @@
 				"P",
 				"Y"
 			],
+			"spellcastingTags": [
+				"O"
+			],
 			"miscTags": [
 				"AOE",
 				"MW",
@@ -3161,6 +3216,7 @@
 			"isNpc": true,
 			"isNamedCreature": true,
 			"source": "CRCotN",
+			"page": 81,
 			"_copy": {
 				"name": "Scholarly Mastermind",
 				"source": "CRCotN",
@@ -3312,6 +3368,9 @@
 				"B",
 				"P",
 				"S"
+			],
+			"spellcastingTags": [
+				"O"
 			],
 			"miscTags": [
 				"MW",
@@ -3646,6 +3705,7 @@
 			"isNpc": true,
 			"isNamedCreature": true,
 			"source": "CRCotN",
+			"page": 81,
 			"_copy": {
 				"name": "Scholarly Mastermind",
 				"source": "CRCotN",
@@ -3679,6 +3739,7 @@
 			"isNpc": true,
 			"isNamedCreature": true,
 			"source": "CRCotN",
+			"page": 83,
 			"_copy": {
 				"name": "Monastic High Curator",
 				"source": "CRCotN",
@@ -3713,6 +3774,7 @@
 			"isNpc": true,
 			"isNamedCreature": true,
 			"source": "CRCotN",
+			"page": 106,
 			"_copy": {
 				"name": "Assassin",
 				"source": "MM",
@@ -3738,6 +3800,9 @@
 			],
 			"damageTagsSpell": [
 				"F"
+			],
+			"spellcastingTags": [
+				"I"
 			],
 			"hasToken": true
 		},
@@ -4372,6 +4437,7 @@
 			"isNpc": true,
 			"isNamedCreature": true,
 			"source": "CRCotN",
+			"page": 150,
 			"_copy": {
 				"name": "Ghost",
 				"source": "MM",
@@ -4391,6 +4457,7 @@
 			"isNpc": true,
 			"isNamedCreature": true,
 			"source": "CRCotN",
+			"page": 150,
 			"_copy": {
 				"name": "Ghost",
 				"source": "MM",
@@ -4427,7 +4494,7 @@
 				{
 					"ac": 19,
 					"from": [
-						"unarmored defense"
+						"Unarmored Defense"
 					]
 				}
 			],
@@ -4529,6 +4596,9 @@
 				"O",
 				"Y"
 			],
+			"spellcastingTags": [
+				"O"
+			],
 			"hasToken": true,
 			"hasFluff": true,
 			"hasFluffImages": true
@@ -4554,7 +4624,7 @@
 				{
 					"ac": 18,
 					"from": [
-						"unarmored defense"
+						"Unarmored Defense"
 					]
 				}
 			],
@@ -4671,6 +4741,9 @@
 			"damageTagsSpell": [
 				"O"
 			],
+			"spellcastingTags": [
+				"O"
+			],
 			"miscTags": [
 				"MW"
 			],
@@ -4701,7 +4774,7 @@
 				{
 					"ac": 17,
 					"from": [
-						"unarmored defense"
+						"Unarmored Defense"
 					]
 				}
 			],
@@ -4817,6 +4890,7 @@
 					]
 				}
 			],
+			"hasToken": true,
 			"hasFluff": true
 		},
 		{
@@ -4932,6 +5006,9 @@
 			"damageTagsSpell": [
 				"Y"
 			],
+			"spellcastingTags": [
+				"O"
+			],
 			"hasToken": true,
 			"hasFluff": true,
 			"hasFluffImages": true
@@ -5022,6 +5099,9 @@
 				"O",
 				"P",
 				"Y"
+			],
+			"spellcastingTags": [
+				"O"
 			],
 			"miscTags": [
 				"AOE",
@@ -5152,6 +5232,9 @@
 				"Y"
 			],
 			"damageTagsSpell": [
+				"O"
+			],
+			"spellcastingTags": [
 				"O"
 			],
 			"conditionInflict": [
@@ -5286,6 +5369,7 @@
 			"isNpc": true,
 			"isNamedCreature": true,
 			"source": "CRCotN",
+			"page": 168,
 			"_copy": {
 				"name": "Deva",
 				"source": "MM",
@@ -5305,6 +5389,7 @@
 			"isNpc": true,
 			"isNamedCreature": true,
 			"source": "CRCotN",
+			"page": 54,
 			"_copy": {
 				"name": "Scholarly Agent",
 				"source": "CRCotN",
@@ -5337,6 +5422,10 @@
 			],
 			"damageTagsSpell": [
 				"F"
+			],
+			"spellcastingTags": [
+				"I",
+				"O"
 			],
 			"hasToken": true
 		},
@@ -5506,6 +5595,9 @@
 			"damageTags": [
 				"L"
 			],
+			"spellcastingTags": [
+				"O"
+			],
 			"hasToken": true,
 			"hasFluff": true,
 			"hasFluffImages": true
@@ -5581,7 +5673,7 @@
 			],
 			"bonus": [
 				{
-					"name": "Telekinetic Toss (Recharge 5-6)",
+					"name": "Telekinetic Toss {@recharge 5}",
 					"entries": [
 						"The excavator targets one Medium or smaller creature or an object weighing 300 pounds or less that isn't being worn or carried. The target, which must be within 30 feet of the excavator and visible to it, is magically pushed up to 20 feet horizontally in a direction of the excavator's choice. If the target is a creature, it can make a {@dc 13} Strength saving throw to resist the effect and is not pushed on a successful save."
 					]
@@ -5710,6 +5802,9 @@
 				"P",
 				"S"
 			],
+			"spellcastingTags": [
+				"O"
+			],
 			"miscTags": [
 				"MW",
 				"RW",
@@ -5727,6 +5822,7 @@
 			"isNpc": true,
 			"isNamedCreature": true,
 			"source": "CRCotN",
+			"page": 126,
 			"_copy": {
 				"name": "Scholarly Agent",
 				"source": "CRCotN",
@@ -5928,6 +6024,9 @@
 				"I",
 				"N"
 			],
+			"spellcastingTags": [
+				"O"
+			],
 			"miscTags": [
 				"MW"
 			],
@@ -5974,6 +6073,11 @@
 				"paralyzed",
 				"poisoned"
 			],
+			"traitTags": [
+				"Death Burst",
+				"Unusual Nature"
+			],
+			"hasToken": true,
 			"hasFluff": true
 		},
 		{
@@ -6434,6 +6538,9 @@
 				"P",
 				"S"
 			],
+			"spellcastingTags": [
+				"O"
+			],
 			"miscTags": [
 				"MW",
 				"RCH",
@@ -6449,6 +6556,7 @@
 			"isNpc": true,
 			"isNamedCreature": true,
 			"source": "CRCotN",
+			"page": 126,
 			"_copy": {
 				"name": "Scholarly Excavator",
 				"source": "CRCotN",
@@ -6460,7 +6568,7 @@
 					"*": {
 						"mode": "replaceTxt",
 						"replace": "the excavator",
-						"with": "Scribble",
+						"with": "Xot",
 						"flags": "i"
 					}
 				}

@@ -54,3 +54,16 @@ class PageFilterTrapsHazards extends PageFilter {
 		);
 	}
 }
+
+globalThis.PageFilterTrapsHazards = PageFilterTrapsHazards;
+
+class ListSyntaxTrapsHazards extends ListUiUtil.ListSyntax {
+	static _INDEXABLE_PROPS_ENTRIES = [
+		"effect",
+		"trigger",
+		"countermeasures",
+		"entries",
+	];
+}
+
+globalThis.ListSyntaxTrapsHazards = ListSyntaxTrapsHazards;
