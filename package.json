@@ -32,7 +32,11 @@
 		"preversion": "npm test",
 		"version": "node node/version-bump.js",
 		"serve:dev": "http-server -c-1 --cors --port 5000",
-		"server": "http-server -c-1 --cors --port 5000 -o"
+		"server": "http-server -c-1 --cors --port 5000 -o",
+		"serve:dev:tls": "http-server -c-1 --cors --port 5001 --tls --cert certs/cert.pem --key certs/key.pem",
+		"spellcheck:check-data": "echo \"This can take a few minutes.\" && npx cspell --no-progress --show-context --show-suggestions \"data/**/*.json\"",
+		"spellcheck:check-data-quick": "git diff --name-only | grep -P \"^data/[^.]+.json\" | npx cspell --no-progress --show-context --show-suggestions --file-list stdin",
+		"spellcheck:trust-data": "echo \"This can take a few minutes.\" && echo \"# new words on $(date)\" >> spellcheck/dnd-words.txt && npx cspell --words-only --unique \"./data/**/*.json\" | sort --ignore-case >> spellcheck/dnd-words.txt"
 	},
 	"repository": {
 		"type": "git",
