@@ -178,6 +178,15 @@ class BrewDoc {
 			});
 		}
 		// endregion
+
+		// region Object
+		if (json.object) {
+			json.object.forEach(obj => {
+				// 2023-10-07
+				if (typeof obj.size === "string") obj.size = [obj.size];
+			});
+		}
+		// endregion
 	}
 	// endregion
 }
@@ -283,19 +292,19 @@ class _BrewUtil2Base {
 
 	/* -------------------------------------------- */
 
-	_isInit = false;
+	_pActiveInit = null;
 
-	async pInit () {
-		if (this._isInit) return;
-		this._isInit = true;
+	pInit () {
+		this._pActiveInit ||= (async () => {
+			// region Ensure the local homebrew cache is hot, to allow us to fetch from it later in a sync manner.
+			//   This is necessary to replicate the "meta" caching done for non-local brew.
+			await this._pGetBrew_pGetLocalBrew();
+			// endregion
 
-		// region Ensure the local homebrew cache is hot, to allow us to fetch from it later in a sync manner.
-		//   This is necessary to replicate the "meta" caching done for non-local brew.
-		await this._pGetBrew_pGetLocalBrew();
-		// endregion
-
-		this._pInit_doBindDragDrop();
-		this._pInit_pDoLoadFonts().then(null);
+			this._pInit_doBindDragDrop();
+			this._pInit_pDoLoadFonts().then(null);
+		})();
+		return this._pActiveInit;
 	}
 
 	/** @abstract */
@@ -468,21 +477,23 @@ class _BrewUtil2Base {
 		const indexLocal = await DataUtil.loadJSON(`${Renderer.get().baseUrl}${this._PATH_LOCAL_INDEX}`);
 		if (!indexLocal?.toImport?.length) return this._cache_brewsLocal = [];
 
-		const out = await indexLocal.toImport.pMap(async name => {
-			name = `${name}`.trim();
-			const url = /^https?:\/\//.test(name) ? name : `${Renderer.get().baseUrl}${this._PATH_LOCAL_DIR}/${name}`;
-			const filename = UrlUtil.getFilename(url);
-			try {
-				const json = await DataUtil.loadRawJSON(url);
-				return this._getBrewDoc({json, url, filename, isLocal: true});
-			} catch (e) {
-				JqueryUtil.doToast({type: "danger", content: `Failed to load local homebrew from URL "${url}"! ${VeCt.STR_SEE_CONSOLE}`});
-				setTimeout(() => { throw e; });
-				return null;
-			}
-		});
+		const brewDocs = (await indexLocal.toImport
+			.pMap(async name => {
+				name = `${name}`.trim();
+				const url = /^https?:\/\//.test(name) ? name : `${Renderer.get().baseUrl}${this._PATH_LOCAL_DIR}/${name}`;
+				const filename = UrlUtil.getFilename(url);
+				try {
+					const json = await DataUtil.loadRawJSON(url);
+					return this._getBrewDoc({json, url, filename, isLocal: true});
+				} catch (e) {
+					JqueryUtil.doToast({type: "danger", content: `Failed to load local homebrew from URL "${url}"! ${VeCt.STR_SEE_CONSOLE}`});
+					setTimeout(() => { throw e; });
+					return null;
+				}
+			}))
+			.filter(Boolean);
 
-		return this._cache_brewsLocal = out.filter(Boolean);
+		return this._cache_brewsLocal = brewDocs;
 	}
 
 	/* -------------------------------------------- */
@@ -607,16 +618,16 @@ class _BrewUtil2Base {
 		return [...brews, ...brewsToAdd];
 	}
 
-	async _pAddBrewDependencies ({brewDocs, brewsRaw = null, brewsRawLocal = null, lockToken}) {
+	async _pGetBrewDependencies ({brewDocs, brewsRaw = null, brewsRawLocal = null, lockToken}) {
 		try {
 			lockToken = await this._LOCK.pLock({token: lockToken});
-			return (await this._pAddBrewDependencies_({brewDocs, brewsRaw, brewsRawLocal, lockToken}));
+			return (await this._pGetBrewDependencies_({brewDocs, brewsRaw, brewsRawLocal, lockToken}));
 		} finally {
 			this._LOCK.unlock();
 		}
 	}
 
-	async _pAddBrewDependencies_ ({brewDocs, brewsRaw = null, brewsRawLocal = null, lockToken}) {
+	async _pGetBrewDependencies_ ({brewDocs, brewsRaw = null, brewsRawLocal = null, lockToken}) {
 		const urlRoot = await this.pGetCustomUrl();
 		const brewIndex = await this._pGetSourceIndex(urlRoot);
 
@@ -738,7 +749,7 @@ class _BrewUtil2Base {
 			lockToken = await this._LOCK.pLock({token: lockToken});
 			const brews = MiscUtil.copyFast(await this._pGetBrewRaw({lockToken}));
 
-			const brewDocsDependencies = await this._pAddBrewDependencies({brewDocs: [brewDoc], brewsRaw: brews, lockToken});
+			const brewDocsDependencies = await this._pGetBrewDependencies({brewDocs, brewsRaw: brews, lockToken});
 			brewDocs.push(...brewDocsDependencies);
 
 			const brewsNxt = this._getNextBrews(brews, brewDocs);
@@ -768,7 +779,7 @@ class _BrewUtil2Base {
 
 		const brews = MiscUtil.copyFast(await this._pGetBrewRaw({lockToken}));
 
-		const brewDocsDependencies = await this._pAddBrewDependencies({brewDocs, brewsRaw: brews, lockToken});
+		const brewDocsDependencies = await this._pGetBrewDependencies({brewDocs, brewsRaw: brews, lockToken});
 		brewDocs.push(...brewDocsDependencies);
 
 		const brewsNxt = this._getNextBrews(brews, brewDocs);
@@ -787,10 +798,13 @@ class _BrewUtil2Base {
 	}
 
 	async _pAddBrewsLazyFinalize_ ({lockToken}) {
-		const brews = MiscUtil.copyFast(await this._pGetBrewRaw({lockToken}));
-		const brewsNxt = this._getNextBrews(brews, this._addLazy_brewsTemp);
+		const brewsRaw = await this._pGetBrewRaw({lockToken});
+		const brewDeps = await this._pGetBrewDependencies({brewDocs: this._addLazy_brewsTemp, brewsRaw, lockToken});
+		const out = MiscUtil.copyFast(brewDeps);
+		const brewsNxt = this._getNextBrews(MiscUtil.copyFast(brewsRaw), [...this._addLazy_brewsTemp, ...brewDeps]);
 		await this.pSetBrew(brewsNxt, {lockToken});
 		this._addLazy_brewsTemp = [];
+		return out;
 	}
 
 	async pPullAllBrews ({brews} = {}) {
@@ -1665,7 +1679,7 @@ class ManageBrewUi {
 	async pRender ($wrp, {rdState = null} = {}) {
 		rdState = rdState || new this.constructor._RenderState();
 
-		rdState.$stgBrewList = $(`<div class="manbrew__current_brew ve-flex-col h-100 mt-1"></div>`);
+		rdState.$stgBrewList = $(`<div class="manbrew__current_brew ve-flex-col h-100 mt-1 min-h-0"></div>`);
 
 		await this._pRender_pBrewList(rdState);
 
@@ -1780,7 +1794,7 @@ class ManageBrewUi {
 			.click(evt => this._pHandleClick_btnListMass({evt, rdState}));
 		const $iptSearch = $(`<input type="search" class="search manbrew__search form-control" placeholder="Search ${this._brewUtil.DISPLAY_NAME}...">`);
 		const $cbAll = $(`<input type="checkbox">`);
-		const $wrpList = $(`<div class="list-display-only max-h-unset smooth-scroll overflow-y-auto h-100 brew-list brew-list--target manbrew__list relative ve-flex-col w-100 mb-3"></div>`);
+		const $wrpList = $(`<div class="list-display-only max-h-unset smooth-scroll overflow-y-auto h-100 min-h-0 brew-list brew-list--target manbrew__list relative ve-flex-col w-100 mb-3"></div>`);
 
 		rdState.list = new List({
 			$iptSearch,
@@ -1807,7 +1821,7 @@ class ManageBrewUi {
 				${$iptSearch}
 			</div>
 			${$wrpBtnsSort}
-			<div class="ve-flex w-100 h-100 overflow-y-auto relative">${$wrpList}</div>
+			<div class="ve-flex w-100 h-100 min-h-0 relative">${$wrpList}</div>
 		</div>`;
 
 		rdState.listSelectClickHandler = new ListSelectClickHandler({list: rdState.list});
@@ -1852,9 +1866,7 @@ class ManageBrewUi {
 				this._LBL_LIST_UPDATE,
 				async () => this._pDoPullAll({
 					rdState,
-					brews: getSelBrews({
-						fnFilter: brew => this._isBrewOperationPermitted_update(brew),
-					}),
+					brews: getSelBrews(),
 				}),
 			),
 			new ContextUtil.Action(
@@ -1886,7 +1898,7 @@ class ManageBrewUi {
 		].filter(Boolean));
 	}
 
-	_isBrewOperationPermitted_update (brew) { return !brew.head.isEditable && this._brewUtil.isPullable(brew); }
+	_isBrewOperationPermitted_update (brew) { return this._brewUtil.isPullable(brew); }
 	_isBrewOperationPermitted_moveToEditable (brew) { return BrewDoc.isOperationPermitted_moveToEditable({brew}); }
 	_isBrewOperationPermitted_delete (brew) { return !brew.head.isLocal; }
 
@@ -1935,7 +1947,7 @@ class ManageBrewUi {
 				const lnkUrl = brewSource.url
 					? e_({
 						tag: "a",
-						clazz: "col-2 text-center",
+						clazz: "col-2 ve-text-center",
 						href: brewSource.url,
 						attrs: {
 							target: "_blank",
@@ -1945,7 +1957,7 @@ class ManageBrewUi {
 					})
 					: e_({
 						tag: "span",
-						clazz: "col-2 text-center",
+						clazz: "col-2 ve-text-center",
 					});
 
 				const eleRow = e_({
@@ -2070,7 +2082,7 @@ class ManageBrewUi {
 				}),
 				e_({
 					tag: "div",
-					clazz: `col-1 text-center italic mobile__text-clip-ellipsis`,
+					clazz: `col-1 ve-text-center italic mobile__text-clip-ellipsis`,
 					title: ptCategory.title,
 					text: ptCategory.short,
 				}),
@@ -2610,7 +2622,7 @@ class GetBrewUi {
 
 		rdState.pageFilter = new this.constructor._PageFilterGetBrew({brewUtil: this._brewUtil});
 
-		const $btnAddSelected = $(`<button class="btn ${this._brewUtil.STYLE_BTN} btn-sm col-0-5 text-center" disabled title="Add Selected"><span class="glyphicon glyphicon-save"></button>`);
+		const $btnAddSelected = $(`<button class="btn ${this._brewUtil.STYLE_BTN} btn-sm col-0-5 ve-text-center" disabled title="Add Selected"><span class="glyphicon glyphicon-save"></button>`);
 
 		const $wrpRows = $$`<div class="list smooth-scroll max-h-unset"><div class="lst__row ve-flex-col"><div class="lst__wrp-cells lst--border lst__row-inner ve-flex w-100"><i>Loading...</i></div></div></div>`;
 
@@ -2751,12 +2763,12 @@ class GetBrewUi {
 						}),
 						btnAdd,
 						e_({tag: "span", clazz: "col-3", text: brewInfo._brewAuthor}),
-						e_({tag: "span", clazz: "col-1-2 text-center mobile__text-clip-ellipsis", text: brewInfo._brewPropDisplayName, title: brewInfo._brewPropDisplayName}),
-						e_({tag: "span", clazz: "col-1-4 text-center code", text: timestampModified}),
-						e_({tag: "span", clazz: "col-1-4 text-center code", text: timestampAdded}),
+						e_({tag: "span", clazz: "col-1-2 ve-text-center mobile__text-clip-ellipsis", text: brewInfo._brewPropDisplayName, title: brewInfo._brewPropDisplayName}),
+						e_({tag: "span", clazz: "col-1-4 ve-text-center code", text: timestampModified}),
+						e_({tag: "span", clazz: "col-1-4 ve-text-center code", text: timestampAdded}),
 						e_({
 							tag: "span",
-							clazz: "col-1 manbrew__source text-center pr-0",
+							clazz: "col-1 manbrew__source ve-text-center pr-0",
 							children: [
 								e_({
 									tag: "a",
@@ -2831,7 +2843,8 @@ class GetBrewUi {
 		});
 
 		await Promise.allSettled(listItems.map(it => it.data.pFnDoDownload({isLazy: true})));
-		await this._brewUtil.pAddBrewsLazyFinalize();
+		const lazyDepsAdded = await this._brewUtil.pAddBrewsLazyFinalize();
+		this._brewsLoaded.push(...lazyDepsAdded);
 		JqueryUtil.doToast(`Finished loading selected ${this._brewUtil.DISPLAY_NAME}!`);
 	}
 
@@ -3188,7 +3201,7 @@ class ManageEditableBrewContentsUi extends BaseComponent {
 		eleLi.innerHTML = `<label class="lst--border lst__row-inner no-select mb-0 ve-flex-v-center">
 			<div class="pl-0 col-1 ve-flex-vh-center"><input type="checkbox" class="no-events"></div>
 			<div class="col-5 bold">${dispName}</div>
-			<div class="col-1 text-center" title="${(sourceMeta.full || "").qq()}" ${this._brewUtil.sourceToStyle(sourceMeta)}>${sourceMeta.abbreviation}</div>
+			<div class="col-1 ve-text-center" title="${(sourceMeta.full || "").qq()}" ${this._brewUtil.sourceToStyle(sourceMeta)}>${sourceMeta.abbreviation}</div>
 			<div class="col-5 ve-flex-vh-center pr-0">${dispProp}</div>
 		</label>`;
 
@@ -3321,7 +3334,7 @@ class ManageEditableBrewContentsUi extends BaseComponent {
 		eleLi.innerHTML = `<label class="lst--border lst__row-inner no-select mb-0 ve-flex-v-center">
 			<div class="pl-0 col-1 ve-flex-vh-center"><input type="checkbox" class="no-events"></div>
 			<div class="col-5 bold">${name}</div>
-			<div class="col-2 text-center">${abv}</div>
+			<div class="col-2 ve-text-center">${abv}</div>
 			<div class="col-4 ve-flex-vh-center pr-0">${source.json}</div>
 		</label>`;
 

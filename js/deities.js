@@ -1,22 +1,39 @@
 "use strict";
 
 class DeitiesSublistManager extends SublistManager {
-	constructor () {
-		super({
-			sublistClass: "subdeities",
-		});
+	static get _ROW_TEMPLATE () {
+		return [
+			new SublistCellTemplate({
+				name: "Name",
+				css: "bold col-4 pl-0",
+				colStyle: "",
+			}),
+			new SublistCellTemplate({
+				name: "Pantheon",
+				css: "col-2 ve-text-center",
+				colStyle: "text-center",
+			}),
+			new SublistCellTemplate({
+				name: "Alignment",
+				css: "col-2 ve-text-center",
+				colStyle: "text-center",
+			}),
+			new SublistCellTemplate({
+				name: "Domains",
+				css: "col-4",
+				colStyle: "",
+			}),
+		];
 	}
 
 	pGetSublistItem (it, hash) {
 		const alignment = it.alignment ? it.alignment.join("") : "\u2014";
 		const domains = it.domains.join(", ");
+		const cellsText = [it.name, it.pantheon, alignment, domains];
 
 		const $ele = $(`<div class="lst__row lst__row--sublist ve-flex-col">
 			<a href="#${hash}" class="lst--border lst__row-inner">
-				<span class="bold col-4 pl-0">${it.name}</span>
-				<span class="col-2">${it.pantheon}</span>
-				<span class="col-2">${alignment}</span>
-				<span class="col-4 ${it.domains[0] === VeCt.STR_NONE ? `list-entry-none` : ""} pr-0">${domains}</span>
+				${this.constructor._getRowCellsHtml({values: cellsText})}
 			</a>
 		</div>`)
 			.contextmenu(evt => this._handleSublistItemContextMenu(evt, listItem))
@@ -34,6 +51,7 @@ class DeitiesSublistManager extends SublistManager {
 			},
 			{
 				entity: it,
+				mdRow: [...cellsText],
 			},
 		);
 		return listItem;
@@ -47,8 +65,6 @@ class DeitiesPage extends ListPage {
 			dataSource: DataUtil.deity.loadJSON.bind(DataUtil.deity),
 
 			pageFilter,
-
-			listClass: "deities",
 
 			dataProps: ["deity"],
 		});
@@ -67,10 +83,10 @@ class DeitiesPage extends ListPage {
 
 		eleLi.innerHTML = `<a href="#${hash}" class="lst--border lst__row-inner">
 			<span class="bold col-3 pl-0">${g.name}</span>
-			<span class="col-2 text-center">${g.pantheon}</span>
-			<span class="col-2 text-center">${alignment}</span>
+			<span class="col-2 ve-text-center">${g.pantheon}</span>
+			<span class="col-2 ve-text-center">${alignment}</span>
 			<span class="col-3 ${g.domains[0] === VeCt.STR_NONE ? `list-entry-none` : ""}">${domains}</span>
-			<span class="col-2 text-center ${Parser.sourceJsonToColor(g.source)} pr-0" title="${Parser.sourceJsonToFull(g.source)}" ${Parser.sourceJsonToStyle(g.source)}>${source}</span>
+			<span class="col-2 ve-text-center ${Parser.sourceJsonToColor(g.source)} pr-0" title="${Parser.sourceJsonToFull(g.source)}" ${Parser.sourceJsonToStyle(g.source)}>${source}</span>
 		</a>`;
 
 		const listItem = new ListItem(

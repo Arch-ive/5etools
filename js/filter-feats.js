@@ -2,6 +2,12 @@
 
 class PageFilterFeats extends PageFilter {
 	// region static
+	static _PREREQ_KEY_TO_FULL = {
+		"other": "Special",
+		"spellcasting2020": "Spellcasting",
+		"spellcastingFeature": "Spellcasting",
+		"spellcastingPrepared": "Spellcasting",
+	};
 	// endregion
 
 	constructor () {
@@ -54,9 +60,8 @@ class PageFilterFeats extends PageFilter {
 
 		const prereqText = Renderer.utils.prerequisite.getHtml(feat.prerequisite, {isListMode: true}) || VeCt.STR_NONE;
 
-		const preSet = new Set();
-		(feat.prerequisite || []).forEach(it => preSet.add(...Object.keys(it)));
-		feat._fPrereqOther = [...preSet].map(it => (it === "other" ? "special" : it === "spellcasting2020" ? "spellcasting" : it).uppercaseFirst());
+		feat._fPrereqOther = [...new Set((feat.prerequisite || []).flatMap(it => Object.keys(it)))]
+			.map(it => (this._PREREQ_KEY_TO_FULL[it] || it).uppercaseFirst());
 		if (feat.prerequisite) feat._fPrereqLevel = feat.prerequisite.filter(it => it.level != null).map(it => `Level ${it.level.level ?? it.level}`);
 		feat._fBenifits = [
 			feat.resist ? "Damage Resistance" : null,
@@ -186,7 +191,7 @@ class ModalFilterFeats extends ModalFilter {
 			<div class="col-4 ${feat._versionBase_isVersion ? "italic" : ""} ${this._getNameStyle()}">${feat._versionBase_isVersion ? `<span class="px-3"></span>` : ""}${feat.name}</div>
 			<span class="col-3 ${feat._slAbility === VeCt.STR_NONE ? "italic" : ""}">${feat._slAbility}</span>
 				<span class="col-3 ${feat._slPrereq === VeCt.STR_NONE ? "italic" : ""}">${feat._slPrereq}</span>
-			<div class="col-1 pr-0 text-center ${Parser.sourceJsonToColor(feat.source)}" title="${Parser.sourceJsonToFull(feat.source)}" ${Parser.sourceJsonToStyle(feat.source)}>${source}</div>
+			<div class="col-1 pr-0 ve-text-center ${Parser.sourceJsonToColor(feat.source)}" title="${Parser.sourceJsonToFull(feat.source)}" ${Parser.sourceJsonToStyle(feat.source)}>${source}</div>
 		</div>`;
 
 		const btnShowHidePreview = eleRow.firstElementChild.children[1].firstElementChild;

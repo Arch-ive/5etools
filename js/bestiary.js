@@ -25,7 +25,6 @@ class _BestiaryUtil {
 class BestiarySublistManager extends SublistManager {
 	constructor () {
 		super({
-			sublistClass: "submonsters",
 			sublistListOptions: {
 				fnSort: PageFilterBestiary.sortMonsters,
 			},
@@ -64,12 +63,39 @@ class BestiarySublistManager extends SublistManager {
 		return `${super._getSublistFullHash({entity})}${_BestiaryUtil.getUrlSubhashes(entity)}`;
 	}
 
+	static get _ROW_TEMPLATE () {
+		return [
+			new SublistCellTemplate({
+				name: "Name",
+				css: "bold col-5 pl-0",
+				colStyle: "",
+			}),
+			new SublistCellTemplate({
+				name: "Type",
+				css: "col-3-8",
+				colStyle: "",
+			}),
+			new SublistCellTemplate({
+				name: "CR",
+				css: "col-1-2 ve-text-center",
+				colStyle: "text-center",
+			}),
+			new SublistCellTemplate({
+				name: "Number",
+				css: "col-2 ve-text-center",
+				colStyle: "text-center",
+			}),
+		];
+	}
+
 	async pGetSublistItem (mon, hash, {count = 1, customHashId = null, initialData} = {}) {
 		const name = mon._displayName || mon.name;
 		const type = _BestiaryUtil.getListDisplayType(mon);
 		const cr = mon._pCr;
 		const hashBase = UrlUtil.URL_TO_HASH_BUILDER[UrlUtil.PG_BESTIARY](mon);
 		const isLocked = !!initialData?.isLocked; // If e.g. reloading from a save
+
+		const cellsText = [name, type, cr];
 
 		const $hovStatblock = $(`<span class="col-1-4 help help--hover ecgen__visible">Stat Block</span>`)
 			.mouseover(evt => this._encounterBuilder.doStatblockMouseOver({
@@ -88,21 +114,21 @@ class BestiarySublistManager extends SublistManager {
 			.mousemove(evt => hovTokenMeta.mouseMove(evt, $hovToken[0]))
 			.mouseleave(evt => hovTokenMeta.mouseLeave(evt, $hovToken[0]));
 
-		const $hovImage = $(`<span class="col-1-2 ecgen__visible help help--hover">Image</span>`)
-			.mouseover(evt => this._encounterBuilder.handleImageMouseOver(evt, $hovImage, mon));
+		const $hovImage = $(`<span class="col-1-2 ecgen__visible help help--hover">Image</span>`);
+		Renderer.monster.hover.bindFluffImageMouseover({mon, $ele: $hovImage});
 
 		const $ptCr = (() => {
-			if (!ScaleCreature.isCrInScaleRange(mon)) return $(`<span class="col-1-2 text-center">${cr}</span>`);
+			if (!ScaleCreature.isCrInScaleRange(mon)) return $(`<span class="col-1-2 ve-text-center">${cr}</span>`);
 
-			const $iptCr = $(`<input value="${cr}" class="w-100 text-center form-control form-control--minimal input-xs">`)
+			const $iptCr = $(`<input value="${cr}" class="w-100 ve-text-center form-control form-control--minimal input-xs">`)
 				.click(() => $iptCr.select())
 				.change(() => this._encounterBuilder.pDoCrChange($iptCr, mon, mon._scaledCr));
 
-			return $$`<span class="col-1-2 text-center">${$iptCr}</span>`;
+			return $$`<span class="col-1-2 ve-text-center">${$iptCr}</span>`;
 		})();
 
-		const $eleCount1 = $(`<span class="col-2 text-center">${count}</span>`);
-		const $eleCount2 = $(`<span class="col-2 pr-0 text-center">${count}</span>`);
+		const $eleCount1 = $(`<span class="col-2 ve-text-center">${count}</span>`);
+		const $eleCount2 = $(`<span class="col-2 pr-0 ve-text-center">${count}</span>`);
 
 		const listItem = new ListItem(
 			hash,
@@ -113,6 +139,7 @@ class BestiarySublistManager extends SublistManager {
 				source: Parser.sourceJsonToAbv(mon.source),
 				type,
 				cr,
+				page: mon.page,
 			},
 			{
 				count,
@@ -127,6 +154,7 @@ class BestiarySublistManager extends SublistManager {
 					UrlUtil.PG_BESTIARY,
 					hashBase,
 				),
+				mdRow: [...cellsText, ({listItem}) => listItem.data.count],
 			},
 		);
 
@@ -135,9 +163,7 @@ class BestiarySublistManager extends SublistManager {
 
 		listItem.ele = $$`<div class="lst__row lst__row--sublist ve-flex-col lst__row--bestiary-sublist">
 			<a href="#${hash}" draggable="false" class="ecgen__hidden lst--border lst__row-inner">
-				<span class="bold col-5 pl-0">${name}</span>
-				<span class="col-3-8">${type}</span>
-				<span class="col-1-2 text-center">${cr}</span>
+				${this.constructor._getRowCellsHtml({values: cellsText, templates: this.constructor._ROW_TEMPLATE.slice(0, 3)})}
 				${$eleCount1}
 			</a>
 
@@ -186,8 +212,8 @@ class BestiaryPageBookView extends ListPageBookView {
 		});
 	}
 
-	_$getWrpControls ({$wrpContent}) {
-		const out = super._$getWrpControls({$wrpContent});
+	async _$pGetWrpControls ({$wrpContent}) {
+		const out = await super._$pGetWrpControls({$wrpContent});
 		const {$wrpPrint} = out;
 
 		// region Markdown
@@ -270,7 +296,6 @@ class BestiaryPage extends ListPageMultiSource {
 		super({
 			pageFilter: new PageFilterBestiary(),
 
-			listClass: "monsters",
 			listOptions: {
 				fnSort: PageFilterBestiary.sortMonsters,
 			},
@@ -373,7 +398,7 @@ class BestiaryPage extends ListPageMultiSource {
 	get _bindOtherButtonsOptions () {
 		return {
 			upload: {
-				pFnPreLoad: (...args) => this.pPreloadSublistSources(...args),
+				pFnPreLoad: (...args) => this._pPreloadSublistSources(...args),
 			},
 			sendToBrew: {
 				mode: "creatureBuilder",
@@ -422,10 +447,10 @@ class BestiaryPage extends ListPageMultiSource {
 						this._encounterBuilder.getButtons(mI),
 						e_({tag: "span", clazz: `ecgen__name bold col-4-2 pl-0`, text: mon.name}),
 						e_({tag: "span", clazz: `col-4-1`, text: type}),
-						e_({tag: "span", clazz: `col-1-7 text-center`, text: cr}),
+						e_({tag: "span", clazz: `col-1-7 ve-text-center`, text: cr}),
 						e_({
 							tag: "span",
-							clazz: `col-2 text-center ${Parser.sourceJsonToColor(mon.source)} pr-0`,
+							clazz: `col-2 ve-text-center ${Parser.sourceJsonToColor(mon.source)} pr-0`,
 							style: Parser.sourceJsonToStylePart(mon.source),
 							title: `${Parser.sourceJsonToFull(mon.source)}${Renderer.utils.getSourceSubText(mon)}`,
 							text: source,
@@ -461,20 +486,17 @@ class BestiaryPage extends ListPageMultiSource {
 		this._encounterBuilder.resetCache();
 	}
 
-	pDoLoadHash (id) {
+	async _pDoLoadHash ({id, lockToken}) {
 		const mon = this._dataList[id];
 
 		this._renderStatblock(mon);
 
-		this.pDoLoadSubHash([]);
+		await this._pDoLoadSubHash({sub: [], lockToken});
 		this._updateSelected();
 	}
 
-	async pDoLoadSubHash (sub) {
-		sub = this._pageFilter.filterBox.setFromSubHashes(sub);
-		await this._sublistManager.pSetFromSubHashes(sub, this.pPreloadSublistSources.bind(this));
-
-		await this._bookView.pHandleSub(sub);
+	async _pDoLoadSubHash ({sub, lockToken}) {
+		sub = await super._pDoLoadSubHash({sub, lockToken});
 
 		const scaledHash = sub.find(it => it.startsWith(UrlUtil.HASH_START_CREATURE_SCALED));
 		const scaledSpellSummonHash = sub.find(it => it.startsWith(UrlUtil.HASH_START_CREATURE_SCALED_SPELL_SUMMON));
@@ -912,7 +934,7 @@ class BestiaryPage extends ListPageMultiSource {
 		return exp.replace(/([^0-9d])/gi, " $1 ").replace(/\s+/g, " ").trim().replace(/^([-+])\s*/, "$1");
 	}
 
-	async pPreloadSublistSources (json) {
+	async _pPreloadSublistSources (json) {
 		if (json.l && json.l.items && json.l.sources) { // if it's an encounter file
 			json.items = json.l.items;
 			json.sources = json.l.sources;

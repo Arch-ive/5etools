@@ -11,14 +11,29 @@ class RecipesSublistManager extends SublistManager {
 		return Renderer.recipe.getCustomHashId(entity);
 	}
 
+	static get _ROW_TEMPLATE () {
+		return [
+			new SublistCellTemplate({
+				name: "Name",
+				css: "bold col-9 pl-0",
+				colStyle: "",
+			}),
+			new SublistCellTemplate({
+				name: "Type",
+				css: "col-3 ve-text-center pr-0",
+				colStyle: "text-center",
+			}),
+		];
+	}
+
 	async pGetSublistItem (itRaw, hash, {customHashId = null} = {}) {
 		const it = await Renderer.hover.pApplyCustomHashId(UrlUtil.getCurrentPage(), itRaw, customHashId);
 		const name = it._displayName || it.name;
+		const cellsText = [name, it.type || "\u2014"];
 
 		const $ele = $(`<div class="lst__row lst__row--sublist ve-flex-col">
 			<a href="#${hash}" class="lst--border lst__row-inner">
-				<span class="bold col-9 pl-0">${name}</span>
-				<span class="col-3 text-center pr-0">${it.type || "\u2014"}</span>
+				${this.constructor._getRowCellsHtml({values: cellsText})}
 			</a>
 		</div>`)
 			.contextmenu(evt => this._handleSublistItemContextMenu(evt, listItem))
@@ -34,6 +49,7 @@ class RecipesSublistManager extends SublistManager {
 			},
 			{
 				entity: it,
+				mdRow: [...cellsText],
 				customHashId,
 			},
 		);
@@ -74,8 +90,8 @@ class RecipesPage extends ListPage {
 
 		eleLi.innerHTML = `<a href="#${hash}" class="lst--border lst__row-inner">
 			<span class="col-6 bold pl-0">${it.name}</span>
-			<span class="col-4 text-center">${it.type || "\u2014"}</span>
-			<span class="col-2 text-center ${Parser.sourceJsonToColor(it.source)} pr-0" title="${Parser.sourceJsonToFull(it.source)}" ${Parser.sourceJsonToStyle(it.source)}>${source}</span>
+			<span class="col-4 ve-text-center">${it.type || "\u2014"}</span>
+			<span class="col-2 ve-text-center ${Parser.sourceJsonToColor(it.source)} pr-0" title="${Parser.sourceJsonToFull(it.source)}" ${Parser.sourceJsonToStyle(it.source)}>${source}</span>
 		</a>`;
 
 		const listItem = new ListItem(
@@ -118,11 +134,12 @@ class RecipesPage extends ListPage {
 		$selScaleFactor.val(`${scaleFactor || 1}`);
 
 		this._$pgContent.empty().append(RenderRecipes.$getRenderedRecipe(ent, {$selScaleFactor}));
+		Renderer.initLazyImageLoaders();
 		this._lastRender = {entity: ent};
 	}
 
-	async pDoLoadSubHash (sub) {
-		sub = await super.pDoLoadSubHash(sub);
+	async _pDoLoadSubHash ({sub, lockToken}) {
+		sub = await super._pDoLoadSubHash({sub, lockToken});
 
 		const scaledHash = sub.find(it => it.startsWith(RecipesPage._HASH_START_SCALED));
 		if (scaledHash) {
