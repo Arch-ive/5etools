@@ -219,6 +219,7 @@ PropOrder._MONSTER = [
 	"dragonAge",
 
 	"tokenUrl",
+	"tokenCredit",
 	"soundClip",
 	"foundryImg",
 
@@ -1181,6 +1182,7 @@ PropOrder._VEHICLE = [
 	"reaction",
 
 	"tokenUrl",
+	"tokenCredit",
 
 	"hasToken",
 	"hasFluff",
@@ -1349,6 +1351,7 @@ PropOrder._ITEM = [
 	"mace",
 	"net",
 	"poison",
+	"polearm",
 	"spear",
 	"staff",
 	"stealth",
@@ -1463,6 +1466,7 @@ PropOrder._OBJECT = [
 	"actionEntries",
 
 	"tokenUrl",
+	"tokenCredit",
 	"hasToken",
 	"hasFluff",
 	"hasFluffImages",
@@ -1752,6 +1756,7 @@ PropOrder._HAZARD = [
 ];
 PropOrder._RECIPE = [
 	"name",
+	"alias",
 
 	"source",
 	"page",
